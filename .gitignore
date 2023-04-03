@@ -1,23 +1,77 @@
-# Compiled class file
-*.class
+# IntelliJ IDEA files
+.idea/
 
-# Log file
+# Compiled class files
+target/
+
+# Log files
 *.log
 
-# BlueJ files
-*.ctxt
+# Maven files
+mvnw
+mvnw.cmd
+.mvn/
+mvn/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Eclipse files
+.classpath
+.project
+.settings/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Gradle files
+.gradle/
+build/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# Node.js
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# Distribution directories
+dist/
+dist-test/
+
+# Typescript cache
+*.tsbuildinfo
+
+# IDE files
+.idea/
+.vscode/
+
+# dotenv environment variables file
+.env
+backend/.env
+
+# Mac files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# WebStorm-specific
+.idea/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/jsLibraryMappings.xml
+.idea/datasettings.xml
+.idea/vcs.xml
+.idea/jsDebugger.xml
+.idea/encodings.xml
+.idea/.name
+.idea/workspace.xml
+.idea_modules/
+
+# ESLint cache
+.eslintcache/
