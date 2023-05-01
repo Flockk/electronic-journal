@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flock.journal.model.auth.AuthenticationResponse;
 import com.flock.journal.model.auth.AuthenticationRequest;
+import com.flock.journal.model.auth.AuthenticationResponse;
 import com.flock.journal.model.auth.RegisterRequest;
+import com.flock.journal.service.AuthenticationService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,17 +18,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
+  private final AuthenticationService service;
+
   @PostMapping("/register")
   public ResponseEntity<AuthenticationResponse> register(
       @RequestBody RegisterRequest request
   ) {
-    // TODO: Реализовать логику регистрации
+    return ResponseEntity.ok(service.register(request));
   }
 
   @PostMapping("/authenticate")
   public ResponseEntity<AuthenticationResponse> authenticate(
       @RequestBody AuthenticationRequest request
   ) {
-    // TODO: Реализовать логику аутентификации
+    return ResponseEntity.ok(service.authenticate(request));
   }
 }
