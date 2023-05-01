@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flock.journal.model.AuthenticationResponse;
+import com.flock.journal.model.auth.AuthenticationResponse;
+import com.flock.journal.model.auth.AuthenticationRequest;
+import com.flock.journal.model.auth.RegisterRequest;
 
 import lombok.RequiredArgsConstructor;
 
