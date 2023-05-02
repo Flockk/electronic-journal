@@ -44,17 +44,6 @@ public class AuthenticationService {
         .build();
   }
 
-  private void saveUserToken(User savedUser, String jwtToken) {
-    var token = Token.builder()
-        .user(savedUser)
-        .value(jwtToken)
-        .type(TokenType.BEARER)
-        .revoked(false)
-        .expired(false)
-        .build();
-    tokenRepository.save(token);
-  }
-
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
@@ -65,9 +54,32 @@ public class AuthenticationService {
     var user = repository.findByLogin(request.getLogin())
         .orElseThrow();
     var jwtToken = jwtService.generateToken(user);
+    revokeAllUserTokens(user);
     saveUserToken(user, jwtToken);
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();
+  }
+
+  private void revokeAllUserTokens(User user) {
+    var validUserTokens = tokenRepository.findAllValidTokensByUser(user.getId());
+    if (validUserTokens.isEmpty()) {
+      return;
+    }
+    validUserTokens.forEach(token -> {
+      token.setExpired(true);
+      token.setRevoked(true);
+    });
+  }
+
+  private void saveUserToken(User savedUser, String jwtToken) {
+    var token = Token.builder()
+        .user(savedUser)
+        .value(jwtToken)
+        .type(TokenType.BEARER)
+        .revoked(false)
+        .expired(false)
+        .build();
+    tokenRepository.save(token);
   }
 }
