@@ -50,12 +50,7 @@ public enum Role {
           TEACHER_CREATE,
           TEACHER_READ,
           TEACHER_UPDATE,
-          TEACHER_DELETE,
-
-          STUDENT_CREATE,
-          STUDENT_READ,
-          STUDENT_UPDATE,
-          STUDENT_DELETE
+          TEACHER_DELETE
       )
   ),
   STUDENT(
