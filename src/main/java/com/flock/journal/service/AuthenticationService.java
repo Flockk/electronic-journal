@@ -13,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.flock.journal.model.Role;
 import com.flock.journal.model.Token;
 import com.flock.journal.model.TokenType;
 import com.flock.journal.model.User;
@@ -42,7 +41,7 @@ public class AuthenticationService {
         .patronymic(request.getPatronymic())
         .login(request.getLogin())
         .password(passwordEncoder.encode(request.getPassword()))
-        .role(Role.STUDENT)
+        .role(request.getRole())
         .build();
     var savedUser = repository.save(user);
     var jwtToken = jwtService.generateToken(user);

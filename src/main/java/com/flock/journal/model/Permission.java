@@ -22,5 +22,5 @@ public enum Permission {
   STUDENT_DELETE("student:delete");
 
   @Getter
-  private final String permission;
+  private final String permissionName;
 }
