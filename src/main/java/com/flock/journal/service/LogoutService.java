@@ -1,4 +1,4 @@
-package com.flock.journal.repository;
+package com.flock.journal.service;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
+
+import com.flock.journal.repository.TokenRepository;
 
 import lombok.RequiredArgsConstructor;
 
