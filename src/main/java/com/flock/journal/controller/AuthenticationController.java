@@ -1,5 +1,6 @@
 package com.flock.journal.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Tag(name = "Authentication")
 public class AuthenticationController {
 
   private final AuthenticationService service;
