@@ -81,6 +81,9 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         )
         .permitAll()
 
+        .requestMatchers("/**")
+        .permitAll()
+
         .requestMatchers(STUDENT_API_PATTERN).hasAnyRole(ADMIN.name(), STUDENT.name())
 
         .requestMatchers(GET, STUDENT_API_PATTERN)
