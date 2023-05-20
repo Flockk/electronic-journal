@@ -1,2 +1,2 @@
 ALTER TABLE users
-    ADD COLUMN user_role VARCHAR(20);
+    ADD COLUMN role VARCHAR(20);

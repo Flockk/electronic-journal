@@ -88,8 +88,8 @@ public class AuthenticationService {
         .user(savedUser)
         .value(jwtToken)
         .type(TokenType.BEARER)
-        .revoked(false)
-        .expired(false)
+        .isRevoked(false)
+        .isExpired(false)
         .build();
     tokenRepository.save(token);
   }

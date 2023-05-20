@@ -53,4 +53,12 @@ public class AuthenticationController {
     redirectAttributes.addFlashAttribute("authenticationResponse", response);
     return "redirect:/grades";
   }
+
+  @PostMapping("/refresh-token")
+  public void refreshToken(
+      HttpServletRequest request,
+      HttpServletResponse response
+  ) throws IOException {
+    service.refreshToken(request, response);
+  }
 }

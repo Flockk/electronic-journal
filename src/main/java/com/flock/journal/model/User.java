@@ -34,23 +34,23 @@ public class User implements UserDetails {
   @Column(name = "user_id")
   private Long id;
 
-  @Column(name = "user_firstname")
+  @Column(name = "firstname")
   private String firstname;
 
-  @Column(name = "user_lastname")
+  @Column(name = "lastname")
   private String lastname;
 
-  @Column(name = "user_patronymic")
+  @Column(name = "patronymic")
   private String patronymic;
 
-  @Column(name = "user_login")
+  @Column(name = "login")
   private String login;
 
-  @Column(name = "user_password")
+  @Column(name = "password")
   private String password;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "user_role")
+  @Column(name = "role")
   private Role role;
 
   @OneToMany(mappedBy = "user")

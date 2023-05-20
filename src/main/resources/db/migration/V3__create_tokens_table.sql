@@ -1,9 +1,9 @@
 CREATE TABLE tokens
 (
-    token_id      SERIAL PRIMARY KEY,
-    token_value   VARCHAR(255) NOT NULL,
-    token_type    VARCHAR(255)  NOT NULL,
-    token_expired BOOLEAN      NOT NULL,
-    token_revoked BOOLEAN      NOT NULL,
-    user_id       BIGINT REFERENCES users (user_id)
+    token_id   SERIAL PRIMARY KEY,
+    value      VARCHAR(255) NOT NULL,
+    type       VARCHAR(255) NOT NULL,
+    is_expired BOOLEAN      NOT NULL,
+    is_revoked BOOLEAN      NOT NULL,
+    user_id    BIGINT REFERENCES users (user_id)
 );
