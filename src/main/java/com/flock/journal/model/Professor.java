@@ -1,21 +1,25 @@
 package com.flock.journal.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import lombok.Data;
 
-
 @Entity
 @Table(name = "professors")
 @Data
 public class Professor {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "prof_id")
@@ -34,4 +38,12 @@ public class Professor {
 
   @Column(name = "phone_number", length = 20)
   private String phoneNumber;
+
+  @ManyToMany
+  @JoinTable(
+      name = "professors_disciplines",
+      joinColumns = @JoinColumn(name = "prof_id"),
+      inverseJoinColumns = @JoinColumn(name = "disc_id")
+  )
+  private List<Discipline> disciplines;
 }
