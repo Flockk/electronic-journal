@@ -1,6 +1,6 @@
 package com.flock.journal.model;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -17,26 +16,29 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "departments")
-public class Department {
+@Table(name = "groups")
+public class Group {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "dept_id")
+  @Column(name = "group_id")
   private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "div_id")
-  private Division division;
+  @JoinColumn(name = "prof_id")
+  private Professor professor;
 
-  @Column(name = "title", unique = true, nullable = false)
+  @Column(name = "title", nullable = false)
   private String title;
 
-  @OneToMany(mappedBy = "department")
-  private List<Professor> professors;
+  @Column(name = "foundation_date")
+  private LocalDate foundationDate;
+
+  @Column(name = "end_date")
+  private LocalDate endDate;
 }

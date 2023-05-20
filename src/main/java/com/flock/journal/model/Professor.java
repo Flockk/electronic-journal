@@ -1,5 +1,6 @@
 package com.flock.journal.model;
 
+import jakarta.persistence.OneToMany;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -52,4 +53,7 @@ public class Professor {
       inverseJoinColumns = @JoinColumn(name = "disc_id")
   )
   private List<Discipline> disciplines;
+
+  @OneToMany(mappedBy = "professor")
+  private List<Group> groups;
 }
