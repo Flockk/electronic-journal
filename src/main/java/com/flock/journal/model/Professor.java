@@ -57,4 +57,7 @@ public class Professor {
 
   @OneToMany(mappedBy = "professor")
   private List<Group> groups;
+
+  @OneToMany(mappedBy = "professor")
+  private List<Lesson> lessons;
 }

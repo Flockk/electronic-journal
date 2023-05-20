@@ -1,6 +1,6 @@
 package com.flock.journal.model;
 
-public enum ClassType {
+public enum LessonType {
   LECTURE("Лекция"),
   PRACTICAL("Практическое занятие"),
   SEMINAR("Семинар"),
@@ -14,7 +14,7 @@ public enum ClassType {
 
   private final String name;
 
-  ClassType(String name) {
+  LessonType(String name) {
     this.name = name;
   }
 

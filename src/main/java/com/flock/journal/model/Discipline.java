@@ -1,5 +1,6 @@
 package com.flock.journal.model;
 
+import jakarta.persistence.OneToMany;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -32,4 +33,7 @@ public class Discipline {
 
   @ManyToMany(mappedBy = "disciplines")
   private List<Professor> professors;
+
+  @OneToMany(mappedBy = "discipline")
+  private List<Lesson> lessons;
 }
