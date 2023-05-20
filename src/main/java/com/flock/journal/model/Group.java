@@ -38,7 +38,7 @@ public class Group {
   @OneToMany(mappedBy = "group")
   private List<Student> students;
 
-  @Column(name = "title", nullable = false)
+  @Column(name = "title", length = 20, nullable = false)
   private String title;
 
   @Column(name = "foundation_date")

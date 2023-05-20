@@ -29,17 +29,17 @@ public class Token {
   @Column(name = "token_id")
   private Long id;
 
-  @Column(name = "value")
+  @Column(name = "value", nullable = false)
   private String value;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "type")
+  @Column(name = "type", length = 6, nullable = false)
   private TokenType type;
 
-  @Column(name = "is_expired")
+  @Column(name = "is_expired", nullable = false)
   private boolean isExpired;
 
-  @Column(name = "is_revoked")
+  @Column(name = "is_revoked", nullable = false)
   private boolean isRevoked;
 
   @ManyToOne

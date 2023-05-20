@@ -27,7 +27,7 @@ public class Division {
   @Column(name = "div_id")
   private Long id;
 
-  @Column(name = "title", unique = true, nullable = false)
+  @Column(name = "title", nullable = false, unique = true)
   private String title;
 
   @OneToMany(mappedBy = "division")

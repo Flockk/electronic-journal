@@ -35,33 +35,33 @@ public class User implements UserDetails {
   @Column(name = "user_id")
   private Long id;
 
-  @Column(name = "firstname")
+  @Column(name = "firstname", nullable = false)
   private String firstname;
 
-  @Column(name = "lastname")
+  @Column(name = "lastname", nullable = false)
   private String lastname;
 
   @Column(name = "patronymic")
   private String patronymic;
 
-  @Column(name = "login")
+  @Column(name = "login", nullable = false, unique = true)
   private String login;
 
-  @Column(name = "password")
+  @Column(name = "password", nullable = false)
   private String password;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "role")
+  @Column(name = "role", length = 20)
   private Role role;
 
   @OneToMany(mappedBy = "user")
-  private List<Token> tokens;
+  private transient List<Token> tokens;
 
   @OneToOne(mappedBy = "user")
-  private Professor professors;
+  private transient Professor professors;
 
   @OneToOne(mappedBy = "user")
-  private Student student;
+  private transient Student student;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,8 +1,8 @@
 package com.flock.journal.model;
 
-import jakarta.persistence.OneToOne;
 import java.time.LocalDate;
 
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,13 +37,13 @@ public class Student {
   @JoinColumn(name = "group_id")
   private Group group;
 
-  @Column(name = "course")
+  @Column(name = "course", nullable = false)
   private int course;
 
-  @Column(name = "major", nullable = false, unique = true)
+  @Column(name = "major", nullable = false)
   private String major;
 
-  @Column(name = "level")
+  @Column(name = "level", nullable = false)
   private String level;
 
   @Column(name = "admission_date")

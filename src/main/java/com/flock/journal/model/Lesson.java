@@ -25,14 +25,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Lesson {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "lsn_id")
   private Long id;
-
-  @Enumerated(EnumType.STRING)
-  @Column(name = "lsn_type", length = 25, nullable = false)
-  private LessonType lessonType;
 
   @ManyToOne
   @JoinColumn(name = "disc_id")
@@ -41,6 +38,10 @@ public class Lesson {
   @ManyToOne
   @JoinColumn(name = "prof_id")
   private Professor professor;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "type", length = 25, nullable = false)
+  private LessonType lessonType;
 
   @Column(name = "date")
   private LocalDateTime date;
