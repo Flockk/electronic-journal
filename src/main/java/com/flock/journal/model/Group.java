@@ -1,7 +1,9 @@
 package com.flock.journal.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +34,9 @@ public class Group {
   @ManyToOne
   @JoinColumn(name = "prof_id")
   private Professor professor;
+
+  @OneToMany(mappedBy = "group")
+  private List<Student> students;
 
   @Column(name = "title", nullable = false)
   private String title;

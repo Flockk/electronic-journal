@@ -1,6 +1,7 @@
 package com.flock.journal.model;
 
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -32,7 +33,7 @@ public class Professor {
   @Column(name = "prof_id")
   private Long id;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "user_id")
   private User user;
 

@@ -1,5 +1,6 @@
 package com.flock.journal.model;
 
+import jakarta.persistence.OneToOne;
 import java.util.Collection;
 import java.util.List;
 
@@ -56,8 +57,11 @@ public class User implements UserDetails {
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;
 
-  @OneToMany(mappedBy = "user")
-  private List<Professor> professors;
+  @OneToOne(mappedBy = "user")
+  private Professor professors;
+
+  @OneToOne(mappedBy = "user")
+  private Student student;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

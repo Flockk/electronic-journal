@@ -1,35 +1,48 @@
 package com.flock.journal.controller;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import java.util.Optional;
+
+import com.flock.journal.model.Student;
+import com.flock.journal.service.StudentService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/student")
-@Tag(name = "Student")
+@RequestMapping("/students")
 public class StudentController {
+  private final StudentService studentService;
+
+  @Autowired
+  public StudentController(StudentService studentService) {
+    this.studentService = studentService;
+  }
 
   @GetMapping
-  public String get() {
-    return "GET:: student controller";
+  public ResponseEntity<List<Student>> getAllStudents() {
+    List<Student> students = studentService.getAllStudents();
+    return new ResponseEntity<>(students, HttpStatus.OK);
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Student> getStudentById(@PathVariable("id") Long id) {
+    Optional<Student> student = studentService.getStudentById(id);
+    return student.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
   @PostMapping
-  public String post() {
-    return "POST:: student controller";
+  public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+    Student savedStudent = studentService.saveStudent(student);
+    return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
   }
 
-  @PutMapping
-  public String put() {
-    return "PUT:: student controller";
-  }
-
-  @DeleteMapping
-  public String delete() {
-    return "DELETE:: student controller";
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteStudent(@PathVariable("id") Long id) {
+    studentService.deleteStudent(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }
