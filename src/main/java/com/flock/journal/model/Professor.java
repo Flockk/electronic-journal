@@ -2,35 +2,36 @@ package com.flock.journal.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import java.util.List;
 import lombok.Data;
 
-@Entity
-@Table(name = "departments")
-@Data
-public class Department {
 
+@Entity
+@Table(name = "professors")
+@Data
+public class Professor {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "dept_id")
+  @Column(name = "prof_id")
   private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "div_id")
-  private Division division;
+  @JoinColumn(name = "user_id")
+  private User user;
 
-  @Column(name = "title", unique = true, nullable = false)
-  private String title;
+  @ManyToOne
+  @JoinColumn(name = "dept_id")
+  private Department department;
 
-  @OneToMany(mappedBy = "department")
-  private List<Professor> professors;
+  @Column(name = "position", length = 50)
+  private String position;
+
+  @Column(name = "phone_number", length = 20)
+  private String phoneNumber;
 }
