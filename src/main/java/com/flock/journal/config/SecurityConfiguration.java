@@ -13,6 +13,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import lombok.RequiredArgsConstructor;
 
 import static org.springframework.http.HttpMethod.DELETE;
@@ -35,14 +39,21 @@ import static com.flock.journal.model.Role.STUDENT;
 
 @Configuration
 @EnableWebSecurity
+@EnableWebMvc
 @RequiredArgsConstructor
 @EnableMethodSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration implements WebMvcConfigurer {
 
   private final JwtAuthenticationFilter jwtAuthFilter;
   private final AuthenticationProvider authenticationProvider;
   private final LogoutHandler logoutHandler;
   private static final String STUDENT_API_PATTERN = "/api/v1/student/**";
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/static/**")
+        .addResourceLocations("classpath:/static/");
+  }
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -51,7 +62,12 @@ public class SecurityConfiguration {
         .disable()
         .authorizeHttpRequests()
         .requestMatchers(
-            "/api/v1/auth/**",
+            "/css/**",
+            "/js/**",
+            "/static/**",
+            "/register",
+            "/login",
+            "/logout",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -85,7 +101,7 @@ public class SecurityConfiguration {
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .logout()
-        .logoutUrl("/api/v1/auth/logout")
+        .logoutUrl("/logout")
         .addLogoutHandler(logoutHandler)
         .logoutSuccessHandler(
             (request, response, authentication) -> SecurityContextHolder.clearContext()
