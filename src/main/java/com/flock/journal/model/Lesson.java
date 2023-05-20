@@ -1,7 +1,9 @@
 package com.flock.journal.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,11 +21,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "lessons")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "lessons")
 public class Lesson {
 
   @Id
@@ -48,4 +50,7 @@ public class Lesson {
 
   @Column(name = "topic")
   private String topic;
+
+  @ManyToMany(mappedBy = "lessons")
+  private List<Group> groups;
 }

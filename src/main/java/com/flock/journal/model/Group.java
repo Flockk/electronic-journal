@@ -3,6 +3,8 @@ package com.flock.journal.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,4 +48,12 @@ public class Group {
 
   @Column(name = "end_date")
   private LocalDate endDate;
+
+  @ManyToMany
+  @JoinTable(
+      name = "groups_lessons",
+      joinColumns = @JoinColumn(name = "group_id"),
+      inverseJoinColumns = @JoinColumn(name = "lsn_id")
+  )
+  private List<Lesson> lessons;
 }
