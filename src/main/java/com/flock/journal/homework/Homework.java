@@ -1,5 +1,6 @@
 package com.flock.journal.homework;
 
+import java.util.List;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -9,8 +10,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import com.flock.journal.grade.Grade;
 import com.flock.journal.lesson.Lesson;
 import com.flock.journal.professor.Professor;
 
@@ -48,4 +51,7 @@ public class Homework {
 
   @Column(name = "end_date")
   private LocalDate endDate;
+
+  @OneToMany(mappedBy = "homework")
+  private List<Grade> grades;
 }

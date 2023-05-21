@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import com.flock.journal.attendance.Attendance;
+import com.flock.journal.grade.Grade;
 import com.flock.journal.group.Group;
 import com.flock.journal.user.User;
 
@@ -63,4 +64,7 @@ public class Student {
 
   @OneToMany(mappedBy = "student")
   private List<Attendance> attendances;
+
+  @OneToMany(mappedBy = "student")
+  private List<Grade> grades;
 }

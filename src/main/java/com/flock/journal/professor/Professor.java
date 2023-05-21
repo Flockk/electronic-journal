@@ -18,6 +18,7 @@ import jakarta.persistence.Table;
 import com.flock.journal.attendance.Attendance;
 import com.flock.journal.department.Department;
 import com.flock.journal.discipline.Discipline;
+import com.flock.journal.grade.Grade;
 import com.flock.journal.group.Group;
 import com.flock.journal.homework.Homework;
 import com.flock.journal.lesson.Lesson;
@@ -74,4 +75,7 @@ public class Professor {
 
   @OneToMany(mappedBy = "professor")
   private List<Homework> homeworks;
+
+  @OneToMany(mappedBy = "professor")
+  private List<Grade> grades;
 }

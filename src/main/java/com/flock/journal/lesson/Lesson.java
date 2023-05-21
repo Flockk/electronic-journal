@@ -1,6 +1,5 @@
 package com.flock.journal.lesson;
 
-import com.flock.journal.homework.Homework;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +18,9 @@ import jakarta.persistence.Table;
 
 import com.flock.journal.attendance.Attendance;
 import com.flock.journal.discipline.Discipline;
+import com.flock.journal.grade.Grade;
 import com.flock.journal.group.Group;
+import com.flock.journal.homework.Homework;
 import com.flock.journal.professor.Professor;
 
 import lombok.AllArgsConstructor;
@@ -66,4 +67,7 @@ public class Lesson {
 
   @OneToMany(mappedBy = "lesson")
   private List<Homework> homeworks;
+
+  @OneToMany(mappedBy = "lesson")
+  private List<Grade> grades;
 }
