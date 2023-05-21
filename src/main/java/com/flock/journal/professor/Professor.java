@@ -1,5 +1,6 @@
 package com.flock.journal.professor;
 
+import com.flock.journal.semestergrades.SemesterGrade;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -78,4 +79,7 @@ public class Professor {
 
   @OneToMany(mappedBy = "professor")
   private List<Grade> grades;
+
+  @OneToMany(mappedBy = "professor")
+  private List<SemesterGrade> semesterGrades;
 }

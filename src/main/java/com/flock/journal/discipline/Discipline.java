@@ -1,5 +1,6 @@
 package com.flock.journal.discipline;
 
+import com.flock.journal.semestergrades.SemesterGrade;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -40,4 +41,7 @@ public class Discipline {
 
   @OneToMany(mappedBy = "discipline")
   private List<Lesson> lessons;
+
+  @OneToMany(mappedBy = "discipline")
+  private List<SemesterGrade> semesterGrades;
 }

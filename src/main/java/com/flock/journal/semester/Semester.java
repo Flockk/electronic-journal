@@ -1,5 +1,7 @@
 package com.flock.journal.semester;
 
+import com.flock.journal.semestergrades.SemesterGrade;
+import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -9,17 +11,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "semesters")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "semesters")
 public class Semester {
 
   @Id
@@ -35,4 +38,7 @@ public class Semester {
 
   @Column(name = "end_date")
   private LocalDate endDate;
+
+  @OneToMany(mappedBy = "semester")
+  private List<SemesterGrade> semesterGrades;
 }

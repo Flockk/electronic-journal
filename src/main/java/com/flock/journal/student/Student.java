@@ -1,5 +1,6 @@
 package com.flock.journal.student;
 
+import com.flock.journal.semestergrades.SemesterGrade;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -77,4 +78,7 @@ public class Student {
       joinColumns = @JoinColumn(name = "stud_id"),
       inverseJoinColumns = @JoinColumn(name = "hw_id"))
   private List<Homework> homeworks;
+
+  @OneToMany(mappedBy = "student")
+  private List<SemesterGrade> semesterGrades;
 }
