@@ -1,5 +1,6 @@
 package com.flock.journal.group;
 
+import com.flock.journal.homework.Homework;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -60,4 +61,10 @@ public class Group {
       inverseJoinColumns = @JoinColumn(name = "lsn_id")
   )
   private List<Lesson> lessons;
+
+  @ManyToMany
+  @JoinTable(name = "homeworks_groups",
+      joinColumns = @JoinColumn(name = "group_id"),
+      inverseJoinColumns = @JoinColumn(name = "hw_id"))
+  private List<Homework> homeworks;
 }

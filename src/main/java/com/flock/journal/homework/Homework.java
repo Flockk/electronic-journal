@@ -1,5 +1,9 @@
 package com.flock.journal.homework;
 
+import com.flock.journal.discipline.Discipline;
+import com.flock.journal.group.Group;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -23,11 +27,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "homeworks")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "homeworks")
 public class Homework {
 
   @Id
@@ -54,4 +58,7 @@ public class Homework {
 
   @OneToMany(mappedBy = "homework")
   private List<Grade> grades;
+
+  @ManyToMany(mappedBy = "homeworks")
+  private List<Group> groups;
 }
