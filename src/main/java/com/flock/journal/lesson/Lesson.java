@@ -11,12 +11,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import com.flock.journal.attendance.Attendance;
+import com.flock.journal.audiences.Audience;
 import com.flock.journal.discipline.Discipline;
 import com.flock.journal.grade.Grade;
 import com.flock.journal.group.Group;
@@ -70,4 +72,12 @@ public class Lesson {
 
   @OneToMany(mappedBy = "lesson")
   private List<Grade> grades;
+
+  @ManyToMany
+  @JoinTable(
+      name = "lessons_audiences",
+      joinColumns = @JoinColumn(name = "lsn_id"),
+      inverseJoinColumns = @JoinColumn(name = "aud_id")
+  )
+  private List<Audience> audiences;
 }
