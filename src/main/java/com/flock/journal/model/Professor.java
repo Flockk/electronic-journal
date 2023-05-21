@@ -1,9 +1,9 @@
 package com.flock.journal.model;
 
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import java.util.List;
 
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -60,4 +60,7 @@ public class Professor {
 
   @OneToMany(mappedBy = "professor")
   private List<Lesson> lessons;
+
+  @OneToMany(mappedBy = "professor")
+  private List<Attendance> attendances;
 }

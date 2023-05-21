@@ -2,6 +2,7 @@ package com.flock.journal.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
@@ -12,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -54,4 +56,7 @@ public class Student {
 
   @Column(name = "phone_number")
   private String phoneNumber;
+
+  @OneToMany(mappedBy = "student")
+  private List<Attendance> attendances;
 }
