@@ -1,12 +1,9 @@
 package com.flock.journal.homework;
 
-import com.flock.journal.discipline.Discipline;
-import com.flock.journal.group.Group;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import java.util.List;
 import java.time.LocalDate;
 
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +14,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import com.flock.journal.group.Group;
+import com.flock.journal.student.Student;
 import com.flock.journal.grade.Grade;
 import com.flock.journal.lesson.Lesson;
 import com.flock.journal.professor.Professor;
@@ -61,4 +60,7 @@ public class Homework {
 
   @ManyToMany(mappedBy = "homeworks")
   private List<Group> groups;
+
+  @ManyToMany(mappedBy = "homeworks")
+  private List<Student> students;
 }

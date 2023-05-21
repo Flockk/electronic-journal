@@ -3,6 +3,8 @@ package com.flock.journal.student;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -14,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import com.flock.journal.homework.Homework;
 import com.flock.journal.attendance.Attendance;
 import com.flock.journal.grade.Grade;
 import com.flock.journal.group.Group;
@@ -31,6 +34,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "students")
 public class Student {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "stud_id")
@@ -67,4 +71,10 @@ public class Student {
 
   @OneToMany(mappedBy = "student")
   private List<Grade> grades;
+
+  @ManyToMany
+  @JoinTable(name = "homeworks_students",
+      joinColumns = @JoinColumn(name = "stud_id"),
+      inverseJoinColumns = @JoinColumn(name = "hw_id"))
+  private List<Homework> homeworks;
 }
