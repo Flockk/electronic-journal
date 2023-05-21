@@ -24,18 +24,18 @@ import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 
-import static com.flock.journal.model.Permission.ADMIN_CREATE;
-import static com.flock.journal.model.Permission.ADMIN_DELETE;
-import static com.flock.journal.model.Permission.ADMIN_READ;
-import static com.flock.journal.model.Permission.ADMIN_UPDATE;
+import static com.flock.journal.user.Permission.ADMIN_CREATE;
+import static com.flock.journal.user.Permission.ADMIN_DELETE;
+import static com.flock.journal.user.Permission.ADMIN_READ;
+import static com.flock.journal.user.Permission.ADMIN_UPDATE;
 
-import static com.flock.journal.model.Permission.STUDENT_CREATE;
-import static com.flock.journal.model.Permission.STUDENT_DELETE;
-import static com.flock.journal.model.Permission.STUDENT_READ;
-import static com.flock.journal.model.Permission.STUDENT_UPDATE;
+import static com.flock.journal.user.Permission.STUDENT_CREATE;
+import static com.flock.journal.user.Permission.STUDENT_DELETE;
+import static com.flock.journal.user.Permission.STUDENT_READ;
+import static com.flock.journal.user.Permission.STUDENT_UPDATE;
 
-import static com.flock.journal.model.Role.ADMIN;
-import static com.flock.journal.model.Role.STUDENT;
+import static com.flock.journal.user.Role.ADMIN;
+import static com.flock.journal.user.Role.STUDENT;
 
 @Configuration
 @EnableWebSecurity

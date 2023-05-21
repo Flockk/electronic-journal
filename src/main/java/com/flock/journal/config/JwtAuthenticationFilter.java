@@ -16,8 +16,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.flock.journal.repository.TokenRepository;
-import com.flock.journal.service.JwtService;
+import com.flock.journal.token.TokenRepository;
+import com.flock.journal.auth.JwtService;
 
 import lombok.RequiredArgsConstructor;
 

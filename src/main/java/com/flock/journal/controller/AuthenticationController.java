@@ -1,7 +1,8 @@
 package com.flock.journal.controller;
 
-import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.flock.journal.model.auth.AuthenticationRequest;
-import com.flock.journal.model.auth.AuthenticationResponse;
-import com.flock.journal.model.auth.RegisterRequest;
-import com.flock.journal.service.AuthenticationService;
+import com.flock.journal.auth.AuthenticationRequest;
+import com.flock.journal.auth.AuthenticationResponse;
+import com.flock.journal.auth.RegisterRequest;
+import com.flock.journal.auth.AuthenticationService;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/")
