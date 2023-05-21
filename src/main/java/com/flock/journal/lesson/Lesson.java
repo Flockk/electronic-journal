@@ -1,5 +1,6 @@
 package com.flock.journal.lesson;
 
+import com.flock.journal.homework.Homework;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -62,4 +63,7 @@ public class Lesson {
 
   @OneToMany(mappedBy = "lesson")
   private List<Attendance> attendances;
+
+  @OneToMany(mappedBy = "lesson")
+  private List<Homework> homeworks;
 }

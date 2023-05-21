@@ -19,6 +19,7 @@ import com.flock.journal.attendance.Attendance;
 import com.flock.journal.department.Department;
 import com.flock.journal.discipline.Discipline;
 import com.flock.journal.group.Group;
+import com.flock.journal.homework.Homework;
 import com.flock.journal.lesson.Lesson;
 import com.flock.journal.user.User;
 
@@ -70,4 +71,7 @@ public class Professor {
 
   @OneToMany(mappedBy = "professor")
   private List<Attendance> attendances;
+
+  @OneToMany(mappedBy = "professor")
+  private List<Homework> homeworks;
 }
