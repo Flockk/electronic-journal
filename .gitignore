@@ -9,31 +9,31 @@ target/
 **/*.log
 
 # Ignore Node.js and TypeScript related files and folders
-client/node_modules/
-client/.next/
-client/out/
-client/.idea/
-client/.vscode/
-client/.yarn/
-client/yarn.lock
-client/.eslintcache
-client/coverage/
-client/vercel.json
-client/now.json
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.idea/
+frontend/.vscode/
+frontend/.yarn/
+frontend/yarn.lock
+frontend/.eslintcache
+frontend/coverage/
+frontend/vercel.json
+frontend/now.json
 
 # Ignore Java build files
-target/
-server/bin/
-server/classes/
-server/*.log
-server/.classpath
-server/.project
-server/.settings/
-server/.factorypath
+backend/target/
+backend/bin/
+backend/classes/
+backend/*.log
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/.factorypath
 
 # Ignore database credentials and log files
-src/main/resources/database.properties
-server/logs/
+backend/main/resources/database.properties
+backend/server/logs/
 
 # Ignore system files
 .DS_Store
