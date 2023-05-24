@@ -32,7 +32,7 @@ backend/.settings/
 backend/.factorypath
 
 # Ignore database credentials and log files
-backend/main/resources/database.properties
+backend/src/main/resources/database.properties
 backend/server/logs/
 
 # Ignore system files
