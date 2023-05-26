@@ -12,7 +12,7 @@ import static java.lang.System.out;
 
 import static com.flock.journal.user.Role.ADMIN;
 import static com.flock.journal.user.Role.STUDENT;
-import static com.flock.journal.user.Role.TEACHER;
+import static com.flock.journal.user.Role.PROFESSOR;
 
 @SpringBootApplication
 public class JournalApplication {
@@ -40,7 +40,7 @@ public class JournalApplication {
           .patronymic("Teacher")
           .login("teacher@login")
           .password("password")
-          .role(TEACHER)
+          .role(PROFESSOR)
           .build();
       out.println("Teacher token: " + service.register(teacher).getAccessToken());
 

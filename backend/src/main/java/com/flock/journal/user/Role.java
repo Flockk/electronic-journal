@@ -19,10 +19,10 @@ public enum Role {
           Permission.ADMIN_UPDATE,
           Permission.ADMIN_DELETE,
 
-          Permission.TEACHER_CREATE,
-          Permission.TEACHER_READ,
-          Permission.TEACHER_UPDATE,
-          Permission.TEACHER_DELETE,
+          Permission.PROFESSOR_CREATE,
+          Permission.PROFESSOR_READ,
+          Permission.PROFESSOR_UPDATE,
+          Permission.PROFESSOR_DELETE,
 
           Permission.STUDENT_CREATE,
           Permission.STUDENT_READ,
@@ -30,12 +30,12 @@ public enum Role {
           Permission.STUDENT_DELETE
       )
   ),
-  TEACHER(
+  PROFESSOR(
       Set.of(
-          Permission.TEACHER_CREATE,
-          Permission.TEACHER_READ,
-          Permission.TEACHER_UPDATE,
-          Permission.TEACHER_DELETE
+          Permission.PROFESSOR_CREATE,
+          Permission.PROFESSOR_READ,
+          Permission.PROFESSOR_UPDATE,
+          Permission.PROFESSOR_DELETE
       )
   ),
   STUDENT(
