@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/lessons")
+@RequestMapping("/api/v1/lessons")
 public class LessonController {
   private final LessonService lessonService;
 

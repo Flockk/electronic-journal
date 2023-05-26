@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/semester-grades")
+@RequestMapping("/api/v1/semester-grades")
 public class SemesterGradeController {
 
   private final SemesterGradeService semesterGradeService;

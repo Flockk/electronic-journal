@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/divisions")
+@RequestMapping("/api/v1/divisions")
 public class DivisionController {
 
   private final DivisionService divisionService;

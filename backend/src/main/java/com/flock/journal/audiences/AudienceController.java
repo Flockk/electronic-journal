@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/audiences")
+@RequestMapping("/api/v1/audiences")
 public class AudienceController {
 
   private final AudienceService audienceService;
