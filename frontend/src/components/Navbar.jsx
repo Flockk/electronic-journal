@@ -13,9 +13,9 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Navbar() {
 	return (
-		<Disclosure as="nav" className="bg-gray-800">
+		<Disclosure as="nav" className="bg-gray-800 fixed top-0 w-full z-50">
 			{({open}) => (
 				<>
 					<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -71,7 +71,7 @@ export default function Example() {
 									<span className="sr-only">View notifications</span>
 									<BellIcon className="h-6 w-6" aria-hidden="true"/>
 								</button>
-								
+
 								{/* Profile dropdown */}
 								<Menu as="div" className="relative ml-3">
 									<div>
@@ -132,7 +132,7 @@ export default function Example() {
 							</div>
 						</div>
 					</div>
-					
+
 					<Disclosure.Panel className="sm:hidden">
 						<div className="space-y-1 px-2 pb-3 pt-2">
 							{navigation.map((item) => (

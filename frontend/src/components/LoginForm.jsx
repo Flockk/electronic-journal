@@ -1,16 +1,20 @@
 import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom'
 import authService from '../services/authService';
 import image from '../assets/images/start.png';
 
 const LoginForm = () => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await authService.login({login, password});
             console.log(response);
+
+            navigate('/divisions');
         } catch (error) {
             console.error('Ошибка аутентификации:', error);
         }
