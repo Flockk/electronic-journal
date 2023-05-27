@@ -15,6 +15,10 @@ const authService = {
         const response = await api.post('/auth/refresh-token');
         return response.data;
     },
+
+    logout: async () => {
+        await api.post('/auth/logout');
+    },
 };
 
 export default authService;
