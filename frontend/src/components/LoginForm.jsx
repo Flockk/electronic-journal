@@ -1,22 +1,30 @@
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom'
-import authService from '../services/authService';
-import image from '../assets/images/start.png';
+import {login} from "../services/authService";
+import {useNavigate} from "react-router-dom";
+import image from "../assets/images/start.png"
 
-const LoginForm = () => {
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
+const Login = () => {
     const navigate = useNavigate();
+    const [loginData, setLoginData] = useState({
+        login: '',
+        password: '',
+    });
+
+    const handleChange = (e) => {
+        setLoginData({
+            ...loginData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await authService.login({login, password});
-            console.log(response);
-
+            const response = await login(loginData);
+            console.log('Logged in successfully', response);
             navigate('/divisions');
         } catch (error) {
-            console.error('Ошибка аутентификации:', error);
+            console.error('Login failed', error);
         }
     };
 
@@ -45,8 +53,9 @@ const LoginForm = () => {
                                 required
                                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                                 placeholder="Введите логин"
-                                value={login}
-                                onChange={(e) => setLogin(e.target.value)}
+                                value={loginData.login}
+                                onChange={handleChange}
+                                name="login"
                             />
                         </div>
                         <div>
@@ -58,8 +67,9 @@ const LoginForm = () => {
                                 required
                                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                                 placeholder="Введите пароль"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={loginData.password}
+                                onChange={handleChange}
+                                name="password"
                             />
                         </div>
                         <button
@@ -72,7 +82,7 @@ const LoginForm = () => {
                 </div>
             </div>
         </main>
-    )
+    );
 };
 
-export default LoginForm;
+export default Login;

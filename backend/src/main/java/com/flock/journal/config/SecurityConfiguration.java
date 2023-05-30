@@ -48,8 +48,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
-    registry.addMapping("/**")
-        .allowedMethods("*");
+    registry.addMapping("/**");
   }
 
   @Bean
@@ -60,7 +59,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         .disable()
         .authorizeHttpRequests()
         .requestMatchers(
-            "/api/v1/auth/login",
+            "/api/v1/auth/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",

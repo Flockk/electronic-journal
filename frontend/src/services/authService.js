@@ -1,24 +1,32 @@
-import api from './api';
+import api from "./api";
 
-const authService = {
-    register: async (registerRequest) => {
-        const response = await api.post('/auth/register', registerRequest);
+export const register = async (registerData) => {
+    try {
+        const response = await api.post('/auth/register', registerData);
+        const {accessToken, refreshToken} = response.data;
+
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
         return response.data;
-    },
-
-    login: async (authenticationRequest) => {
-        const response = await api.post('/auth/login', authenticationRequest);
-        return response.data;
-    },
-
-    refreshToken: async () => {
-        const response = await api.post('/auth/refresh-token');
-        return response.data;
-    },
-
-    logout: async () => {
-        await api.post('/auth/logout');
-    },
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
 };
 
-export default authService;
+export const login = async (loginData) => {
+    try {
+        const response = await api.post('/auth/login', loginData);
+        const {accessToken, refreshToken} = response.data;
+
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
+};
+
+export const logout = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+};

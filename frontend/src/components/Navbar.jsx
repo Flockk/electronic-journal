@@ -1,6 +1,8 @@
 import {Fragment} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/react/24/outline'
+import {useNavigate} from "react-router-dom";
+import {logout} from "../services/authService";
 
 const navigation = [
     {name: 'Оценки', href: '#', current: true},
@@ -14,6 +16,12 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        logout();
+        navigate("/")
+    };
+
     return (
         <Disclosure as="nav" className="bg-gray-800 fixed top-0 w-full z-50">
             {({open}) => (
@@ -72,7 +80,6 @@ export default function Navbar() {
                                     <BellIcon className="h-6 w-6" aria-hidden="true"/>
                                 </button>
 
-                                {/* Profile dropdown */}
                                 <Menu as="div" className="relative ml-3">
                                     <div>
                                         <Menu.Button
@@ -111,6 +118,7 @@ export default function Navbar() {
                                                     <a
                                                         href="#"
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        onClick={handleLogout}
                                                     >
                                                         Выйти
                                                     </a>
