@@ -1,5 +1,6 @@
 package com.flock.journal.division;
 
+import jakarta.persistence.OneToOne;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -11,6 +12,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import com.flock.journal.department.Department;
+import com.flock.journal.division.directors.Director;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +35,24 @@ public class Division {
   @Column(name = "title", nullable = false, unique = true)
   private String title;
 
+  @Column(name = "phone")
+  private String phone;
+
+  @Column(name = "email")
+  private String email;
+
+  @Column(name = "address")
+  private String address;
+
+  @Column(name = "start_time")
+  private String startTime;
+
+  @Column(name = "end_time")
+  private String endTime;
+
   @OneToMany(mappedBy = "division")
   private List<Department> departments;
+
+  @OneToOne(mappedBy = "division")
+  private Director director;
 }

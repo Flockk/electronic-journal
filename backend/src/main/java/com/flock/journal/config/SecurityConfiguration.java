@@ -36,7 +36,7 @@ import static com.flock.journal.user.Role.ADMIN;
 import static com.flock.journal.user.Role.STUDENT;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfiguration implements WebMvcConfigurer {

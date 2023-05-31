@@ -62,7 +62,7 @@ public class User implements UserDetails {
   private transient List<Token> tokens;
 
   @OneToOne(mappedBy = "user")
-  private transient Professor professors;
+  private transient Professor professor;
 
   @OneToOne(mappedBy = "user")
   private transient Student student;
