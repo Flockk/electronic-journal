@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
 import {login} from "../services/authService";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import image from "../assets/images/start.png"
+import useAuth from "../utils/useAuth";
 
 const Login = () => {
+    const {setAuth} = useAuth();
+
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/divisions";
+
     const [loginData, setLoginData] = useState({
         login: '',
         password: '',
@@ -21,8 +27,9 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await login(loginData);
+            setAuth({response});
             console.log('Logged in successfully', response);
-            navigate('/divisions');
+            navigate(from, {replace: true});
         } catch (error) {
             console.error('Login failed', error);
         }

@@ -1,8 +1,8 @@
 import api from "./api";
 
-export const register = async (registerData) => {
+export const login = async (loginData) => {
     try {
-        const response = await api.post('/auth/register', registerData);
+        const response = await api.post('/auth/login', loginData);
         const {accessToken, refreshToken} = response.data;
 
         localStorage.setItem('accessToken', accessToken);
@@ -13,9 +13,9 @@ export const register = async (registerData) => {
     }
 };
 
-export const login = async (loginData) => {
+export const register = async (registerData) => {
     try {
-        const response = await api.post('/auth/login', loginData);
+        const response = await api.post('/auth/register', registerData);
         const {accessToken, refreshToken} = response.data;
 
         localStorage.setItem('accessToken', accessToken);
