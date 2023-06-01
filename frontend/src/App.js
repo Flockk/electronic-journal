@@ -4,6 +4,7 @@ import Missing from "./components/Missing";
 import DivisionPage from "./pages/DivisionPage";
 import RequireAuth from "./utils/RequireAuth";
 import Layout from "./components/Layout";
+import Unauthorized from "./components/Unauthorized";
 
 function App() {
     return (
@@ -11,7 +12,7 @@ function App() {
             <Route path="/" element={<Layout/>}>
                 <Route index element={<Login/>}/>
 
-                <Route element={<RequireAuth/>}>
+                <Route element={<RequireAuth allowedRole="ADMIN"/>}>
                     <Route path="divisions" element={<DivisionPage/>}/>
                 </Route>
 
