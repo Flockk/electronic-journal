@@ -4,7 +4,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import image from "../assets/images/start.png"
 import useAuth from "../utils/useAuth";
 
-const Login = () => {
+const LoginPage = () => {
     const {setAuth} = useAuth();
 
     const navigate = useNavigate();
@@ -92,4 +92,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LoginPage;

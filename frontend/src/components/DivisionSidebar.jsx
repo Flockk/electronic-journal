@@ -1,42 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Scrollspy from 'react-scrollspy';
-import {getAllDivisions} from "../services/divisionService";
 
-const DivisionSidebar = () => {
-    const [divisions, setDivisions] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchDivisions = () => {
-            getAllDivisions()
-                .then((divisions) => {
-                    setDivisions(divisions);
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    setError(error);
-                    setLoading(false);
-                });
-        };
-
-        fetchDivisions();
-    }, []);
-
-    if (loading) {
-        return (
-            <div
-                className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
-                role="status" aria-label="loading">
-                <span className="sr-only">Загрузка...</span>
-            </div>
-        );
-    }
-
-    if (error) {
-        return <div>Error loading divisions: {error.message}</div>;
-    }
-
+const DivisionSidebar = ({divisions}) => {
     return (
         <div id="docs-sidebar"
              className="hs-overlay hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-[height-of-navbar] left-0 bottom-0 z-[60] w-80 bg-white border-r border-gray-200 py-10 px-8 scrollbar-none lg:block lg:translate-x-0 lg:top-0 lg:right-auto lg:bottom-0 lg:left-0 lg:z-10 dark:scrollbar-y dark:bg-slate-900 mt-14">

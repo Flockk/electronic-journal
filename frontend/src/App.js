@@ -1,5 +1,5 @@
 import {Route, Routes} from "react-router-dom";
-import Login from "./components/Login";
+import LoginPage from "./pages/LoginPage";
 import Missing from "./components/Missing";
 import DivisionPage from "./pages/DivisionPage";
 import RequireAuth from "./utils/RequireAuth";
@@ -9,7 +9,7 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<Layout/>}>
-                <Route index element={<Login/>}/>
+                <Route index element={<LoginPage/>}/>
 
                 <Route element={<RequireAuth/>}>
                     <Route path="divisions" element={<DivisionPage/>}/>
