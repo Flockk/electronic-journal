@@ -11,7 +11,7 @@ function App() {
             <Route path="/" element={<Layout/>}>
                 <Route index element={<Login/>}/>
 
-                <Route element={<RequireAuth allowedRole="ADMIN"/>}>
+                <Route element={<RequireAuth/>}>
                     <Route path="divisions" element={<DivisionPage/>}/>
                 </Route>
 

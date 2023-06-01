@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/divisions")
-@PreAuthorize("hasRole('ADMIN')")
 public class DivisionController {
 
   private final DivisionService divisionService;

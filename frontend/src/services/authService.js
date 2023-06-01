@@ -1,13 +1,27 @@
 import api from "./api";
 
+const getAccessToken = () => {
+    return JSON.parse(localStorage.getItem("accessToken"))
+};
+
+export const createAuthHeaders = () => {
+    const accessToken = getAccessToken();
+    if (accessToken) {
+        return {
+            Authorization: `Bearer ${accessToken}`,
+        };
+    }
+    return {};
+};
+
 export const login = async (loginData) => {
     try {
         const response = await api.post('/auth/login', loginData);
-        const {role, accessToken, refreshToken} = response.data;
+        const {role, access_token, refresh_token} = response.data;
 
         localStorage.setItem('role', role);
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('accessToken', access_token);
+        localStorage.setItem('refreshToken', refresh_token);
         return response.data;
     } catch (error) {
         throw new Error(error.response.data.error);
@@ -17,11 +31,11 @@ export const login = async (loginData) => {
 export const register = async (registerData) => {
     try {
         const response = await api.post('/auth/register', registerData);
-        const {role, accessToken, refreshToken} = response.data;
+        const {role, access_token, refresh_token} = response.data;
 
         localStorage.setItem('role', role);
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('accessToken', access_token);
+        localStorage.setItem('refreshToken', refresh_token);
         return response.data;
     } catch (error) {
         throw new Error(error.response.data.error);
