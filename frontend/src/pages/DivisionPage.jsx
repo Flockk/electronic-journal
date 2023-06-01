@@ -35,9 +35,10 @@ const DivisionPage = () => {
     }
 
     const navigation = [
-        { name: 'Оценки', href: '#', current: true },
+        { name: 'Учебные подразделения', href: '#', current: true },
+        { name: 'Оценки', href: '#', current: false },
         { name: 'Расписание', href: '#', current: false },
-        { name: 'Домашнее задание', href: '#', current: false },
+        { name: 'Домашнее задание', href: '/homeworks', current: false },
         { name: 'Группа', href: '#', current: false },
     ];
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import image from "../assets/images/404.svg";
 
-const Missing = () => {
+const MissingPage = () => {
     const navigate = useNavigate();
 
     const goBack = () => {
@@ -52,4 +52,4 @@ const Missing = () => {
     );
 }
 
-export default Missing;
+export default MissingPage;
