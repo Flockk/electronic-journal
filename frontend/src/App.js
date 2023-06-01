@@ -4,7 +4,6 @@ import Missing from "./components/Missing";
 import DivisionPage from "./pages/DivisionPage";
 import RequireAuth from "./utils/RequireAuth";
 import Layout from "./components/Layout";
-import Unauthorized from "./components/Unauthorized";
 
 function App() {
     return (

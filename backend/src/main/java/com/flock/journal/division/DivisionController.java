@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/divisions")
-@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
+@PreAuthorize("hasRole('ADMIN')")
 public class DivisionController {
 
   private final DivisionService divisionService;
@@ -23,14 +23,12 @@ public class DivisionController {
   }
 
   @GetMapping
-  @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
   public ResponseEntity<List<Division>> getAllDivisions() {
     List<Division> divisions = divisionService.getAllDivisions();
     return new ResponseEntity<>(divisions, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
-  @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
   public ResponseEntity<Division> getDivisionById(@PathVariable("id") Long id) {
     Optional<Division> division = divisionService.getDivisionById(id);
     return division.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
@@ -38,14 +36,12 @@ public class DivisionController {
   }
 
   @PostMapping
-  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Division> createDivision(@RequestBody Division division) {
     Division savedDivision = divisionService.saveDivision(division);
     return new ResponseEntity<>(savedDivision, HttpStatus.CREATED);
   }
 
   @DeleteMapping("/{id}")
-  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deleteDivision(@PathVariable("id") Long id) {
     divisionService.deleteDivision(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
