@@ -3,14 +3,18 @@ import Table from "../components/Table";
 import Navbar from "../components/Navbar";
 import StackedLayout from "../components/StackedLayout";
 import DropdownListbox from "../components/DropdownListbox";
+import {Link} from "react-router-dom";
 
 const HomeworkPage = () => {
     const navigation = [
-        { name: 'Учебные подразделения', href: '/divisions', current: false },
-        { name: 'Оценки', href: '#', current: false },
-        { name: 'Расписание', href: '#', current: false },
-        { name: 'Домашнее задание', href: '#', current: true },
-        { name: 'Группа', href: '#', current: false },
+        {
+            name: <Link to="/divisions">Учебные подразделения</Link>,
+            current: false
+        },
+        {name: 'Оценки', href: '#', current: false},
+        {name: 'Расписание', href: '#', current: false},
+        {name: 'Домашнее задание', href: '#', current: true},
+        {name: 'Группа', href: '#', current: false},
     ];
 
     const dropdownGroups = [

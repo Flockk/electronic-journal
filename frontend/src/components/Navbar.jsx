@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../services/authService";
 
 function classNames(...classes) {
@@ -94,12 +94,12 @@ export default function Navbar({navigation}) {
                                         >
                                             <Menu.Item>
                                                 {({active}) => (
-                                                    <a
-                                                        href="#"
+                                                    <Link
+                                                        to="/profile"
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         Профиль
-                                                    </a>
+                                                    </Link>
                                                 )}
                                             </Menu.Item>
                                             <Menu.Item>

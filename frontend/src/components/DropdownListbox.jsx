@@ -1,9 +1,14 @@
 import {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
+import {FiSearch} from 'react-icons/fi'
 
 function DropdownListbox({options, defaultValue}) {
     const [selected, setSelected] = useState(defaultValue || options[0])
+    const [searchQuery, setSearchQuery] = useState('')
+    const filteredOptions = options.filter(option =>
+        option.name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
 
     return (
         <div className="top-16 w-48">
@@ -14,8 +19,8 @@ function DropdownListbox({options, defaultValue}) {
                     >
                         <span className="block truncate">{selected.name}</span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-              <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
-            </span>
+                            <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
+                        </span>
                     </Listbox.Button>
                     <Transition
                         as={Fragment}
@@ -24,8 +29,19 @@ function DropdownListbox({options, defaultValue}) {
                         leaveTo="opacity-0"
                     >
                         <Listbox.Options
-                            className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {options.map((option, index) => (
+                            className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                        >
+                            <div className="flex items-center px-4 py-2">
+                                <FiSearch className="h-5 w-5 mr-2 text-gray-500"/>
+                                <input
+                                    type="text"
+                                    className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 flex-grow-0"
+                                    placeholder="Поиск"
+                                    value={searchQuery}
+                                    onChange={event => setSearchQuery(event.target.value)}
+                                />
+                            </div>
+                            {filteredOptions.map((option, index) => (
                                 <Listbox.Option
                                     key={index}
                                     className={({active}) =>
@@ -37,16 +53,16 @@ function DropdownListbox({options, defaultValue}) {
                                 >
                                     {({selected}) => (
                                         <>
-                      <span
-                          className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
-                      >
-                        {option.name}
-                      </span>
+                                            <span
+                                                className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
+                                            >
+                                                {option.name}
+                                            </span>
                                             {selected ? (
                                                 <span
                                                     className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600">
-                          <CheckIcon className="h-5 w-5" aria-hidden="true"/>
-                        </span>
+                                                    <CheckIcon className="h-5 w-5" aria-hidden="true"/>
+                                                </span>
                                             ) : null}
                                         </>
                                     )}

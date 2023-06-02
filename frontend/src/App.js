@@ -3,8 +3,9 @@ import LoginPage from "./pages/LoginPage";
 import MissingPage from "./pages/MissingPage";
 import RequireAuth from "./utils/RequireAuth";
 import Layout from "./components/Layout";
-import HomeworkPage from "./pages/HomeworkPage";
 import DivisionPage from "./pages/DivisionPage";
+import HomeworkPage from "./pages/HomeworkPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Route element={<RequireAuth/>}>
                     <Route path="divisions" element={<DivisionPage/>}/>
                     <Route path="homeworks" element={<HomeworkPage/>}/>
+                    <Route path="profile" element={<ProfilePage/>}/>
                 </Route>
 
                 <Route path="*" element={<MissingPage/>}/>
