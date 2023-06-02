@@ -1,7 +1,6 @@
 import {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
-import {FiSearch} from 'react-icons/fi'
 
 function DropdownListbox({options, defaultValue}) {
     const [selected, setSelected] = useState(defaultValue || options[0])
@@ -32,11 +31,10 @@ function DropdownListbox({options, defaultValue}) {
                             className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         >
                             <div className="flex items-center px-4 py-2">
-                                <FiSearch className="h-5 w-5 mr-2 text-gray-500"/>
                                 <input
                                     type="text"
                                     className="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 flex-grow-0"
-                                    placeholder="Поиск"
+                                    placeholder="Поиск..."
                                     value={searchQuery}
                                     onChange={event => setSearchQuery(event.target.value)}
                                 />
@@ -71,6 +69,7 @@ function DropdownListbox({options, defaultValue}) {
                         </Listbox.Options>
                     </Transition>
                 </div>
+
             </Listbox>
         </div>
     )

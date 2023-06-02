@@ -1,8 +1,8 @@
-import Navbar from "../components/Navbar";
+import Navbar from "../components/layout/Navbar";
 import React from "react";
 import {Link} from "react-router-dom";
-import ProfileCard from "../components/ProfileCard";
-import Footer from "../components/Footer";
+import ProfileCard from "../components/cards/ProfileCard";
+import Footer from "../components/layout/Footer";
 
 const ProfilePage = () => {
 

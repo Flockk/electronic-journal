@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import FillingTable from "../components/FillingTable";
-import Navbar from "../components/Navbar";
-import StackedLayout from "../components/StackedLayout";
-import DropdownListbox from "../components/DropdownListbox";
+import FillingTable from "../components/tables/FillingTable";
+import Navbar from "../components/layout/Navbar";
+import StackedLayout from "../components/layout/StackedLayout";
+import DropdownListbox from "../components/dropdowns/DropdownListbox";
 import {Link} from "react-router-dom";
-import Footer from "../components/Footer";
+import Footer from "../components/layout/Footer";
 
 const HomeworkPage = () => {
     const navigation = [

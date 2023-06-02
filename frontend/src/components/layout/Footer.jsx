@@ -1,9 +1,8 @@
 import React from "react";
-import logo from "../assets/images/logo.svg"
+import logo from "../../assets/images/logo.svg"
 
 const Footer = () => {
     return (
-        // <footer className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-gray-900">
         <footer className="bg-white dark:bg-gray-900 mt-auto relative z-50">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="container flex flex-col items-center justify-between px-6 py-8 mx-auto lg:flex-row">

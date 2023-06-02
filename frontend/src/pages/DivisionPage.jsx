@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
-import Navbar from '../components/Navbar';
-import DivisionSidebar from '../components/DivisionSidebar';
-import Section from '../components/Section';
-import DivisionDescription from '../components/DivisionDescription';
+import Navbar from '../components/layout/Navbar';
+import DivisionSidebar from '../components/division/DivisionSidebar';
+import Section from '../components/section/Section';
+import DivisionDescription from '../components/division/DivisionDescription';
 import {getAllDivisions} from '../services/divisionService';
-import Footer from "../components/Footer";
+import Footer from "../components/layout/Footer";
 
 const DivisionPage = () => {
     const [divisions, setDivisions] = useState([]);
