@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Table = ({ tableItems, setTableItemsProp, columns }) => {
+const FillingTable = ({ tableItems, setTableItemsProp, columns }) => {
     const [activeEditIndex, setActiveEditIndex] = useState(null);
     const [hoveredCell, setHoveredCell] = useState(null);
 
@@ -99,4 +99,4 @@ const Table = ({ tableItems, setTableItemsProp, columns }) => {
     );
 };
 
-export default Table;
+export default FillingTable;

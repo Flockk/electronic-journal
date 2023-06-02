@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import DivisionPage from "./pages/DivisionPage";
 import HomeworkPage from "./pages/HomeworkPage";
 import ProfilePage from "./pages/ProfilePage";
+import SchedulePage from "./pages/SchedulePage";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="divisions" element={<DivisionPage/>}/>
                     <Route path="homeworks" element={<HomeworkPage/>}/>
                     <Route path="profile" element={<ProfilePage/>}/>
+                    <Route path="schedule" element={<SchedulePage/>}/>
                 </Route>
 
                 <Route path="*" element={<MissingPage/>}/>

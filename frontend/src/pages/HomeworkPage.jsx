@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Table from "../components/Table";
+import FillingTable from "../components/FillingTable";
 import Navbar from "../components/Navbar";
 import StackedLayout from "../components/StackedLayout";
 import DropdownListbox from "../components/DropdownListbox";
@@ -13,7 +13,10 @@ const HomeworkPage = () => {
             current: false
         },
         {name: 'Оценки', href: '#', current: false},
-        {name: 'Расписание', href: '#', current: false},
+        {
+            name: <Link to="/schedule">Расписание</Link>,
+            current: false
+        },
         {name: 'Домашнее задание', href: '#', current: true},
         {name: 'Группа', href: '#', current: false},
     ];
@@ -85,7 +88,7 @@ const HomeworkPage = () => {
                     </>
                 }
             >
-                <Table tableItems={tableItems} setTableItemsProp={setTableItems} columns={columns}/>
+                <FillingTable tableItems={tableItems} setTableItemsProp={setTableItems} columns={columns}/>
             </StackedLayout>
             <Footer/>
         </div>

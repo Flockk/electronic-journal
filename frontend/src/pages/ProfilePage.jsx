@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar";
 import React from "react";
 import {Link} from "react-router-dom";
 import ProfileCard from "../components/ProfileCard";
+import Footer from "../components/Footer";
 
 const ProfilePage = () => {
 
@@ -11,7 +12,10 @@ const ProfilePage = () => {
             current: false
         },
         {name: 'Оценки', href: '#', current: false},
-        {name: 'Расписание', href: '#', current: false},
+        {
+            name: <Link to="/schedule">Расписание</Link>,
+            current: false
+        },
         {
             name: <Link to="/homeworks">Домашнее задание</Link>,
             current: false
@@ -23,6 +27,7 @@ const ProfilePage = () => {
         <div className="mt-16">
             <Navbar navigation={navigation}/>
             <ProfileCard/>
+            <Footer/>
         </div>
     );
 }
