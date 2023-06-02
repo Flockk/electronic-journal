@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import StackedLayout from "../components/StackedLayout";
 import DropdownListbox from "../components/DropdownListbox";
 import {Link} from "react-router-dom";
+import Footer from "../components/Footer";
 
 const HomeworkPage = () => {
     const navigation = [
@@ -59,6 +60,11 @@ const HomeworkPage = () => {
             theme: "",
             homework: "",
         },
+        {
+            date: "28.09",
+            theme: "",
+            homework: "",
+        },
     ]);
 
     const columns = [
@@ -68,7 +74,7 @@ const HomeworkPage = () => {
     ];
 
     return (
-        <div className="mt-16">
+        <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation}/>
             <StackedLayout
                 title="Домашние задания"
@@ -81,6 +87,7 @@ const HomeworkPage = () => {
             >
                 <Table tableItems={tableItems} setTableItemsProp={setTableItems} columns={columns}/>
             </StackedLayout>
+            <Footer/>
         </div>
     );
 };

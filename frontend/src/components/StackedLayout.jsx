@@ -13,7 +13,7 @@ function StackedLayout({title, children, buttons}) {
                     </div>
                 </div>
             </header>
-            <main>
+            <main className="flex-grow">
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{children}</div>
             </main>
         </>

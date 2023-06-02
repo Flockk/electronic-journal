@@ -3,6 +3,7 @@ import {Disclosure, Menu, Transition} from '@headlessui/react';
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline';
 import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../services/authService";
+import logo from "../assets/images/logo.svg"
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
@@ -38,13 +39,13 @@ export default function Navbar({navigation}) {
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
                                         className="block h-8 w-auto lg:hidden"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                        alt="Your Company"
+                                        src={logo}
+                                        alt="Логотип сайта"
                                     />
                                     <img
                                         className="hidden h-8 w-auto lg:block"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                        alt="Your Company"
+                                        src={logo}
+                                        alt="Логотип сайта"
                                     />
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
