@@ -1,12 +1,15 @@
 import {Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import MissingPage from "./pages/MissingPage";
-import RequireAuth from "./utils/RequireAuth";
+import RequireAuth from "./utils/requireAuth";
 import Layout from "./components/layout/Layout";
-import DivisionPage from "./pages/DivisionPage";
-import HomeworkPage from "./pages/HomeworkPage";
-import ProfilePage from "./pages/ProfilePage";
-import SchedulePage from "./pages/SchedulePage";
+import StudDivisionPage from "./pages/student/StudDivisionPage";
+import ProfHomeworkPage from "./pages/professor/ProfHomeworkPage";
+import StudProfilePage from "./pages/student/StudProfilePage";
+import StudSchedulePage from "./pages/student/StudSchedulePage";
+import AdminProfilePage from "./pages/admin/AdminProfilePage";
+import ProfProfilePage from "./pages/professor/ProfProfilePage";
+import AdminAccountCreationPage from "./pages/admin/AdminAccountCreationPage";
 
 function App() {
     return (
@@ -14,11 +17,20 @@ function App() {
             <Route path="/" element={<Layout/>}>
                 <Route index element={<LoginPage/>}/>
 
-                <Route element={<RequireAuth/>}>
-                    <Route path="divisions" element={<DivisionPage/>}/>
-                    <Route path="homeworks" element={<HomeworkPage/>}/>
-                    <Route path="profile" element={<ProfilePage/>}/>
-                    <Route path="schedule" element={<SchedulePage/>}/>
+                <Route path="admin" element={<RequireAuth allowedRole={"ADMIN"}/>}>
+                    <Route path="profile" element={<AdminProfilePage/>}/>
+                    <Route path="register" element={<AdminAccountCreationPage/>}/>
+                </Route>
+
+                <Route path="professor" element={<RequireAuth allowedRole={"PROFESSOR"}/>}>
+                    <Route path="profile" element={<ProfProfilePage/>}/>
+                    <Route path="homeworks" element={<ProfHomeworkPage/>}/>
+                </Route>
+
+                <Route path="student" element={<RequireAuth allowedRole={"STUDENT"}/>}>
+                    <Route path="profile" element={<StudProfilePage/>}/>
+                    <Route path="divisions" element={<StudDivisionPage/>}/>
+                    <Route path="schedule" element={<StudSchedulePage/>}/>
                 </Route>
 
                 <Route path="*" element={<MissingPage/>}/>

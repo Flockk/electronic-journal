@@ -21,4 +21,38 @@ public class JournalApplication {
     SpringApplication.run(JournalApplication.class, args);
   }
 
+  @Bean
+  public CommandLineRunner commandLineRunner(AuthenticationService service) {
+    return args -> {
+      var admin = RegisterRequest.builder()
+          .firstname("Admin")
+          .lastname("Admin")
+          .patronymic("Admin")
+          .login("admin@login")
+          .password("password")
+          .role(ADMIN)
+          .build();
+      out.println("Admin token: " + service.register(admin).getAccessToken());
+
+      var teacher = RegisterRequest.builder()
+          .firstname("Professor")
+          .lastname("Professor")
+          .patronymic("Professor")
+          .login("professor@login")
+          .password("password")
+          .role(PROFESSOR)
+          .build();
+      out.println("Professor token: " + service.register(teacher).getAccessToken());
+
+      var student = RegisterRequest.builder()
+          .firstname("Student")
+          .lastname("Student")
+          .patronymic("Student")
+          .login("student@login")
+          .password("password")
+          .role(STUDENT)
+          .build();
+      out.println("Student token: " + service.register(student).getAccessToken());
+    };
+  }
 }

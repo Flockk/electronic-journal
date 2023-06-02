@@ -9,7 +9,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/profile";
+    const from = location.state?.from?.pathname || "/";
 
     const [loginData, setLoginData] = useState({
         login: '',
@@ -29,7 +29,16 @@ const LoginPage = () => {
             const response = await login(loginData);
             setAuth({response});
             console.log('Logged in successfully', response);
-            navigate(from, {replace: true});
+
+            if (response.role === "ADMIN") {
+                navigate("/admin/profile", {replace: true});
+            } else if (response.role === "PROFESSOR") {
+                navigate("/professor/profile", {replace: true});
+            } else if (response.role === "STUDENT") {
+                navigate("/student/profile", {replace: true});
+            } else {
+                navigate(from, {replace: true});
+            }
         } catch (error) {
             console.error('Login failed', error);
         }

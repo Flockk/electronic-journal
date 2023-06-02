@@ -12,7 +12,6 @@ const RequireAuth = ({allowedRole}) => {
         return auth?.response && auth.response.role === allowedRole;
     };
 
-
     return isRoleAllowed() ? (
         <Outlet/>
     ) : (

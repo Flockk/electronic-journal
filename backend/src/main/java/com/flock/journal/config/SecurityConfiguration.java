@@ -59,6 +59,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         .authorizeHttpRequests()
         .requestMatchers(
             "/api/v1/divisions",
+            "/api/v1/homeworks",
             "/api/v1/auth/**",
             "/v2/api-docs",
             "/v3/api-docs",
@@ -79,6 +80,8 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         .requestMatchers(POST, "/api/v1/admin/**").hasAuthority(ADMIN_CREATE.name())
         .requestMatchers(PUT, "/api/v1/admin/**").hasAuthority(ADMIN_UPDATE.name())
         .requestMatchers(DELETE, "/api/v1/admin/**").hasAuthority(ADMIN_DELETE.name())
+
+        .requestMatchers(POST, "/api/v1/auth/register").hasRole(ADMIN.name())
 
         .requestMatchers("/api/v1/professor/**").hasRole(PROFESSOR.name())
 

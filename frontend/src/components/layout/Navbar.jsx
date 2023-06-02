@@ -9,7 +9,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
 }
 
-export default function Navbar({navigation}) {
+export default function Navbar({navigation, profileLink}) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -96,7 +96,7 @@ export default function Navbar({navigation}) {
                                             <Menu.Item>
                                                 {({active}) => (
                                                     <Link
-                                                        to="/profile"
+                                                        to={profileLink}
                                                         className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                     >
                                                         Профиль

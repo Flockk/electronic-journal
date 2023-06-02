@@ -1,24 +1,17 @@
 import React, {useState} from "react";
-import FillingTable from "../components/tables/FillingTable";
-import Navbar from "../components/layout/Navbar";
-import StackedLayout from "../components/layout/StackedLayout";
-import DropdownListbox from "../components/dropdowns/DropdownListbox";
+import FillingTable from "../../components/tables/FillingTable";
+import Navbar from "../../components/layout/Navbar";
+import StackedLayout from "../../components/layout/StackedLayout";
+import DropdownListbox from "../../components/dropdowns/DropdownListbox";
 import {Link} from "react-router-dom";
-import Footer from "../components/layout/Footer";
+import Footer from "../../components/layout/Footer";
 
-const HomeworkPage = () => {
+const ProfHomeworkPage = () => {
     const navigation = [
         {
-            name: <Link to="/divisions">Учебные подразделения</Link>,
+            name: <Link to="/professor/homeworks">Домашние задания</Link>,
             current: false
         },
-        {name: 'Оценки', href: '#', current: false},
-        {
-            name: <Link to="/schedule">Расписание</Link>,
-            current: false
-        },
-        {name: 'Домашнее задание', href: '#', current: true},
-        {name: 'Группа', href: '#', current: false},
     ];
 
     const dropdownGroups = [
@@ -78,7 +71,7 @@ const HomeworkPage = () => {
 
     return (
         <div className="flex flex-col min-h-screen mt-16">
-            <Navbar navigation={navigation}/>
+            <Navbar navigation={navigation} profileLink="/professor/profile"/>
             <StackedLayout
                 title="Домашние задания"
                 buttons={
@@ -95,4 +88,4 @@ const HomeworkPage = () => {
     );
 };
 
-export default HomeworkPage;
+export default ProfHomeworkPage;

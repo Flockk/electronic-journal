@@ -1,23 +1,17 @@
 import {Link} from "react-router-dom";
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/layout/Footer";
 import React from "react";
-import StackedLayout from "../components/layout/StackedLayout";
-import SimpleTable from "../components/tables/SimpleTable";
+import StackedLayout from "../../components/layout/StackedLayout";
+import SimpleTable from "../../components/tables/SimpleTable";
 
-const SchedulePage = () => {
+const StudSchedulePage = () => {
     const navigation = [
         {
-            name: <Link to="/divisions">Учебные подразделения</Link>,
+            name: <Link to="/student/divisions">Учебные подразделения</Link>,
             current: false,
         },
-        {name: "Оценки", href: "#", current: false},
         {name: "Расписание", href: "#", current: true},
-        {
-            name: <Link to="/homeworks">Домашнее задание</Link>,
-            current: false,
-        },
-        {name: "Группа", href: "#", current: false},
     ];
 
     const columns = [
@@ -142,13 +136,12 @@ const SchedulePage = () => {
                 department: "Кафедра прикладной математики и информатики",
             },
         ],
-        Суббота: [
-        ],
+        Суббота: [],
     };
 
     return (
         <div className="flex flex-col min-h-screen mt-16">
-            <Navbar navigation={navigation}/>
+            <Navbar navigation={navigation} profileLink="/student/profile"/>
             <StackedLayout title="Расписание">
                 {Object.entries(scheduleData).map(([dayOfWeek, data]) => (
                     <div key={dayOfWeek} className="mb-8">
@@ -165,4 +158,4 @@ const SchedulePage = () => {
     );
 };
 
-export default SchedulePage;
+export default StudSchedulePage;
