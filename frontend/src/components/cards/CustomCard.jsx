@@ -5,7 +5,7 @@ import FullNameInput from "../inputs/FullNameInput";
 import LoginInput from "../inputs/LoginInput";
 import PasswordInput from "../inputs/PasswordInput";
 import PhoneInput from "../inputs/PhoneInput";
-import DropdownMenu from "../dropdowns/DropdownMenu";
+import DropdownRoleSelection from "../dropdowns/DropdownRoleSelection";
 
 const CustomCard = ({
                         includeProfilePhoto,
@@ -34,7 +34,7 @@ const CustomCard = ({
                         <LoginInput/>
                         <PasswordInput/>
                         {includePhoneInput && <PhoneInput/>}
-                        {includeDropdownMenu && <DropdownMenu/>}
+                        {includeDropdownMenu && <DropdownRoleSelection/>}
                     </div>
 
                     <div className="mt-5 flex justify-end gap-x-2">

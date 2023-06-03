@@ -30,7 +30,7 @@ const StudDivisionPage = () => {
     ];
 
     return (
-        <div className="dark:bg-slate-900">
+        <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation} profileLink="/student/profile"/>
             <div className="max-w-[90rem] mx-auto mt-14 flex">
                 <div>

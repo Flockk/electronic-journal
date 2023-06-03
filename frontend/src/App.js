@@ -9,7 +9,7 @@ import StudProfilePage from "./pages/student/StudProfilePage";
 import StudSchedulePage from "./pages/student/StudSchedulePage";
 import AdminProfilePage from "./pages/admin/AdminProfilePage";
 import ProfProfilePage from "./pages/professor/ProfProfilePage";
-import AdminAccountCreationPage from "./pages/admin/AdminAccountCreationPage";
+import AdminManagementUsers from "./pages/admin/AdminManagementUsers";
 
 function App() {
     return (
@@ -19,7 +19,7 @@ function App() {
 
                 <Route path="admin" element={<RequireAuth allowedRole={"ADMIN"}/>}>
                     <Route path="profile" element={<AdminProfilePage/>}/>
-                    <Route path="register" element={<AdminAccountCreationPage/>}/>
+                    <Route path="users" element={<AdminManagementUsers/>}></Route>
                 </Route>
 
                 <Route path="professor" element={<RequireAuth allowedRole={"PROFESSOR"}/>}>

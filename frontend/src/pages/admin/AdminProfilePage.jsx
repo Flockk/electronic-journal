@@ -8,13 +8,13 @@ const AdminProfilePage = () => {
 
     const navigation = [
         {
-            name: <Link to="/admin/register">Создание пользователей</Link>,
+            name: <Link to="/admin/users">Управление пользователями</Link>,
             current: false
         },
     ];
 
     return (
-        <div className="mt-16">
+        <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation} profileLink="/admin/profile"/>
             <CustomCard title="Ваш  профиль"
                         description="Вы можете изменить настройки своего профиля"

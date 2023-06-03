@@ -14,7 +14,7 @@ const ProfProfilePage = () => {
     ];
 
     return (
-        <div className="mt-16">
+        <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation} profileLink="/professor/profile"/>
             <CustomCard title="Ваш  профиль"
                         description="Вы можете изменить настройки своего профиля"
