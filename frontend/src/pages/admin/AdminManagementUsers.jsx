@@ -21,7 +21,7 @@ const AdminManagementUsers = () => {
             <Navbar navigation={navigation} profileLink="/admin/profile"/>
             <StackedLayout title="Управление пользователями" buttons={
                 <>
-                    <ButtonImport buttonText="Импорт" />
+                    <ButtonImport buttonText="Экспорт" />
                     <ButtonAddUser buttonText="Добавить пользователя" />
                 </>
             }>

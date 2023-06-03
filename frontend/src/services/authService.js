@@ -1,5 +1,19 @@
 import api from "./api";
 
+const getAccessToken = () => {
+    return localStorage.getItem("accessToken");
+};
+
+export const createAuthHeaders = () => {
+    const accessToken = getAccessToken();
+    if (accessToken) {
+        return {
+            Authorization: `Bearer ${accessToken}`,
+        };
+    }
+    return {};
+};
+
 export const login = async (loginData) => {
     try {
         const response = await api.post('/auth/login', loginData);
