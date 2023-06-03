@@ -22,9 +22,22 @@ public class UserController {
   }
 
   @GetMapping
-  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<List<User>> getAllUsers() {
     List<User> users = userService.getAllUsers();
+    return new ResponseEntity<>(users, HttpStatus.OK);
+  }
+
+  @GetMapping("/ascending")
+  @PreAuthorize("hasRole('ADMIN')")
+  public ResponseEntity<List<User>> getAllUsersSortedAscending() {
+    List<User> users = userService.getAllUsersSortedAscending();
+    return new ResponseEntity<>(users, HttpStatus.OK);
+  }
+
+  @GetMapping("/descending")
+  @PreAuthorize("hasRole('ADMIN')")
+  public ResponseEntity<List<User>> getAllUsersSortedDescending() {
+    List<User> users = userService.getAllUsersSortedDescending();
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 

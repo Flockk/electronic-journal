@@ -1,19 +1,40 @@
 import React, {useEffect, useState} from 'react';
-import {getAllUsers} from "../../services/userService";
+import {getAllUsers, getAllUsersSortedAscending, getAllUsersSortedDescending} from "../../services/userService";
 import DropdownThreedot from "../dropdowns/DropdownThreedot";
 import ColoredBadge from "../badge/ColoredBadge";
 
 const WithBtnTable = () => {
     const [users, setUsers] = useState([]);
+    const [sortOrder, setSortOrder] = useState('ascending');
 
-    const handleAllClick = async () => {
+    const handleAllClick = () => {
+        getAllUsers()
+            .then(usersData => {
+                setUsers(usersData);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
+    const handleSortClick = async () => {
+        const newSortOrder = sortOrder === 'ascending' ? 'descending' : 'ascending';
+        setSortOrder(newSortOrder);
+
         try {
-            const usersData = await getAllUsers();
-            setUsers(usersData);
+            let sortedUsers;
+            if (newSortOrder === 'ascending') {
+                sortedUsers = await getAllUsersSortedAscending();
+            } else {
+                sortedUsers = await getAllUsersSortedDescending();
+            }
+
+            setUsers(sortedUsers);
         } catch (error) {
             console.error(error);
         }
     };
+
 
     useEffect(() => {
         handleAllClick();
@@ -67,7 +88,8 @@ const WithBtnTable = () => {
                                     <tr>
                                         <th scope="col"
                                             className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                            <button className="flex items-center gap-x-3 focus:outline-none">
+                                            <button className="flex items-center gap-x-3 focus:outline-none"
+                                                    onClick={handleSortClick}>
                                                 <span>ФИО</span>
 
                                                 <svg className="h-3" viewBox="0 0 10 11" fill="none"

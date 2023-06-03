@@ -13,10 +13,35 @@ export const getAllUsers = async () => {
     }
 };
 
+export const getAllUsersSortedAscending = async () => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get('/admin/users/ascending', {headers});
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.response.data.error);
+    }
+};
+
+export const getAllUsersSortedDescending = async () => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get('/admin/users/descending', {headers});
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const getUserById = async (id) => {
     try {
         const headers = createAuthHeaders();
         const response = await api.get(`/admin/users/${id}`, {headers});
+
         return response.data;
     } catch (error) {
         throw new Error(error.response.data.error);
