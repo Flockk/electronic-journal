@@ -31,6 +31,11 @@ public class UserService {
     return userRepository.findAll(sort);
   }
 
+  public List<User> searchUsers(String query) {
+    return userRepository.findUsersBySearch(
+        query, query, query, query);
+  }
+
   public Optional<User> getUserById(Long id) {
     return userRepository.findById(id);
   }

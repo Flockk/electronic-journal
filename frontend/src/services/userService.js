@@ -37,6 +37,18 @@ export const getAllUsersSortedDescending = async () => {
     }
 };
 
+export const searchUsers = async (query) => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get(`/admin/users/search?query=${query}`, {headers});
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const getUserById = async (id) => {
     try {
         const headers = createAuthHeaders();

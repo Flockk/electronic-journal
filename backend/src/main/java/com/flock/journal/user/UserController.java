@@ -22,6 +22,7 @@ public class UserController {
   }
 
   @GetMapping
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<List<User>> getAllUsers() {
     List<User> users = userService.getAllUsers();
     return new ResponseEntity<>(users, HttpStatus.OK);
@@ -38,6 +39,13 @@ public class UserController {
   @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<List<User>> getAllUsersSortedDescending() {
     List<User> users = userService.getAllUsersSortedDescending();
+    return new ResponseEntity<>(users, HttpStatus.OK);
+  }
+
+  @GetMapping("/search")
+  @PreAuthorize("hasRole('ADMIN')")
+  public ResponseEntity<List<User>> searchUsers(@RequestParam("query") String query) {
+    List<User> users = userService.searchUsers(query);
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 
