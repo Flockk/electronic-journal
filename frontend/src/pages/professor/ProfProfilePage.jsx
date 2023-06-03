@@ -1,7 +1,7 @@
 import Navbar from "../../components/layout/Navbar";
 import React from "react";
 import {Link} from "react-router-dom";
-import ProfileCard from "../../components/cards/ProfileCard";
+import CustomCard from "../../components/cards/CustomCard";
 import Footer from "../../components/layout/Footer";
 
 const ProfProfilePage = () => {
@@ -16,7 +16,10 @@ const ProfProfilePage = () => {
     return (
         <div className="mt-16">
             <Navbar navigation={navigation} profileLink="/professor/profile"/>
-            <ProfileCard/>
+            <CustomCard title="Ваш  профиль"
+                        description="Вы можете изменить настройки своего профиля"
+                        saveButtonText="Сохранить"
+            />
             <Footer/>
         </div>
     );
