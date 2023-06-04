@@ -2,13 +2,15 @@ import {useState} from "react";
 
 const DropdownRoleSelection = ({role}) => {
     const [open, setOpen] = useState(false);
+    const [selectedRole, setSelectedRole] = useState(role);
 
     const toggle = () => {
         setOpen(!open);
     };
 
-    const handleRoleSelection = () => {
-        toggle();
+    const selectRole = (selectedRole) => {
+        setSelectedRole(selectedRole);
+        setOpen(false);
     };
 
     return (
@@ -30,7 +32,7 @@ const DropdownRoleSelection = ({role}) => {
                         type="button"
                         className="inline-flex gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-center text-sm text-gray-500 shadow-sm transition-all hover:bg-gray-100 focus:ring focus:ring-gray-100 disabled:cursor-not-allowed disabled:border-gray-100 disabled:bg-gray-50 disabled:text-gray-400"
                     >
-                        {role ? role : "Выберите роль"}
+                        {selectedRole ? selectedRole : "Выберите роль"}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-5 w-5 text-gray-400"
@@ -45,7 +47,6 @@ const DropdownRoleSelection = ({role}) => {
                         </svg>
                     </button>
 
-
                     {open && (
                         <div
                             id="dropdown-button"
@@ -55,14 +56,14 @@ const DropdownRoleSelection = ({role}) => {
                                 <a
                                     href="#"
                                     className="flex w-full items-center rounded-md px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-                                    onClick={() => handleRoleSelection()}
+                                    onClick={() => selectRole("PROFESSOR")}
                                 >
                                     Преподаватель
                                 </a>
                                 <a
                                     href="#"
                                     className="flex w-full items-center rounded-md px-3 py-2 text-gray-700 hover:bg-gray-100"
-                                    onClick={() => handleRoleSelection()}
+                                    onClick={() => selectRole("STUDENT")}
                                 >
                                     Студент
                                 </a>
@@ -71,7 +72,7 @@ const DropdownRoleSelection = ({role}) => {
                                 <a
                                     href="#"
                                     className="flex w-full items-center rounded-md px-3 py-2 text-gray-700 hover:bg-gray-100"
-                                    onClick={() => handleRoleSelection()}
+                                    onClick={() => selectRole("ADMIN")}
                                 >
                                     Администратор
                                 </a>

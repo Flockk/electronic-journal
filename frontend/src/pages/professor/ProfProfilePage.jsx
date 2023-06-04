@@ -1,8 +1,8 @@
 import Navbar from "../../components/layout/Navbar";
 import React from "react";
 import {Link} from "react-router-dom";
-import CustomCard from "../../components/cards/CustomCard";
 import Footer from "../../components/layout/Footer";
+import Card from "../../components/cards/Card";
 
 const ProfProfilePage = () => {
 
@@ -16,7 +16,7 @@ const ProfProfilePage = () => {
     return (
         <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation} profileLink="/professor/profile"/>
-            <CustomCard title="Ваш  профиль"
+            <Card title="Ваш  профиль"
                         description="Вы можете изменить настройки своего профиля"
                         saveButtonText="Сохранить"
             />
