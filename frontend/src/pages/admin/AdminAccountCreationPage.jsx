@@ -10,12 +10,13 @@ import {register} from "../../services/authService";
 import ButtonAction from "../../components/buttons/ButtonAction";
 import ButtonBack from "../../components/buttons/ButtonBack";
 import Card from "../../components/cards/Card";
+import AlertSuccess from "../../components/alerts/AlertSuccess";
 
 const AdminAccountCreationPage = () => {
     const navigation = [
         {
             name: <Link to="/admin/users">Управление пользователями</Link>,
-            current: true
+            current: true,
         },
     ];
 
@@ -28,10 +29,13 @@ const AdminAccountCreationPage = () => {
         role: "",
     });
 
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
     const handleRegister = async () => {
         try {
             console.log(userData);
             await register(userData);
+            setShowSuccessAlert(true); // Показать уведомление об успешном создании
         } catch (error) {
             // Обработка ошибок при регистрации
         }
@@ -57,19 +61,19 @@ const AdminAccountCreationPage = () => {
                                 onFirstNameChange={(value) =>
                                     setUserData((prevUserData) => ({
                                         ...prevUserData,
-                                        firstname: value
+                                        firstname: value,
                                     }))
                                 }
                                 onLastNameChange={(value) =>
                                     setUserData((prevUserData) => ({
                                         ...prevUserData,
-                                        lastname: value
+                                        lastname: value,
                                     }))
                                 }
                                 onPatronymicChange={(value) =>
                                     setUserData((prevUserData) => ({
                                         ...prevUserData,
-                                        patronymic: value
+                                        patronymic: value,
                                     }))
                                 }
                             />
@@ -77,7 +81,7 @@ const AdminAccountCreationPage = () => {
                                 onLoginChange={(value) =>
                                     setUserData((prevUserData) => ({
                                         ...prevUserData,
-                                        login: value
+                                        login: value,
                                     }))
                                 }
                             />
@@ -85,7 +89,7 @@ const AdminAccountCreationPage = () => {
                                 onPasswordChange={(value) =>
                                     setUserData((prevUserData) => ({
                                         ...prevUserData,
-                                        password: value
+                                        password: value,
                                     }))
                                 }
                             />
@@ -94,7 +98,7 @@ const AdminAccountCreationPage = () => {
                                 onRoleChange={(value) =>
                                     setUserData((prevUserData) => ({
                                         ...prevUserData,
-                                        role: value
+                                        role: value,
                                     }))
                                 }
                             />
@@ -106,6 +110,12 @@ const AdminAccountCreationPage = () => {
                         </div>
                     </form>
                 </Card>
+                {showSuccessAlert && (
+                    <AlertSuccess
+                        title="Успешно!"
+                        message="Пользователь успешно создан."
+                    />
+                )}
             </div>
             <Footer/>
         </div>

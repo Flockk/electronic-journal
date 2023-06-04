@@ -9,7 +9,24 @@ const DropdownRoleSelection = ({role, onRoleChange}) => {
     };
 
     const selectRole = (selectedRole) => {
-        setSelectedRole(selectedRole);
+        let displayedRole;
+
+        switch (selectedRole) {
+            case "PROFESSOR":
+                displayedRole = "Преподаватель";
+                break;
+            case "STUDENT":
+                displayedRole = "Студент";
+                break;
+            case "ADMIN":
+                displayedRole = "Администратор";
+                break;
+            default:
+                displayedRole = "Выберите роль";
+                break;
+        }
+
+        setSelectedRole(displayedRole);
         setOpen(false);
         onRoleChange(selectedRole);
     };
