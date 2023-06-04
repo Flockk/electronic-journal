@@ -12,6 +12,8 @@ const WithBtnTable = () => {
     const [users, setUsers] = useState([]);
     const [sortOrder, setSortOrder] = useState('ascending');
     const [searchValue, setSearchValue] = useState('');
+    const [filterRole, setFilterRole] = useState(null);
+    const [activeButton, setActiveButton] = useState('all');
 
     const handleAllClick = () => {
         getAllUsers()
@@ -23,8 +25,9 @@ const WithBtnTable = () => {
             });
 
         setSearchValue('');
+        setFilterRole(null);
+        setActiveButton('all');
     };
-
 
     const handleSortClick = async () => {
         const newSortOrder = sortOrder === 'ascending' ? 'descending' : 'ascending';
@@ -58,6 +61,35 @@ const WithBtnTable = () => {
             });
     };
 
+    const handleProfessorsClick = () => {
+        getAllUsers()
+            .then((usersData) => {
+                const filteredUsers = usersData.filter(user => user.role === 'PROFESSOR');
+                setUsers(filteredUsers);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+        setSearchValue('');
+        setFilterRole('PROFESSOR');
+        setActiveButton('professors');
+    };
+
+    const handleStudentsClick = () => {
+        getAllUsers()
+            .then((usersData) => {
+                const filteredUsers = usersData.filter(user => user.role === 'STUDENT');
+                setUsers(filteredUsers);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+        setSearchValue('');
+        setFilterRole('STUDENT');
+        setActiveButton('students');
+    };
 
     useEffect(() => {
         handleAllClick();
@@ -70,17 +102,27 @@ const WithBtnTable = () => {
                 <div
                     className="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
                     <button
-                        className="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 bg-gray-100 sm:text-sm dark:bg-gray-800 dark:text-gray-300"
+                        className={`px-5 py-2 text-xs font-medium ${
+                            activeButton === 'all' ? 'bg-gray-100' : ''
+                        } text-gray-600 transition-colors duration-200 sm:text-sm dark:bg-gray-800 dark:text-gray-300`}
                         onClick={handleAllClick}
                     >
                         Все
                     </button>
                     <button
-                        className="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
+                        className={`px-5 py-2 text-xs font-medium ${
+                            activeButton === 'professors' ? 'bg-gray-100' : ''
+                        } text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100`}
+                        onClick={handleProfessorsClick}
+                    >
                         Преподаватели
                     </button>
                     <button
-                        className="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
+                        className={`px-5 py-2 text-xs font-medium ${
+                            activeButton === 'students' ? 'bg-gray-100' : ''
+                        } text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100`}
+                        onClick={handleStudentsClick}
+                    >
                         Студенты
                     </button>
                 </div>
@@ -142,10 +184,6 @@ const WithBtnTable = () => {
                                             Логин
                                         </th>
 
-                                        <th scope="col"
-                                            className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Пароль
-                                        </th>
-
                                         <th scope="col" className="relative py-3.5 px-4">
                                             <span className="sr-only">Edit</span>
                                         </th>
@@ -154,6 +192,7 @@ const WithBtnTable = () => {
                                     <tbody
                                         className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                     {users.map((user) => (
+                                        (filterRole === null || user.role === filterRole) &&
                                         <tr key={user.id}>
                                             <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                 <div>

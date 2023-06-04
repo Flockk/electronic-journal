@@ -6,10 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/professors")
+@RequestMapping("/api/v1/admin/professors")
 public class ProfessorController {
 
   private final ProfessorService professorService;
@@ -20,12 +21,14 @@ public class ProfessorController {
   }
 
   @GetMapping
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<List<Professor>> getAllProfessors() {
     List<Professor> professors = professorService.getAllProfessors();
     return new ResponseEntity<>(professors, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Professor> getProfessorById(@PathVariable("id") Long id) {
     Optional<Professor> professor = professorService.getProfessorById(id);
     return professor.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
@@ -33,12 +36,14 @@ public class ProfessorController {
   }
 
   @PostMapping
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Professor> createProfessor(@RequestBody Professor professor) {
     Professor savedProfessor = professorService.saveProfessor(professor);
     return new ResponseEntity<>(savedProfessor, HttpStatus.CREATED);
   }
 
   @DeleteMapping("/{id}")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deleteProfessor(@PathVariable("id") Long id) {
     professorService.deleteProfessor(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);

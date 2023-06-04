@@ -12,7 +12,7 @@ const AdminManagementUsers = () => {
     const navigation = [
         {
             name: <Link to="#">Управление пользователями</Link>,
-            current: false
+            current: true
         },
     ];
 

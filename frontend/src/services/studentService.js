@@ -1,10 +1,10 @@
 import api from "./api";
 import {createAuthHeaders} from "./authService";
 
-export const getAllProfessors = async () => {
+export const getAllStudents = async () => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get('/professors', {headers});
+        const response = await api.get('/students', {headers});
 
         return response.data;
     } catch (error) {
@@ -12,10 +12,10 @@ export const getAllProfessors = async () => {
     }
 };
 
-export const getProfessorById = async (id) => {
+export const getStudentById = async (id) => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get(`/professors/${id}`, {headers});
+        const response = await api.get(`/students/${id}`, {headers});
 
         return response.data;
     } catch (error) {
@@ -23,10 +23,10 @@ export const getProfessorById = async (id) => {
     }
 };
 
-export const createProfessor = async (professorData) => {
+export const createStudent = async (studentData) => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.post('/professors', professorData, {headers});
+        const response = await api.post('/students', studentData, {headers});
 
         return response.data;
     } catch (error) {
@@ -34,10 +34,10 @@ export const createProfessor = async (professorData) => {
     }
 };
 
-export const deleteProfessor = async (id) => {
+export const deleteStudent = async (id) => {
     try {
         const headers = createAuthHeaders();
-        await api.delete(`/professors/${id}`, {headers});
+        await api.delete(`/students/${id}`, {headers});
     } catch (error) {
         throw new Error(error.response.data.error);
     }
