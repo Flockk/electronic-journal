@@ -32,7 +32,7 @@ public class UserService {
   }
 
   public List<User> searchUsers(String query) {
-    return userRepository.findUsersBySearch(
+    return userRepository.findByFirstnameAndLastnameAndPatronymicAndLogin(
         query, query, query, query);
   }
 
