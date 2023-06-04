@@ -30,12 +30,8 @@ export const login = async (loginData) => {
 
 export const register = async (registerData) => {
     try {
-        const response = await api.post('/auth/register', registerData);
-        const {role, access_token, refresh_token} = response.data;
-
-        localStorage.setItem('role', role);
-        localStorage.setItem('accessToken', access_token);
-        localStorage.setItem('refreshToken', refresh_token);
+        const headers = createAuthHeaders();
+        const response = await api.post('/auth/register', registerData, {headers});
         return response.data;
     } catch (error) {
         throw new Error(error.response.data.error);

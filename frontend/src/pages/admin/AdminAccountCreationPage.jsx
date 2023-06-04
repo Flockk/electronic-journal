@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import React, {useState} from "react";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
@@ -12,12 +12,10 @@ import ButtonBack from "../../components/buttons/ButtonBack";
 import Card from "../../components/cards/Card";
 
 const AdminAccountCreationPage = () => {
-    const navigate = useNavigate();
-
     const navigation = [
         {
-            name: <Link to="/admin/register">Создание пользователя</Link>,
-            current: true,
+            name: <Link to="/admin/users">Управление пользователями</Link>,
+            current: true
         },
     ];
 
@@ -32,8 +30,8 @@ const AdminAccountCreationPage = () => {
 
     const handleRegister = async () => {
         try {
+            console.log(userData);
             await register(userData);
-            // Регистрация успешна, выполните необходимые действия, например, перенаправление пользователя или показ сообщения об успехе.
         } catch (error) {
             // Обработка ошибок при регистрации
         }
@@ -55,15 +53,48 @@ const AdminAccountCreationPage = () => {
 
                     <form>
                         <div className="grid grid-cols-12 gap-4 sm:gap-6">
-                            <FullNameInput/>
-                            <LoginInput/>
-                            <PasswordInput/>
-                            <DropdownRoleSelection
-                                role={userData.role}
-                                selectRole={(selectedRole) =>
+                            <FullNameInput
+                                onFirstNameChange={(value) =>
                                     setUserData((prevUserData) => ({
                                         ...prevUserData,
-                                        role: selectedRole,
+                                        firstname: value
+                                    }))
+                                }
+                                onLastNameChange={(value) =>
+                                    setUserData((prevUserData) => ({
+                                        ...prevUserData,
+                                        lastname: value
+                                    }))
+                                }
+                                onPatronymicChange={(value) =>
+                                    setUserData((prevUserData) => ({
+                                        ...prevUserData,
+                                        patronymic: value
+                                    }))
+                                }
+                            />
+                            <LoginInput
+                                onLoginChange={(value) =>
+                                    setUserData((prevUserData) => ({
+                                        ...prevUserData,
+                                        login: value
+                                    }))
+                                }
+                            />
+                            <PasswordInput
+                                onPasswordChange={(value) =>
+                                    setUserData((prevUserData) => ({
+                                        ...prevUserData,
+                                        password: value
+                                    }))
+                                }
+                            />
+                            <DropdownRoleSelection
+                                role={userData.role}
+                                onRoleChange={(value) =>
+                                    setUserData((prevUserData) => ({
+                                        ...prevUserData,
+                                        role: value
                                     }))
                                 }
                             />

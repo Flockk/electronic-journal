@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const DropdownRoleSelection = ({role}) => {
+const DropdownRoleSelection = ({role, onRoleChange}) => {
     const [open, setOpen] = useState(false);
     const [selectedRole, setSelectedRole] = useState(role);
 
@@ -11,6 +11,7 @@ const DropdownRoleSelection = ({role}) => {
     const selectRole = (selectedRole) => {
         setSelectedRole(selectedRole);
         setOpen(false);
+        onRoleChange(selectedRole);
     };
 
     return (
