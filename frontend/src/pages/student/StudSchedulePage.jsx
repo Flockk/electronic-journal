@@ -14,6 +14,11 @@ const StudSchedulePage = () => {
         {name: "Расписание", href: "#", current: true},
     ];
 
+    const footerElements = [
+        <Link to="/student/divisions">Учебные подразделения</Link>,
+        "Расписание",
+    ];
+
     const columns = [
         "Время",
         "Дата",
@@ -153,7 +158,7 @@ const StudSchedulePage = () => {
                     </div>
                 ))}
             </StackedLayout>
-            <Footer/>
+            <Footer elements={footerElements}/>
         </div>
     );
 };

@@ -17,14 +17,19 @@ const StudProfilePage = () => {
         },
     ];
 
+    const footerElements = [
+        <Link to="/student/divisions">Учебные подразделения</Link>,
+        <Link to="/student/schedule">Расписание</Link>,
+    ];
+
     return (
         <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation} profileLink="/student/profile"/>
             <Card title="Ваш  профиль"
-                        description="Вы можете изменить настройки своего профиля"
-                        saveButtonText="Сохранить"
+                  description="Вы можете изменить настройки своего профиля"
+                  saveButtonText="Сохранить"
             />
-            <Footer/>
+            <Footer elements={footerElements}/>
         </div>
     );
 }

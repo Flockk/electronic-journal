@@ -16,6 +16,10 @@ const AdminManagementUsers = () => {
         },
     ];
 
+    const footerElements = [
+        <Link to="#">Управление пользователями</Link>
+    ];
+
     return (
         <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation} profileLink="/admin/profile"/>
@@ -29,7 +33,7 @@ const AdminManagementUsers = () => {
             }>
                 <WithBtnTable/>
             </StackedLayout>
-            <Footer/>
+            <Footer elements={footerElements}/>
         </div>
     );
 }

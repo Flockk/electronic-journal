@@ -14,6 +14,10 @@ const ProfHomeworkPage = () => {
         },
     ];
 
+    const footerElements = [
+        <Link to="/professor/homeworks">Домашние задания</Link>,
+    ];
+
     const dropdownGroups = [
         {name: '4310'},
         {name: '4311'},
@@ -83,7 +87,7 @@ const ProfHomeworkPage = () => {
             >
                 <FillingTable tableItems={tableItems} setTableItemsProp={setTableItems} columns={columns}/>
             </StackedLayout>
-            <Footer/>
+            <Footer elements={footerElements}/>
         </div>
     );
 };

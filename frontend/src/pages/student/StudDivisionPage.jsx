@@ -29,6 +29,11 @@ const StudDivisionPage = () => {
         },
     ];
 
+    const footerElements = [
+        'Учебные подразделения',
+        <Link to="/student/schedule">Расписание</Link>,
+    ];
+
     return (
         <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation} profileLink="/student/profile"/>
@@ -51,7 +56,7 @@ const StudDivisionPage = () => {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            <Footer elements={footerElements}/>
         </div>
     );
 };

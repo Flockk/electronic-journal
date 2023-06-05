@@ -20,6 +20,10 @@ const AdminAccountCreationPage = () => {
         },
     ];
 
+    const footerElements = [
+        <Link to="/admin/users">Управление пользователями</Link>
+    ];
+
     const [userData, setUserData] = useState({
         firstname: "",
         lastname: "",
@@ -117,7 +121,7 @@ const AdminAccountCreationPage = () => {
                     />
                 )}
             </div>
-            <Footer/>
+            <Footer elements={footerElements}/>
         </div>
     );
 };
