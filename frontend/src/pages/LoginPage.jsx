@@ -89,7 +89,7 @@ const LoginPage = () => {
                             />
                         </div>
                         <button
-                            className="w-full px-4 py-2 text-white font-medium bg-blue-500 hover:bg-blue-400 active:bg-indigo-600 rounded-lg duration-150"
+                            className="w-full px-4 py-2 text-white font-medium bg-blue-500 hover:bg-blue-400 active:bg-blue-600 rounded-lg duration-150"
                             type="submit"
                         >
                             Войти
