@@ -4,7 +4,7 @@ import {createAuthHeaders} from "./authService";
 export const getAllUsers = async () => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get('/admin/users', {headers});
+        const response = await api.get('/users', {headers});
 
         return response.data;
     } catch (error) {
@@ -16,7 +16,7 @@ export const getAllUsers = async () => {
 export const getAllUsersSortedAscending = async () => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get('/admin/users/ascending', {headers});
+        const response = await api.get('/users/ascending', {headers});
 
         return response.data;
     } catch (error) {
@@ -28,7 +28,7 @@ export const getAllUsersSortedAscending = async () => {
 export const getAllUsersSortedDescending = async () => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get('/admin/users/descending', {headers});
+        const response = await api.get('/users/descending', {headers});
 
         return response.data;
     } catch (error) {
@@ -40,7 +40,7 @@ export const getAllUsersSortedDescending = async () => {
 export const searchUsers = async (query) => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get(`/admin/users/search?query=${query}`, {headers});
+        const response = await api.get(`/users/search?query=${query}`, {headers});
 
         return response.data;
     } catch (error) {
@@ -52,7 +52,7 @@ export const searchUsers = async (query) => {
 export const getUserById = async (id) => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get(`/admin/users/${id}`, {headers});
+        const response = await api.get(`/users/${id}`, {headers});
 
         return response.data;
     } catch (error) {
@@ -63,7 +63,7 @@ export const getUserById = async (id) => {
 export const deleteUser = async (id) => {
     try {
         const headers = createAuthHeaders();
-        await api.delete(`/admin/users/${id}`, {headers});
+        await api.delete(`/users/${id}`, {headers});
     } catch (error) {
         throw new Error(error.response.data.error);
     }

@@ -1,140 +1,50 @@
 import React, {useEffect, useState} from 'react';
-import {
-    getAllUsers,
-    getAllUsersSortedAscending,
-    getAllUsersSortedDescending,
-    searchUsers
-} from "../../services/userService";
+import {getAllGroups} from "../../services/groupService";
 import ThreedotDropdown from "../dropdowns/ThreedotDropdown";
-import ColoredBadge from "../badge/ColoredBadge";
 import Pagination from "./Pagination";
 
-const WithBtnTable = () => {
-    const [users, setUsers] = useState([]);
-    const [sortOrder, setSortOrder] = useState('ascending');
-    const [searchValue, setSearchValue] = useState('');
-    const [filterRole, setFilterRole] = useState(null);
+const ManagementGroupsTable = () => {
+    const [groups, setGroups] = useState([]);
     const [activeButton, setActiveButton] = useState('all');
     const [currentPage, setCurrentPage] = useState(1);
 
     const handleAllClick = () => {
-        getAllUsers()
-            .then((usersData) => {
-                setUsers(usersData);
+        getAllGroups()
+            .then((groupsData) => {
+                setGroups(groupsData);
             })
             .catch((error) => {
                 console.error(error);
             });
 
-        setSearchValue('');
-        setFilterRole(null);
         setActiveButton('all');
-    };
-
-    const handleSortClick = async () => {
-        const newSortOrder = sortOrder === 'ascending' ? 'descending' : 'ascending';
-        setSortOrder(newSortOrder);
-
-        try {
-            let sortedUsers;
-            if (newSortOrder === 'ascending') {
-                sortedUsers = await getAllUsersSortedAscending();
-            } else {
-                sortedUsers = await getAllUsersSortedDescending();
-            }
-
-            setUsers(sortedUsers);
-            setSearchValue('');
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-
-    const handleSearchChange = (e) => {
-        setSearchValue(e.target.value);
-
-        searchUsers(e.target.value)
-            .then((searchResults) => {
-                setUsers(searchResults);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    };
-
-    const handleProfessorsClick = () => {
-        getAllUsers()
-            .then((usersData) => {
-                const filteredUsers = usersData.filter(user => user.role === 'PROFESSOR');
-                setUsers(filteredUsers);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-
-        setSearchValue('');
-        setFilterRole('PROFESSOR');
-        setActiveButton('professors');
-    };
-
-    const handleStudentsClick = () => {
-        getAllUsers()
-            .then((usersData) => {
-                const filteredUsers = usersData.filter(user => user.role === 'STUDENT');
-                setUsers(filteredUsers);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-
-        setSearchValue('');
-        setFilterRole('STUDENT');
-        setActiveButton('students');
     };
 
     const getPaginatedData = () => {
         const startIndex = (currentPage - 1) * 10;
         const endIndex = startIndex + 10;
-        return users.slice(startIndex, endIndex);
+        return groups.slice(startIndex, endIndex);
     };
 
     useEffect(() => {
         handleAllClick();
     }, []);
 
-
     return (
         <section className="container px-4 mx-auto">
-            <div className="mt-6 md:flex md:items-center md:justify-between">
-                <div
-                    className="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
-                    <button
-                        className={`px-5 py-2 text-xs font-medium ${
-                            activeButton === 'all' ? 'bg-gray-100' : ''
-                        } text-gray-600 transition-colors duration-200 sm:text-sm dark:bg-gray-800 dark:text-gray-300`}
-                        onClick={handleAllClick}
-                    >
-                        Все
-                    </button>
-                    <button
-                        className={`px-5 py-2 text-xs font-medium ${
-                            activeButton === 'professors' ? 'bg-gray-100' : ''
-                        } text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100`}
-                        onClick={handleProfessorsClick}
-                    >
-                        Преподаватели
-                    </button>
-                    <button
-                        className={`px-5 py-2 text-xs font-medium ${
-                            activeButton === 'students' ? 'bg-gray-100' : ''
-                        } text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100`}
-                        onClick={handleStudentsClick}
-                    >
-                        Студенты
-                    </button>
-                </div>
+            <div
+                className="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
+                <button
+                    className={`px-5 py-2 text-xs font-medium ${
+                        activeButton === 'all' ? 'bg-gray-100' : ''
+                    } text-gray-600 transition-colors duration-200 sm:text-sm dark:bg-gray-800 dark:text-gray-300`}
+                    onClick={handleAllClick}
+                >
+                    Все
+                </button>
+            </div>
 
+            <div className="mt-6 md:flex md:items-center md:justify-between">
                 <div className="relative flex items-center mt-4 md:mt-0">
         <span className="absolute">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -146,8 +56,8 @@ const WithBtnTable = () => {
                     <input
                         type="text"
                         placeholder="Поиск"
-                        value={searchValue}
-                        onChange={handleSearchChange}
+                        // value={searchValue}
+                        // onChange={handleSearchChange}
                         className="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                 </div>
@@ -164,8 +74,9 @@ const WithBtnTable = () => {
                                         <th scope="col"
                                             className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                             <button className="flex items-center gap-x-3 focus:outline-none"
-                                                    onClick={handleSortClick}>
-                                                <span>ФИО</span>
+                                                // onClick={handleSortClick}
+                                            >
+                                                <span>Номер</span>
 
                                                 <svg className="h-3" viewBox="0 0 10 11" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -184,12 +95,12 @@ const WithBtnTable = () => {
 
                                         <th scope="col"
                                             className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                            Роль
+                                            Дата формирования
                                         </th>
 
                                         <th scope="col"
                                             className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                            Логин
+                                            Дата расформирования
                                         </th>
 
                                         <th scope="col" className="relative py-3.5 px-4">
@@ -199,27 +110,32 @@ const WithBtnTable = () => {
                                     </thead>
                                     <tbody
                                         className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                                    {getPaginatedData().map((user) => (
-                                        (filterRole === null || user.role === filterRole) &&
-                                        <tr key={user.id}>
+                                    {getPaginatedData().map((group) => (
+                                        <tr key={group.id}>
                                             <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                 <div>
                                                     <h2 className="font-medium text-gray-800 dark:text-white">
-                                                        {user.lastname} {user.firstname} {user.patronymic}
+                                                        {group.title}
                                                     </h2>
                                                 </div>
                                             </td>
-                                            <td className="px-12 py-4 text-sm font-medium whitespace-nowrap">
-                                                <ColoredBadge role={user.role}/>
+                                            <td className="px-4 py-4 text-sm whitespace-nowrap">
+                                                <div>
+                                                    <h4 className="text-gray-700 dark:text-gray-200">
+                                                        {group.foundation_date}
+                                                    </h4>
+                                                </div>
                                             </td>
                                             <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                 <div>
-                                                    <h4 className="text-gray-700 dark:text-gray-200">{user.login}</h4>
+                                                    <h4 className="text-gray-700 dark:text-gray-200">
+                                                        {group.end_date}
+                                                    </h4>
                                                 </div>
                                             </td>
 
                                             <td className="px-4 py-4 text-sm whitespace-nowrap relative">
-                                                <ThreedotDropdown userId={user.id}/>
+                                                <ThreedotDropdown id={group.id}/>
                                             </td>
                                         </tr>
                                     ))}
@@ -235,11 +151,12 @@ const WithBtnTable = () => {
                 <Pagination
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
-                    totalItems={users.length}
+                    totalItems={groups.length}
                 />
             </div>
         </section>
     );
+
 }
 
-export default WithBtnTable;
+export default ManagementGroupsTable;

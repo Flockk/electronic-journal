@@ -7,7 +7,6 @@ import FullNameInput from "../../components/inputs/FullNameInput";
 import LoginInput from "../../components/inputs/LoginInput";
 import PasswordInput from "../../components/inputs/PasswordInput";
 import ActionButton from "../../components/buttons/ActionButton";
-import PhoneInput from "../../components/inputs/PhoneInput";
 import ProfilePhoto from "../../components/profile/ProfilePhoto";
 
 const StudProfilePage = () => {

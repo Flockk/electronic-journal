@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
-import WithBtnTable from "../../components/tables/WithBtnTable";
+import ManagementUsersTable from "../../components/tables/ManagementUsersTable";
 import StackedLayout from "../../components/layout/StackedLayout";
 import ButtonAdd from "../../components/buttons/AddButton";
 
@@ -34,7 +34,7 @@ const AdminManagementUsers = () => {
                     </Link>
                 </>
             }>
-                <WithBtnTable/>
+                <ManagementUsersTable/>
             </StackedLayout>
             <Footer elements={footerElements}/>
         </div>

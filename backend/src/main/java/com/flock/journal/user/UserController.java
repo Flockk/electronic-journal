@@ -10,8 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("/*")
-@RequestMapping("/api/v1/admin/users")
+@RequestMapping("/api/v1/users")
+@PreAuthorize("hasRole('ADMIN')")
 public class UserController {
 
   private final UserService userService;
@@ -22,34 +22,35 @@ public class UserController {
   }
 
   @GetMapping
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasAuthority('admin:read')")
   public ResponseEntity<List<User>> getAllUsers() {
     List<User> users = userService.getAllUsers();
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 
   @GetMapping("/ascending")
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasAuthority('admin:read')")
   public ResponseEntity<List<User>> getAllUsersSortedAscending() {
     List<User> users = userService.getAllUsersSortedAscending();
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 
   @GetMapping("/descending")
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasAuthority('admin:read')")
   public ResponseEntity<List<User>> getAllUsersSortedDescending() {
     List<User> users = userService.getAllUsersSortedDescending();
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 
   @GetMapping("/search")
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasAuthority('admin:read')")
   public ResponseEntity<List<User>> searchUsers(@RequestParam("query") String query) {
     List<User> users = userService.searchUsers(query);
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
+  @PreAuthorize("hasAuthority('admin:read')")
   public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
     Optional<User> user = userService.getUserById(id);
     return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
@@ -57,7 +58,7 @@ public class UserController {
   }
 
   @DeleteMapping("/{id}")
-  @PreAuthorize("hasRole('ADMIN')")
+  @PreAuthorize("hasAuthority('admin:delete')")
   public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
     userService.deleteUser(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);

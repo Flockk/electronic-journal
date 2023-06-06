@@ -6,11 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/groups")
+@PreAuthorize("hasRole('ADMIN')")
 public class GroupController {
+
   private final GroupService groupService;
 
   @Autowired
@@ -19,6 +22,7 @@ public class GroupController {
   }
 
   @GetMapping
+  @PreAuthorize("hasAuthority('admin:read')")
   public ResponseEntity<List<Group>> getAllGroups() {
     List<Group> groups = groupService.getAllGroups();
     return new ResponseEntity<>(groups, HttpStatus.OK);

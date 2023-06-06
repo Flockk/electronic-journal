@@ -4,6 +4,7 @@ import StackedLayout from "../../components/layout/StackedLayout";
 import ButtonAdd from "../../components/buttons/AddButton";
 import Footer from "../../components/layout/Footer";
 import React from "react";
+import ManagementGroupsTable from "../../components/tables/ManagementGroupsTable";
 
 const AdminManagementUsers = () => {
 
@@ -33,6 +34,7 @@ const AdminManagementUsers = () => {
                     </Link>
                 </>
             }>
+                <ManagementGroupsTable/>
             </StackedLayout>
             <Footer elements={footerElements}/>
         </div>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/v1/divisions")
+@PreAuthorize("hasRole('STUDENT')")
 public class DivisionController {
 
   private final DivisionService divisionService;
@@ -22,6 +23,7 @@ public class DivisionController {
   }
 
   @GetMapping
+  @PreAuthorize("hasAuthority('student:read')")
   public ResponseEntity<List<Division>> getAllDivisions() {
     List<Division> divisions = divisionService.getAllDivisions();
     return new ResponseEntity<>(divisions, HttpStatus.OK);

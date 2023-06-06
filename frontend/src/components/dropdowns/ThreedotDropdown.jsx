@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {deleteUser} from "../../services/userService";
 
-const ThreedotDropdown = ({userId}) => {
+const ThreedotDropdown = ({id}) => {
     const [open, setOpen] = useState(false);
     const buttonRef = useRef(null);
     const panelRef = useRef(null);
@@ -43,7 +43,7 @@ const ThreedotDropdown = ({userId}) => {
     }, [open]);
 
     const handleDelete = () => {
-        deleteUser(userId)
+        deleteUser(id)
             .then(() => {
             })
             .catch((error) => {
