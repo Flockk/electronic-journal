@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 
-const AlertSuccess = ({title, message}) => {
+const AlertSuccess = ({title, message, onClose}) => {
     const [showAlert, setShowAlert] = useState(true);
 
     const handleCloseAlert = () => {
         setShowAlert(false);
+        onClose();
     };
 
     useEffect(() => {
@@ -19,8 +20,9 @@ const AlertSuccess = ({title, message}) => {
 
     return (
         showAlert && (
-            <div className="fixed bottom-4 left-4 z-50 max-w-sm w-full bg-green-50 border-l-4 border-green-500 rounded-md shadow-md">
-            <div className="flex justify-between py-3">
+            <div
+                className="fixed bottom-4 left-4 z-50 max-w-sm w-full bg-green-50 border-l-4 border-green-500 rounded-md shadow-md">
+                <div className="flex justify-between py-3">
                     <div className="flex">
                         <div>
                             <svg

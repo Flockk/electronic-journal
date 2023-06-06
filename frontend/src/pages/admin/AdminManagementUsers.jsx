@@ -1,10 +1,9 @@
+import React from "react";
 import {Link} from "react-router-dom";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
-import React from "react";
 import WithBtnTable from "../../components/tables/WithBtnTable";
 import StackedLayout from "../../components/layout/StackedLayout";
-import ButtonImport from "../../components/buttons/ButtonImport";
 import ButtonAddUser from "../../components/buttons/ButtonAddUser";
 
 const AdminManagementUsers = () => {
@@ -14,10 +13,15 @@ const AdminManagementUsers = () => {
             name: <Link to="#">Управление пользователями</Link>,
             current: true
         },
+        {
+            name: <Link to="/admin/groups">Управление группами</Link>,
+            current: false
+        },
     ];
 
     const footerElements = [
-        <Link to="#">Управление пользователями</Link>
+        <Link to="#">Управление пользователями</Link>,
+        <Link to="/admin/groups">Управление группами</Link>
     ];
 
     return (
@@ -25,7 +29,6 @@ const AdminManagementUsers = () => {
             <Navbar navigation={navigation} profileLink="/admin/profile"/>
             <StackedLayout title="Управление пользователями" buttons={
                 <>
-                    <ButtonImport buttonText="Экспорт"/>
                     <Link to="create">
                         <ButtonAddUser buttonText="Добавить пользователя"/>
                     </Link>

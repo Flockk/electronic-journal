@@ -11,10 +11,15 @@ const AdminProfilePage = () => {
             name: <Link to="/admin/users">Управление пользователями</Link>,
             current: false
         },
+        {
+            name: <Link to="/admin/groups">Управление группами</Link>,
+            current: false
+        },
     ];
 
     const footerElements = [
         <Link to="/admin/users">Управление пользователями</Link>,
+        <Link to="/admin/groups">Управление группами</Link>
     ];
 
     return (

@@ -156,7 +156,7 @@ const WithBtnTable = () => {
             <div className="flex flex-col mt-6">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                        <div className="overflow-visible border border-gray-200 dark:border-gray-700 md:rounded-lg">
                             <div>
                                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                     <thead className="bg-gray-50 dark:bg-gray-800">
@@ -205,7 +205,7 @@ const WithBtnTable = () => {
                                             <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                                 <div>
                                                     <h2 className="font-medium text-gray-800 dark:text-white">
-                                                        {user.firstname} {user.lastname} {user.patronymic}
+                                                        {user.lastname} {user.firstname} {user.patronymic}
                                                     </h2>
                                                 </div>
                                             </td>
@@ -219,7 +219,7 @@ const WithBtnTable = () => {
                                             </td>
 
                                             <td className="px-4 py-4 text-sm whitespace-nowrap relative">
-                                                <DropdownThreedot/>
+                                                <DropdownThreedot userId={user.id}/>
                                             </td>
                                         </tr>
                                     ))}

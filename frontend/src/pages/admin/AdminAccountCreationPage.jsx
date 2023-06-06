@@ -18,10 +18,15 @@ const AdminAccountCreationPage = () => {
             name: <Link to="/admin/users">Управление пользователями</Link>,
             current: true,
         },
+        {
+            name: <Link to="/admin/groups">Управление группами</Link>,
+            current: false
+        },
     ];
 
     const footerElements = [
-        <Link to="/admin/users">Управление пользователями</Link>
+        <Link to="/admin/users">Управление пользователями</Link>,
+        <Link to="/admin/groups">Управление группами</Link>
     ];
 
     const [userData, setUserData] = useState({
@@ -39,10 +44,14 @@ const AdminAccountCreationPage = () => {
         try {
             console.log(userData);
             await register(userData);
-            setShowSuccessAlert(true); // Показать уведомление об успешном создании
+            setShowSuccessAlert(true);
         } catch (error) {
             // Обработка ошибок при регистрации
         }
+    };
+
+    const handleAlertClose = () => {
+        setShowSuccessAlert(false);
     };
 
     return (
@@ -118,6 +127,7 @@ const AdminAccountCreationPage = () => {
                     <AlertSuccess
                         title="Успешно!"
                         message="Пользователь успешно создан."
+                        onClose={handleAlertClose}
                     />
                 )}
             </div>

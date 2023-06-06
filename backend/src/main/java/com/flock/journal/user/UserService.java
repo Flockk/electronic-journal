@@ -22,12 +22,12 @@ public class UserService {
   }
 
   public List<User> getAllUsersSortedAscending() {
-    Sort sort = Sort.by("firstname", "lastname", "patronymic").ascending();
+    Sort sort = Sort.by("lastname", "firstname", "patronymic").ascending();
     return userRepository.findAll(sort);
   }
 
   public List<User> getAllUsersSortedDescending() {
-    Sort sort = Sort.by("firstname", "lastname", "patronymic").descending();
+    Sort sort = Sort.by("lastname", "firstname", "patronymic").descending();
     return userRepository.findAll(sort);
   }
 

@@ -63,7 +63,7 @@ export const getUserById = async (id) => {
 export const deleteUser = async (id) => {
     try {
         const headers = createAuthHeaders();
-        await api.delete(`admin/users/${id}`, {headers});
+        await api.delete(`/admin/users/${id}`, {headers});
     } catch (error) {
         throw new Error(error.response.data.error);
     }

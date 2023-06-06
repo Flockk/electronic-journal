@@ -5,6 +5,7 @@ import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
 function DropdownListbox({options, defaultValue}) {
     const [selected, setSelected] = useState(defaultValue || options[0])
     const [searchQuery, setSearchQuery] = useState('')
+    const [isHovered, setIsHovered] = useState(false);
     const filteredOptions = options.filter(option =>
         option.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
@@ -14,7 +15,11 @@ function DropdownListbox({options, defaultValue}) {
             <Listbox value={selected} onChange={setSelected}>
                 <div className="relative mt-1">
                     <Listbox.Button
-                        className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm"
+                        className={`relative w-full cursor-pointer rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm ${
+                            isHovered ? 'hover:bg-blue-100' : ''
+                        }`}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
                     >
                         <span className="block truncate">{selected.name}</span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -42,10 +47,10 @@ function DropdownListbox({options, defaultValue}) {
                             {filteredOptions.map((option, index) => (
                                 <Listbox.Option
                                     key={index}
-                                    className={({active}) =>
-                                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                    className={({active, disabled}) =>
+                                        `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
                                             active ? 'bg-blue-100 text-blue-900' : 'text-gray-900'
-                                        }`
+                                        } ${isHovered ? 'hover:bg-blue-100' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`
                                     }
                                     value={option}
                                 >
