@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {deleteUser} from "../../services/userService";
 
-const DropdownThreedot = ({userId}) => {
+const ThreedotDropdown = ({userId}) => {
     const [open, setOpen] = useState(false);
     const buttonRef = useRef(null);
     const panelRef = useRef(null);
@@ -47,7 +47,6 @@ const DropdownThreedot = ({userId}) => {
             .then(() => {
             })
             .catch((error) => {
-                // Обработка ошибки при удалении пользователя
                 console.log(error);
             });
     };
@@ -113,4 +112,4 @@ const DropdownThreedot = ({userId}) => {
     );
 };
 
-export default DropdownThreedot;
+export default ThreedotDropdown;

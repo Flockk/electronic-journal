@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-const AlertSuccess = ({title, message, onClose}) => {
+const SuccessAlert = ({title, message, onClose}) => {
     const [showAlert, setShowAlert] = useState(true);
 
     const handleCloseAlert = () => {
@@ -64,4 +64,4 @@ const AlertSuccess = ({title, message, onClose}) => {
 };
 
 
-export default AlertSuccess;
+export default SuccessAlert;

@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const DropdownRoleSelection = ({role, onRoleChange}) => {
+const RoleSelectionDropdown = ({role, onRoleChange}) => {
     const [open, setOpen] = useState(false);
     const [selectedRole, setSelectedRole] = useState(role);
 
@@ -103,4 +103,4 @@ const DropdownRoleSelection = ({role, onRoleChange}) => {
     );
 };
 
-export default DropdownRoleSelection;
+export default RoleSelectionDropdown;

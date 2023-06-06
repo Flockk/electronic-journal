@@ -5,12 +5,12 @@ import Footer from "../../components/layout/Footer";
 import FullNameInput from "../../components/inputs/FullNameInput";
 import LoginInput from "../../components/inputs/LoginInput";
 import PasswordInput from "../../components/inputs/PasswordInput";
-import DropdownRoleSelection from "../../components/dropdowns/DropdownRoleSelection";
+import RoleSelectionDropdown from "../../components/dropdowns/RoleSelectionDropdown";
 import {register} from "../../services/authService";
-import ButtonAction from "../../components/buttons/ButtonAction";
-import ButtonBack from "../../components/buttons/ButtonBack";
+import ActionButton from "../../components/buttons/ActionButton";
+import ButtonBack from "../../components/buttons/BackButton";
 import Card from "../../components/cards/Card";
-import AlertSuccess from "../../components/alerts/AlertSuccess";
+import SuccessAlert from "../../components/alerts/SuccessAlert";
 
 const AdminAccountCreationPage = () => {
     const navigation = [
@@ -106,7 +106,7 @@ const AdminAccountCreationPage = () => {
                                     }))
                                 }
                             />
-                            <DropdownRoleSelection
+                            <RoleSelectionDropdown
                                 role={userData.role}
                                 onRoleChange={(value) =>
                                     setUserData((prevUserData) => ({
@@ -118,13 +118,13 @@ const AdminAccountCreationPage = () => {
                         </div>
 
                         <div className="mt-5 flex justify-end gap-x-2">
-                            <ButtonAction buttonText="Создать" onClick={handleRegister}/>
+                            <ActionButton buttonText="Создать" onClick={handleRegister}/>
                             <ButtonBack/>
                         </div>
                     </form>
                 </Card>
                 {showSuccessAlert && (
-                    <AlertSuccess
+                    <SuccessAlert
                         title="Успешно!"
                         message="Пользователь успешно создан."
                         onClose={handleAlertClose}

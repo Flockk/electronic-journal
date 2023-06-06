@@ -7,7 +7,7 @@ import ProfilePhoto from "../../components/profile/ProfilePhoto";
 import FullNameInput from "../../components/inputs/FullNameInput";
 import LoginInput from "../../components/inputs/LoginInput";
 import PasswordInput from "../../components/inputs/PasswordInput";
-import ButtonAction from "../../components/buttons/ButtonAction";
+import ActionButton from "../../components/buttons/ActionButton";
 
 const ProfProfilePage = () => {
 
@@ -42,7 +42,7 @@ const ProfProfilePage = () => {
                         </div>
 
                         <div className="mt-5 flex justify-end gap-x-2">
-                            <ButtonAction buttonText="Сохранить"/>
+                            <ActionButton buttonText="Сохранить"/>
                         </div>
                     </form>
                 </Card>

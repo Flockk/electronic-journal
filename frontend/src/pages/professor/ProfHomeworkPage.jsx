@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import FillingTable from "../../components/tables/FillingTable";
 import Navbar from "../../components/layout/Navbar";
 import StackedLayout from "../../components/layout/StackedLayout";
-import DropdownListbox from "../../components/dropdowns/DropdownListbox";
+import ListboxDropdown from "../../components/dropdowns/ListboxDropdown";
 import {Link} from "react-router-dom";
 import Footer from "../../components/layout/Footer";
 
@@ -80,8 +80,8 @@ const ProfHomeworkPage = () => {
                 title="Домашние задания"
                 buttons={
                     <>
-                        <DropdownListbox options={dropdownGroups} defaultValue={dropdownGroups[0]}/>
-                        <DropdownListbox options={dropdownDisciplines} defaultValue={dropdownDisciplines[0]}/>
+                        <ListboxDropdown options={dropdownGroups} defaultValue={dropdownGroups[0]}/>
+                        <ListboxDropdown options={dropdownDisciplines} defaultValue={dropdownDisciplines[0]}/>
                     </>
                 }
             >

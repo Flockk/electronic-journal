@@ -5,7 +5,7 @@ import {
     getAllUsersSortedDescending,
     searchUsers
 } from "../../services/userService";
-import DropdownThreedot from "../dropdowns/DropdownThreedot";
+import ThreedotDropdown from "../dropdowns/ThreedotDropdown";
 import ColoredBadge from "../badge/ColoredBadge";
 import Pagination from "./Pagination";
 
@@ -219,7 +219,7 @@ const WithBtnTable = () => {
                                             </td>
 
                                             <td className="px-4 py-4 text-sm whitespace-nowrap relative">
-                                                <DropdownThreedot userId={user.id}/>
+                                                <ThreedotDropdown userId={user.id}/>
                                             </td>
                                         </tr>
                                     ))}

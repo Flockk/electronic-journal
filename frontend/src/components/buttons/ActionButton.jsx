@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ButtonAction = ({onClick, buttonText}) => {
+const ActionButton = ({onClick, buttonText}) => {
     return (
         <button
             type="button"
@@ -12,4 +12,4 @@ const ButtonAction = ({onClick, buttonText}) => {
     );
 };
 
-export default ButtonAction;
+export default ActionButton;

@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-const ModalDelete = ({title, description, onDelete}) => {
+const DeleteModal = ({title, description, onDelete}) => {
     const [showModal, setShowModal] = useState(true);
 
     const closeModal = () => {
@@ -64,4 +64,4 @@ const ModalDelete = ({title, description, onDelete}) => {
     );
 };
 
-export default ModalDelete;
+export default DeleteModal;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const AlertWarning = ({title, message}) => {
+const WarningAlert = ({title, message}) => {
     return (
         <div className="mt-12 mx-4 px-4 rounded-md bg-amber-50 md:max-w-2xl md:mx-auto md:px-8">
             <div className="py-3">
@@ -23,4 +23,4 @@ const AlertWarning = ({title, message}) => {
     )
 }
 
-export default AlertWarning;
+export default WarningAlert;

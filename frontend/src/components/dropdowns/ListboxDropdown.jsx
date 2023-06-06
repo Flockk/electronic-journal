@@ -2,7 +2,7 @@ import {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
 
-function DropdownListbox({options, defaultValue}) {
+function ListboxDropdown({options, defaultValue}) {
     const [selected, setSelected] = useState(defaultValue || options[0])
     const [searchQuery, setSearchQuery] = useState('')
     const [isHovered, setIsHovered] = useState(false);
@@ -80,4 +80,4 @@ function DropdownListbox({options, defaultValue}) {
     )
 }
 
-export default DropdownListbox;
+export default ListboxDropdown;

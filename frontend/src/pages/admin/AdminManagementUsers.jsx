@@ -4,7 +4,7 @@ import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 import WithBtnTable from "../../components/tables/WithBtnTable";
 import StackedLayout from "../../components/layout/StackedLayout";
-import ButtonAddUser from "../../components/buttons/ButtonAddUser";
+import ButtonAdd from "../../components/buttons/AddButton";
 
 const AdminManagementUsers = () => {
 
@@ -30,7 +30,7 @@ const AdminManagementUsers = () => {
             <StackedLayout title="Управление пользователями" buttons={
                 <>
                     <Link to="create">
-                        <ButtonAddUser buttonText="Добавить пользователя"/>
+                        <ButtonAdd buttonText="Добавить пользователя"/>
                     </Link>
                 </>
             }>

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-const FillingTable = ({ tableItems, setTableItemsProp, columns }) => {
+const FillingTable = ({tableItems, setTableItemsProp, columns}) => {
     const [activeEditIndex, setActiveEditIndex] = useState(null);
     const [hoveredCell, setHoveredCell] = useState(null);
 
@@ -43,7 +43,8 @@ const FillingTable = ({ tableItems, setTableItemsProp, columns }) => {
                                     {column.field === "theme" || column.field === "homework" ? (
                                         activeEditIndex === `${idxRow}-${column.field}` ? (
                                             <div className="relative">
-                                                <div className="relative overflow-hidden rounded-md border border-gray-300 shadow-sm focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
+                                                <div
+                                                    className="relative overflow-hidden rounded-md border border-gray-300 shadow-sm focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
                             <textarea
                                 value={item[column.field]}
                                 onChange={(e) => {
