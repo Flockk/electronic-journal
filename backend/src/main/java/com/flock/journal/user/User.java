@@ -1,5 +1,6 @@
 package com.flock.journal.user;
 
+import jakarta.persistence.FetchType;
 import java.util.Collection;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class User implements UserDetails {
   @OneToMany(mappedBy = "user")
   private transient List<Token> tokens;
 
-  @OneToOne(mappedBy = "user")
+  @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
   private transient Professor professor;
 
   @OneToOne(mappedBy = "user")

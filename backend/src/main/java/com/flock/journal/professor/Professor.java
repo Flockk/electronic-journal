@@ -1,6 +1,8 @@
 package com.flock.journal.professor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flock.journal.semestergrades.SemesterGrade;
+import jakarta.persistence.FetchType;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -43,10 +45,11 @@ public class Professor {
   @Column(name = "prof_id")
   private Long id;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id")
   private User user;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "dept_id")
   private Department department;
@@ -57,6 +60,7 @@ public class Professor {
   @Column(name = "phone_number", length = 20)
   private String phoneNumber;
 
+  @JsonIgnore
   @ManyToMany
   @JoinTable(
       name = "professors_disciplines",
@@ -65,21 +69,27 @@ public class Professor {
   )
   private List<Discipline> disciplines;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "professor")
   private List<Group> groups;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "professor")
   private List<Lesson> lessons;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "professor")
   private List<Attendance> attendances;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "professor")
   private List<Homework> homeworks;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "professor")
   private List<Grade> grades;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "professor")
   private List<SemesterGrade> semesterGrades;
 }

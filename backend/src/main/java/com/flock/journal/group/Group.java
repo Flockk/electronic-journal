@@ -1,7 +1,9 @@
 package com.flock.journal.group;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.flock.journal.homework.Homework;
+import jakarta.persistence.FetchType;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,14 +26,9 @@ import com.flock.journal.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Setter
-@Getter
-@ToString
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,8 +41,7 @@ public class Group {
   @Column(name = "group_id")
   private Long id;
 
-  @JsonIgnore
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "prof_id")
   private Professor professor;
 
