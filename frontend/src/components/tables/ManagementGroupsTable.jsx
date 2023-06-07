@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {getAllGroups} from "../../services/groupService";
 import ThreedotDropdown from "../dropdowns/ThreedotDropdown";
 import Pagination from "./Pagination";
+import formatDate from "../../utils/dateUtils";
 
 const ManagementGroupsTable = () => {
     const [groups, setGroups] = useState([]);
-    const [activeButton, setActiveButton] = useState('all');
     const [currentPage, setCurrentPage] = useState(1);
 
     const handleAllClick = () => {
@@ -16,8 +16,6 @@ const ManagementGroupsTable = () => {
             .catch((error) => {
                 console.error(error);
             });
-
-        setActiveButton('all');
     };
 
     const getPaginatedData = () => {
@@ -32,19 +30,7 @@ const ManagementGroupsTable = () => {
 
     return (
         <section className="container px-4 mx-auto">
-            <div
-                className="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
-                <button
-                    className={`px-5 py-2 text-xs font-medium ${
-                        activeButton === 'all' ? 'bg-gray-100' : ''
-                    } text-gray-600 transition-colors duration-200 sm:text-sm dark:bg-gray-800 dark:text-gray-300`}
-                    onClick={handleAllClick}
-                >
-                    Все
-                </button>
-            </div>
-
-            <div className="mt-6 md:flex md:items-center md:justify-between">
+            <div className="mt-6 md:flex md:items-center md:justify-end">
                 <div className="relative flex items-center mt-4 md:mt-0">
         <span className="absolute">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -74,7 +60,6 @@ const ManagementGroupsTable = () => {
                                         <th scope="col"
                                             className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                             <button className="flex items-center gap-x-3 focus:outline-none"
-                                                // onClick={handleSortClick}
                                             >
                                                 <span>Номер</span>
 
@@ -119,17 +104,18 @@ const ManagementGroupsTable = () => {
                                                     </h2>
                                                 </div>
                                             </td>
-                                            <td className="px-4 py-4 text-sm whitespace-nowrap">
+                                            <td className="px-16 py-4 text-sm whitespace-nowrap">
                                                 <div>
                                                     <h4 className="text-gray-700 dark:text-gray-200">
-                                                        {group.foundation_date}
+                                                        {formatDate(group.foundationDate)}
                                                     </h4>
                                                 </div>
                                             </td>
-                                            <td className="px-4 py-4 text-sm whitespace-nowrap">
+
+                                            <td className="px-10 py-4 text-sm whitespace-nowrap">
                                                 <div>
                                                     <h4 className="text-gray-700 dark:text-gray-200">
-                                                        {group.end_date}
+                                                        {formatDate(group.endDate)}
                                                     </h4>
                                                 </div>
                                             </td>
@@ -156,7 +142,6 @@ const ManagementGroupsTable = () => {
             </div>
         </section>
     );
-
 }
 
 export default ManagementGroupsTable;
