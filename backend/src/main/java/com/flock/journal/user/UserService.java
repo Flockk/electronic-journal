@@ -3,6 +3,8 @@ package com.flock.journal.user;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+  private static final Logger log = LogManager.getLogger(UserService.class);
   private final UserRepository userRepository;
 
   @Autowired
@@ -18,7 +21,10 @@ public class UserService {
   }
 
   public List<User> getAllUsers() {
-    return userRepository.findAll();
+    log.info("Получение всех пользователей");
+    List<User> users = userRepository.findAll();
+    log.info("Найдено {} пользователей", users.size());
+    return users;
   }
 
   public List<User> getAllUsersSortedAscending() {

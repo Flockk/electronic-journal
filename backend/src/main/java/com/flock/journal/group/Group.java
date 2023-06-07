@@ -1,5 +1,6 @@
 package com.flock.journal.group;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flock.journal.homework.Homework;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,9 +24,15 @@ import com.flock.journal.student.Student;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+
+@Setter
+@Getter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,10 +45,12 @@ public class Group {
   @Column(name = "group_id")
   private Long id;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "prof_id")
   private Professor professor;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "group")
   private List<Student> students;
 
@@ -54,6 +63,7 @@ public class Group {
   @Column(name = "end_date")
   private LocalDate endDate;
 
+  @JsonIgnore
   @ManyToMany
   @JoinTable(
       name = "groups_lessons",
@@ -62,6 +72,7 @@ public class Group {
   )
   private List<Lesson> lessons;
 
+  @JsonIgnore
   @ManyToMany
   @JoinTable(name = "homeworks_groups",
       joinColumns = @JoinColumn(name = "group_id"),
