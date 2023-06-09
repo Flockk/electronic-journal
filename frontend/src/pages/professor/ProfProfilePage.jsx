@@ -24,7 +24,7 @@ const ProfProfilePage = () => {
 
     return (
         <div className="flex flex-col min-h-screen mt-16">
-            <Navbar navigation={navigation} profileLink="/student/profile"/>
+            <Navbar navigation={navigation} profileLink="/professor/profile"/>
             <div className="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
                 <Card>
                     <div className="mb-8">

@@ -1,6 +1,8 @@
 package com.flock.journal.discipline;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flock.journal.semestergrades.SemesterGrade;
+import jakarta.persistence.FetchType;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -36,12 +38,15 @@ public class Discipline {
   @Column(name = "name", nullable = false, unique = true)
   private String name;
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "disciplines")
   private List<Professor> professors;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "discipline")
   private List<Lesson> lessons;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "discipline")
   private List<SemesterGrade> semesterGrades;
 }

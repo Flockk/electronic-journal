@@ -3,6 +3,7 @@ package com.flock.journal.discipline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,7 +11,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/disciplines")
+@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
 public class DisciplineController {
+
   private final DisciplineService disciplineService;
 
   @Autowired
@@ -21,6 +24,17 @@ public class DisciplineController {
   @GetMapping
   public ResponseEntity<List<Discipline>> getAllDisciplines() {
     List<Discipline> disciplines = disciplineService.getAllDisciplines();
+    return new ResponseEntity<>(disciplines, HttpStatus.OK);
+  }
+
+  @GetMapping("/professors/{professorId}")
+  @PreAuthorize("hasAnyAuthority('admin:read', 'professor:read')")
+  public ResponseEntity<List<Discipline>> getDisciplinesByProfessor(
+      @PathVariable("professorId") Long professorId) {
+    List<Discipline> disciplines = disciplineService.getDisciplinesByProfessorId(professorId);
+    if (disciplines.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     return new ResponseEntity<>(disciplines, HttpStatus.OK);
   }
 
