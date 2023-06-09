@@ -30,9 +30,6 @@ public class Semester {
   @Column(name = "sem_id")
   private Long id;
 
-  @Column(name = "number")
-  private int number;
-
   @Column(name = "start_date")
   private LocalDate startDate;
 

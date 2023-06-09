@@ -25,34 +25,34 @@ public class JournalApplication {
 //  public CommandLineRunner commandLineRunner(AuthenticationService service) {
 //    return args -> {
 //      var admin = RegisterRequest.builder()
-//          .firstname("Admin")
-//          .lastname("Admin")
-//          .patronymic("Admin")
+//          .firstname("Иван")
+//          .lastname("Иванов")
+//          .patronymic("")
 //          .login("admin@login")
-//          .password("password")
+//          .password("pass")
 //          .role(ADMIN)
 //          .build();
-//      out.println("Admin token: " + service.register(admin).getAccessToken());
+//      out.println("Токен администратора: " + service.register(admin).getAccessToken());
 //
 //      var professor = RegisterRequest.builder()
-//          .firstname("Professor")
-//          .lastname("Professor")
-//          .patronymic("Professor")
+//          .firstname("Сергей")
+//          .lastname("Сотников")
+//          .patronymic("Викторович")
 //          .login("professor@login")
-//          .password("password")
+//          .password("pass")
 //          .role(PROFESSOR)
 //          .build();
-//      out.println("Professor token: " + service.register(professor).getAccessToken());
+//      out.println("Токен преподавателя: " + service.register(professor).getAccessToken());
 //
 //      var student = RegisterRequest.builder()
-//          .firstname("Student")
-//          .lastname("Student")
-//          .patronymic("Student")
+//          .firstname("Максим")
+//          .lastname("Елушев")
+//          .patronymic("Андреевич")
 //          .login("student@login")
-//          .password("password")
+//          .password("pass")
 //          .role(STUDENT)
 //          .build();
-//      out.println("Student token: " + service.register(student).getAccessToken());
+//      out.println("Токен студента: " + service.register(student).getAccessToken());
 //    };
 //  }
 }
