@@ -20,6 +20,10 @@ public class LessonService {
     return lessonRepository.findAll();
   }
 
+  public List<Lesson> getLessonsByProfessorId(Long professorId) {
+    return lessonRepository.findByProfessorId(professorId);
+  }
+
   public Optional<Lesson> getLessonById(Long id) {
     return lessonRepository.findById(id);
   }

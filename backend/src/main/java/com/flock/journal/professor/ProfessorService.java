@@ -1,5 +1,6 @@
 package com.flock.journal.professor;
 
+import com.flock.journal.group.Group;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,10 @@ public class ProfessorService {
 
   public List<Professor> getAllProfessors() {
     return professorRepository.findAll();
+  }
+
+  public List<Group> getGroupsByProfessorId(Long professorId) {
+    return professorRepository.findGroupsByProfessorId(professorId);
   }
 
   public Optional<Professor> getProfessorById(Long id) {

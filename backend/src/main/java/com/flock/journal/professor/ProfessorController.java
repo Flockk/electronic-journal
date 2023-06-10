@@ -1,5 +1,6 @@
 package com.flock.journal.professor;
 
+import com.flock.journal.group.Group;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/professors")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
 public class ProfessorController {
 
   private final ProfessorService professorService;
@@ -26,6 +27,13 @@ public class ProfessorController {
   public ResponseEntity<List<Professor>> getAllProfessors() {
     List<Professor> professors = professorService.getAllProfessors();
     return new ResponseEntity<>(professors, HttpStatus.OK);
+  }
+
+  @GetMapping("/{professorId}/groups")
+  @PreAuthorize("hasAnyAuthority('admin:read', 'professor:read')")
+  public ResponseEntity<List<Group>> getGroupsByProfessorId(@PathVariable Long professorId) {
+    List<Group> groups = professorService.getGroupsByProfessorId(professorId);
+    return new ResponseEntity<>(groups, HttpStatus.OK);
   }
 
   @GetMapping("/{id}")

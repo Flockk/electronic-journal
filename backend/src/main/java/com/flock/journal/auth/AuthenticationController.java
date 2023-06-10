@@ -1,4 +1,4 @@
-package com.flock.journal.controller;
+package com.flock.journal.auth;
 
 import java.io.IOException;
 
