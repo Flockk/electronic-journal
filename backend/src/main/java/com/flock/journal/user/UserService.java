@@ -1,5 +1,7 @@
 package com.flock.journal.user;
 
+import com.flock.journal.professor.Professor;
+import com.flock.journal.professor.ProfessorRepository;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +19,12 @@ public class UserService {
 
   private static final Logger log = LogManager.getLogger(UserService.class);
   private final UserRepository userRepository;
+  private final ProfessorRepository professorRepository;
 
   @Autowired
-  public UserService(UserRepository userRepository) {
+  public UserService(UserRepository userRepository, ProfessorRepository professorRepository) {
     this.userRepository = userRepository;
+    this.professorRepository = professorRepository;
   }
 
   public List<User> getAllUsers() {
@@ -33,11 +37,17 @@ public class UserService {
   public User getCurrentUser() throws NotFoundException {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     if (authentication == null || !authentication.isAuthenticated()) {
-      throw new IllegalStateException("User is not authenticated");
+      throw new IllegalStateException("Пользователь не аутентифицирован");
     }
 
     String username = authentication.getName();
     return userRepository.findByLogin(username)
+        .orElseThrow(NotFoundException::new);
+  }
+
+  public Professor getCurrentProfessor() throws NotFoundException {
+    User currentUser = getCurrentUser();
+    return professorRepository.findByUserId(currentUser.getId())
         .orElseThrow(NotFoundException::new);
   }
 

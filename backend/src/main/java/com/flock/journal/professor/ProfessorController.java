@@ -1,10 +1,12 @@
 package com.flock.journal.professor;
 
 import com.flock.journal.group.Group;
+import com.flock.journal.user.UserService;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
 public class ProfessorController {
 
+  private final UserService userService;
   private final ProfessorService professorService;
 
   @Autowired
-  public ProfessorController(ProfessorService professorService) {
+  public ProfessorController(UserService userService, ProfessorService professorService) {
+    this.userService = userService;
     this.professorService = professorService;
   }
 
@@ -34,6 +38,13 @@ public class ProfessorController {
     Optional<Professor> professor = professorService.getProfessorById(id);
     return professor.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping("/me")
+  @PreAuthorize("hasAuthority('professor:read')")
+  public ResponseEntity<Professor> getCurrentProfessor() throws NotFoundException {
+    Professor professor = userService.getCurrentProfessor();
+    return ResponseEntity.ok(professor);
   }
 
   @GetMapping("/{professorId}/groups")
