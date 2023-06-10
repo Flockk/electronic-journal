@@ -2,6 +2,8 @@ package com.flock.journal.user;
 
 import com.flock.journal.professor.Professor;
 import com.flock.journal.professor.ProfessorRepository;
+import com.flock.journal.student.Student;
+import com.flock.journal.student.StudentRepository;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +22,14 @@ public class UserService {
   private static final Logger log = LogManager.getLogger(UserService.class);
   private final UserRepository userRepository;
   private final ProfessorRepository professorRepository;
+  private final StudentRepository studentRepository;
 
   @Autowired
-  public UserService(UserRepository userRepository, ProfessorRepository professorRepository) {
+  public UserService(UserRepository userRepository, ProfessorRepository professorRepository,
+      StudentRepository studentRepository) {
     this.userRepository = userRepository;
     this.professorRepository = professorRepository;
+    this.studentRepository = studentRepository;
   }
 
   public List<User> getAllUsers() {
@@ -48,6 +53,12 @@ public class UserService {
   public Professor getCurrentProfessor() throws NotFoundException {
     User currentUser = getCurrentUser();
     return professorRepository.findByUserId(currentUser.getId())
+        .orElseThrow(NotFoundException::new);
+  }
+
+  public Student getCurrentStudent() throws NotFoundException {
+    User currentUser = getCurrentUser();
+    return studentRepository.findByUserId(currentUser.getId())
         .orElseThrow(NotFoundException::new);
   }
 
