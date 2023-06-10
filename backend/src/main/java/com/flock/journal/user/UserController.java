@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/users")
-@PreAuthorize("hasRole('ADMIN')")
+@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
 public class UserController {
 
   private static final Logger log = LogManager.getLogger(UserController.class);
@@ -32,6 +33,13 @@ public class UserController {
     List<User> users = userService.getAllUsers();
     log.info("Найдено {} пользователей", users.size());
     return new ResponseEntity<>(users, HttpStatus.OK);
+  }
+
+  @GetMapping("/me")
+  @PreAuthorize("hasAnyAuthority('admin:read', 'professor:read', 'student:read')")
+  public ResponseEntity<User> getCurrentUser() throws NotFoundException {
+    User user = userService.getCurrentUser();
+    return ResponseEntity.ok(user);
   }
 
   @GetMapping("/ascending")

@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,6 +28,17 @@ public class UserService {
     List<User> users = userRepository.findAll();
     log.info("Найдено {} пользователей", users.size());
     return users;
+  }
+
+  public User getCurrentUser() throws NotFoundException {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    if (authentication == null || !authentication.isAuthenticated()) {
+      throw new IllegalStateException("User is not authenticated");
+    }
+
+    String username = authentication.getName();
+    return userRepository.findByLogin(username)
+        .orElseThrow(NotFoundException::new);
   }
 
   public List<User> getAllUsersSortedAscending() {

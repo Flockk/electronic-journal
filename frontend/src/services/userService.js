@@ -60,6 +60,17 @@ export const getUserById = async (id) => {
     }
 };
 
+export const getCurrentUser = async () => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get("/users/me", {headers});
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const deleteUser = async (id) => {
     try {
         const headers = createAuthHeaders();

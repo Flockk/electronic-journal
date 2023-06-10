@@ -15,11 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.flock.journal.auth.AuthenticationRequest;
-import com.flock.journal.auth.AuthenticationResponse;
-import com.flock.journal.auth.RegisterRequest;
-import com.flock.journal.auth.AuthenticationService;
-
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin

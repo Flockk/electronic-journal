@@ -1,5 +1,5 @@
 import Navbar from "../../components/layout/Navbar";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import Footer from "../../components/layout/Footer";
 import Card from "../../components/cards/Card";
@@ -8,8 +8,29 @@ import FullNameInput from "../../components/inputs/FullNameInput";
 import LoginInput from "../../components/inputs/LoginInput";
 import PasswordInput from "../../components/inputs/PasswordInput";
 import ActionButton from "../../components/buttons/ActionButton";
+import {getCurrentUser} from "../../services/userService";
 
 const ProfProfilePage = () => {
+    const [currentUser, setCurrentUser] = useState(null);
+    const [lastname, setLastName] = useState("");
+    const [firstname, setFirstName] = useState("");
+    const [patronymic, setPatronymic] = useState("");
+
+    useEffect(() => {
+        const fetchCurrentUser = async () => {
+            try {
+                const user = await getCurrentUser();
+                setCurrentUser(user);
+                setLastName(user.lastname);
+                setFirstName(user.firstname);
+                setPatronymic(user.patronymic);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchCurrentUser();
+    }, []);
 
     const navigation = [
         {
@@ -36,7 +57,14 @@ const ProfProfilePage = () => {
                     <form>
                         <div className="grid grid-cols-12 gap-4 sm:gap-6">
                             <ProfilePhoto/>
-                            <FullNameInput/>
+                            <FullNameInput
+                                lastName={lastname}
+                                firstName={firstname}
+                                patronymic={patronymic}
+                                onLastNameChange={setLastName}
+                                onFirstNameChange={setFirstName}
+                                onPatronymicChange={setPatronymic}
+                            />
                             <LoginInput/>
                             <PasswordInput/>
                         </div>

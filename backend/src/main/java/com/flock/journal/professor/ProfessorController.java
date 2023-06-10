@@ -29,18 +29,19 @@ public class ProfessorController {
     return new ResponseEntity<>(professors, HttpStatus.OK);
   }
 
-  @GetMapping("/{professorId}/groups")
-  @PreAuthorize("hasAnyAuthority('admin:read', 'professor:read')")
-  public ResponseEntity<List<Group>> getGroupsByProfessorId(@PathVariable Long professorId) {
-    List<Group> groups = professorService.getGroupsByProfessorId(professorId);
-    return new ResponseEntity<>(groups, HttpStatus.OK);
-  }
-
   @GetMapping("/{id}")
   public ResponseEntity<Professor> getProfessorById(@PathVariable("id") Long id) {
     Optional<Professor> professor = professorService.getProfessorById(id);
     return professor.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping("/{professorId}/groups")
+  @PreAuthorize("hasAnyAuthority('admin:read', 'professor:read')")
+  public ResponseEntity<List<Group>> getGroupsByProfessorId(
+      @PathVariable("professorId") Long professorId) {
+    List<Group> groups = professorService.getGroupsByProfessorId(professorId);
+    return new ResponseEntity<>(groups, HttpStatus.OK);
   }
 
   @PostMapping
