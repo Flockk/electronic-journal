@@ -33,7 +33,7 @@ function ListboxDropdown({options, defaultValue, placeholder}) {
                         leaveTo="opacity-0"
                     >
                         <Listbox.Options
-                            className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                            className="absolute mt-1 max-h-[240px] overflow-y-auto w-full rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         >
                             <div className="flex items-center px-4 py-2">
                                 <input
@@ -57,7 +57,7 @@ function ListboxDropdown({options, defaultValue, placeholder}) {
                                     {({selected}) => (
                                         <>
                                             <span
-                                                className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
+                                                className={`block whitespace-normal ${selected ? 'font-medium' : 'font-normal'}`}
                                             >
                                                 {option.title}
                                             </span>

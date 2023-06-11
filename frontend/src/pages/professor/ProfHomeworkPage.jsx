@@ -6,9 +6,11 @@ import ListboxDropdown from "../../components/dropdowns/ListboxDropdown";
 import {Link} from "react-router-dom";
 import Footer from "../../components/layout/Footer";
 import {getCurrentProfessor, getGroupsByProfessorId} from "../../services/professorService";
+import {getDisciplinesByProfessorId} from "../../services/disciplineService";
 
 const ProfHomeworkPage = () => {
     const [dropdownGroups, setDropdownGroups] = useState([]);
+    const [dropdownDisciplines, setDropdownDisciplines] = useState([]);
 
     const navigation = [
         {
@@ -22,26 +24,22 @@ const ProfHomeworkPage = () => {
     ];
 
     useEffect(() => {
-        const fetchGroups = async () => {
+        const fetchData = async () => {
             try {
                 const currentProfessor = await getCurrentProfessor();
                 const groups = await getGroupsByProfessorId(currentProfessor.id);
                 setDropdownGroups(groups);
+
+                const disciplines = await getDisciplinesByProfessorId(currentProfessor.id);
+                const formattedDisciplines = disciplines.map(discipline => ({title: discipline.name, ...discipline}));
+                setDropdownDisciplines(formattedDisciplines);
             } catch (error) {
-                console.error("Не удалось получить группы:", error);
+                console.error("Не удалось получить группы и дисциплины:", error);
             }
         };
 
-        fetchGroups();
+        fetchData();
     }, []);
-
-    const dropdownDisciplines = [
-        {name: 'Дисциплина 1'},
-        {name: 'Дисциплина 2'},
-        {name: 'Дисциплина 3'},
-        {name: 'Дисциплина 4'},
-        {name: 'Дисциплина 5'},
-    ];
 
     const [tableItems, setTableItems] = useState([
         {
@@ -89,11 +87,16 @@ const ProfHomeworkPage = () => {
                 title="Домашние задания"
                 buttons={
                     <>
-                        <ListboxDropdown options={dropdownGroups}
-                                         defaultValue={dropdownGroups[0]}
-                                         placeholder="Выберите группу"
+                        <ListboxDropdown
+                            options={dropdownGroups}
+                            defaultValue={dropdownGroups[0]}
+                            placeholder="Выберите группу"
                         />
-                        <ListboxDropdown options={dropdownDisciplines} defaultValue={dropdownDisciplines[0]}/>
+                        <ListboxDropdown
+                            options={dropdownDisciplines}
+                            defaultValue={dropdownDisciplines[0]}
+                            placeholder="Выберите дисциплину"
+                        />
                     </>
                 }
             >
