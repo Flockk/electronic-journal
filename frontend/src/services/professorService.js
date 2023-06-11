@@ -45,6 +45,17 @@ export const getGroupsByProfessorId = async (professorId) => {
     }
 };
 
+export const getHomeworksByProfessorId = async () => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get("/professors/me/homeworks", { headers });
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const createProfessor = async (professorData) => {
     try {
         const headers = createAuthHeaders();

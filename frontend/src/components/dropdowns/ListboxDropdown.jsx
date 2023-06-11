@@ -2,8 +2,8 @@ import {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
 
-function ListboxDropdown({options, defaultValue, placeholder}) {
-    const [selected, setSelected] = useState(defaultValue || options[0]);
+function ListboxDropdown({options}) {
+    const [selected, setSelected] = useState(options[0]);
     const [searchQuery, setSearchQuery] = useState('');
     const [isHovered, setIsHovered] = useState(false);
     const filteredOptions = options.filter(option =>
@@ -21,7 +21,7 @@ function ListboxDropdown({options, defaultValue, placeholder}) {
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                     >
-                        <span className="block truncate">{selected ? selected.title : placeholder}</span>
+                        <span className="block truncate">{selected ? selected.title : options[0]?.title}</span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
                         </span>
@@ -74,7 +74,6 @@ function ListboxDropdown({options, defaultValue, placeholder}) {
                         </Listbox.Options>
                     </Transition>
                 </div>
-
             </Listbox>
         </div>
     )

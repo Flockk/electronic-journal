@@ -5,12 +5,20 @@ import StackedLayout from "../../components/layout/StackedLayout";
 import ListboxDropdown from "../../components/dropdowns/ListboxDropdown";
 import {Link} from "react-router-dom";
 import Footer from "../../components/layout/Footer";
-import {getCurrentProfessor, getGroupsByProfessorId} from "../../services/professorService";
+import {
+    getCurrentProfessor,
+    getGroupsByProfessorId,
+    getHomeworksByProfessorId
+} from "../../services/professorService";
 import {getDisciplinesByProfessorId} from "../../services/disciplineService";
+import formatDate from "../../utils/alternativeDateUtils";
 
 const ProfHomeworkPage = () => {
+    const [selectedGroup, setSelectedGroup] = useState(null);
+    const [selectedDiscipline, setSelectedDiscipline] = useState(null);
     const [dropdownGroups, setDropdownGroups] = useState([]);
     const [dropdownDisciplines, setDropdownDisciplines] = useState([]);
+    const [tableItems, setTableItems] = useState([]);
 
     const navigation = [
         {
@@ -31,48 +39,27 @@ const ProfHomeworkPage = () => {
                 setDropdownGroups(groups);
 
                 const disciplines = await getDisciplinesByProfessorId(currentProfessor.id);
-                const formattedDisciplines = disciplines.map(discipline => ({title: discipline.name, ...discipline}));
+                const formattedDisciplines = disciplines.map(discipline => ({
+                    title: discipline.name,
+                    ...discipline
+                }));
                 setDropdownDisciplines(formattedDisciplines);
+
+                const homeworks = await getHomeworksByProfessorId(currentProfessor.id);
+                const formattedHomeworks = homeworks.map((homework) => ({
+                    date: formatDate(homework.lesson.date),
+                    theme: homework.lesson.topic,
+                    homework: homework.description
+                }));
+
+                setTableItems(formattedHomeworks);
             } catch (error) {
-                console.error("Не удалось получить группы и дисциплины:", error);
+                console.error('Не удалось получить группы и дисциплины:', error);
             }
         };
 
         fetchData();
     }, []);
-
-    const [tableItems, setTableItems] = useState([
-        {
-            date: "01.09",
-            theme: "",
-            homework: "",
-        },
-        {
-            date: "07.09",
-            theme: "",
-            homework: "",
-        },
-        {
-            date: "14.09",
-            theme: "",
-            homework: "",
-        },
-        {
-            date: "21.09",
-            theme: "",
-            homework: "",
-        },
-        {
-            date: "28.09",
-            theme: "",
-            homework: "",
-        },
-        {
-            date: "28.09",
-            theme: "",
-            homework: "",
-        },
-    ]);
 
     const columns = [
         {label: "Дата", field: "date"},
@@ -89,13 +76,13 @@ const ProfHomeworkPage = () => {
                     <>
                         <ListboxDropdown
                             options={dropdownGroups}
-                            defaultValue={dropdownGroups[0]}
-                            placeholder="Выберите группу"
+                            value={selectedGroup}
+                            onChange={setSelectedGroup}
                         />
                         <ListboxDropdown
                             options={dropdownDisciplines}
-                            defaultValue={dropdownDisciplines[0]}
-                            placeholder="Выберите дисциплину"
+                            value={selectedDiscipline}
+                            onChange={setSelectedDiscipline}
                         />
                     </>
                 }
