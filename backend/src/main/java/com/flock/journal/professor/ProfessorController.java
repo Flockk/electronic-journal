@@ -1,6 +1,7 @@
 package com.flock.journal.professor;
 
 import com.flock.journal.group.Group;
+import com.flock.journal.homework.Homework;
 import com.flock.journal.lesson.Lesson;
 import com.flock.journal.user.UserService;
 import java.util.List;
@@ -47,6 +48,14 @@ public class ProfessorController {
     Professor professor = userService.getCurrentProfessor();
     List<Lesson> lessons = professorService.getLessonsByProfessorId(professor.getId());
     return new ResponseEntity<>(lessons, HttpStatus.OK);
+  }
+
+  @GetMapping("/me/homeworks")
+  @PreAuthorize("hasAuthority('professor:read')")
+  public ResponseEntity<List<Homework>> getHomeworksByCurrentProfessor() throws NotFoundException {
+    Professor professor = userService.getCurrentProfessor();
+    List<Homework> homeworks = professorService.getHomeworksByProfessorId(professor.getId());
+    return new ResponseEntity<>(homeworks, HttpStatus.OK);
   }
 
   @GetMapping("/me")

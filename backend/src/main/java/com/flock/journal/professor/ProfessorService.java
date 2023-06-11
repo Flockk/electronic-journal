@@ -1,6 +1,8 @@
 package com.flock.journal.professor;
 
 import com.flock.journal.group.Group;
+import com.flock.journal.homework.Homework;
+import com.flock.journal.homework.HomeworkRepository;
 import com.flock.journal.lesson.Lesson;
 import com.flock.journal.lesson.LessonRepository;
 import java.util.List;
@@ -15,11 +17,14 @@ public class ProfessorService {
   private final ProfessorRepository professorRepository;
   private final LessonRepository lessonRepository;
 
+  private final HomeworkRepository homeworkRepository;
+
   @Autowired
   public ProfessorService(ProfessorRepository professorRepository,
-      LessonRepository lessonRepository) {
+      LessonRepository lessonRepository, HomeworkRepository homeworkRepository) {
     this.professorRepository = professorRepository;
     this.lessonRepository = lessonRepository;
+    this.homeworkRepository = homeworkRepository;
   }
 
   public List<Professor> getAllProfessors() {
@@ -36,6 +41,10 @@ public class ProfessorService {
 
   public List<Lesson> getLessonsByProfessorId(Long professorId) {
     return lessonRepository.findByProfessorId(professorId);
+  }
+
+  public List<Homework> getHomeworksByProfessorId(Long professorId) {
+    return homeworkRepository.findByProfessorId(professorId);
   }
 
   public Professor saveProfessor(Professor professor) {

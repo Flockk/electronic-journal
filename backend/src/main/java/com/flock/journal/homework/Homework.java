@@ -1,7 +1,6 @@
 package com.flock.journal.homework;
 
 import java.util.List;
-import java.time.LocalDate;
 
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Column;
