@@ -1,25 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import Navbar from '../../components/layout/Navbar';
 import DivisionSidebar from '../../components/division/DivisionSidebar';
 import Section from '../../components/section/Section';
 import DivisionDescription from '../../components/division/DivisionDescription';
-import {getAllDivisions} from '../../services/divisionService';
 import Footer from "../../components/layout/Footer";
 
 const StudDivisionPage = () => {
-    const [divisions, setDivisions] = useState([]);
-
-    useEffect(() => {
-        const fetchDivisions = () => {
-            getAllDivisions()
-                .then((divisions) => {
-                    setDivisions(divisions);
-                })
-        };
-
-        fetchDivisions();
-    }, []);
+    const [divisions] = useState([]);
 
     const navigation = [
         {name: 'Учебные подразделения', href: '#', current: true},

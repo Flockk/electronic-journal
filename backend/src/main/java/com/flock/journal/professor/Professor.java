@@ -13,13 +13,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import com.flock.journal.attendance.Attendance;
-import com.flock.journal.department.Department;
 import com.flock.journal.discipline.Discipline;
 import com.flock.journal.grade.Grade;
 import com.flock.journal.group.Group;
@@ -48,11 +46,6 @@ public class Professor {
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "user_id")
   private User user;
-
-  @JsonIgnore
-  @ManyToOne
-  @JoinColumn(name = "dept_id")
-  private Department department;
 
   @Column(name = "position", length = 50)
   private String position;

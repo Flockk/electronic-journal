@@ -39,21 +39,15 @@ public class Homework {
   private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "lsn_id")
+  @JoinColumn(name = "lsn_id", nullable = false)
   private Lesson lesson;
 
   @ManyToOne
-  @JoinColumn(name = "prof_id")
+  @JoinColumn(name = "prof_id", nullable = false)
   private Professor professor;
 
   @Column(name = "description", columnDefinition = "TEXT")
   private String description;
-
-  @Column(name = "foundation_date")
-  private LocalDate foundationDate;
-
-  @Column(name = "end_date")
-  private LocalDate endDate;
 
   @OneToMany(mappedBy = "homework")
   private List<Grade> grades;

@@ -1,5 +1,6 @@
 package com.flock.journal.lesson;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -61,18 +62,23 @@ public class Lesson {
   @Column(name = "topic")
   private String topic;
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "lessons")
   private List<Group> groups;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "lesson")
   private List<Attendance> attendances;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "lesson")
   private List<Homework> homeworks;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "lesson")
   private List<Grade> grades;
 
+  @JsonIgnore
   @ManyToMany
   @JoinTable(
       name = "lessons_audiences",
