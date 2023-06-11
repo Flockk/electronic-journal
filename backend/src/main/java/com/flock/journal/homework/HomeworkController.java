@@ -46,9 +46,24 @@ public class HomeworkController {
   }
 
   @PostMapping
+  @PreAuthorize("hasAuthority('professor:create')")
   public ResponseEntity<Homework> createHomework(@RequestBody Homework homework) {
     Homework savedHomework = homeworkService.saveHomework(homework);
     return new ResponseEntity<>(savedHomework, HttpStatus.CREATED);
+  }
+
+  @PutMapping("/{id}")
+  @PreAuthorize("hasAuthority('professor:update')")
+  public ResponseEntity<Homework> updateHomework(
+      @PathVariable("id") Long id,
+      @RequestBody Homework homework
+  ) {
+    Homework updatedHomework = homeworkService.updateHomework(id, homework);
+    if (updatedHomework != null) {
+      return new ResponseEntity<>(updatedHomework, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 
   @DeleteMapping("/{id}")
