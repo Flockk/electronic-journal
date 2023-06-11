@@ -34,6 +34,17 @@ public class HomeworkController {
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
+  @GetMapping("/{groupId}/{disciplineId}/{professorId}")
+  @PreAuthorize("hasAuthority('professor:read')")
+  public ResponseEntity<List<Homework>> getHomeworksByGroupDisciplineProfessor(
+      @PathVariable("groupId") Long groupId,
+      @PathVariable("disciplineId") Long disciplineId,
+      @PathVariable("professorId") Long professorId) {
+    List<Homework> homeworks = homeworkService.getHomeworksByGroupDisciplineProfessor(
+        groupId, disciplineId, professorId);
+    return new ResponseEntity<>(homeworks, HttpStatus.OK);
+  }
+
   @PostMapping
   public ResponseEntity<Homework> createHomework(@RequestBody Homework homework) {
     Homework savedHomework = homeworkService.saveHomework(homework);

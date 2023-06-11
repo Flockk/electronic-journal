@@ -20,6 +20,18 @@ public class HomeworkService {
     return homeworkRepository.findAll();
   }
 
+  public List<Homework> getHomeworksByGroupDisciplineProfessor(
+      Long groupId,
+      Long disciplineId,
+      Long professorId
+  ) {
+    return homeworkRepository.findByGroupDisciplineProfessor(
+        groupId,
+        disciplineId,
+        professorId
+    );
+  }
+
   public Optional<Homework> getHomeworkById(Long id) {
     return homeworkRepository.findById(id);
   }
