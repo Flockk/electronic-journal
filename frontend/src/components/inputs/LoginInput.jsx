@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoginInput = ({onLoginChange}) => {
+const LoginInput = ({login, onLoginChange}) => {
     return (
         <>
             <div className="col-span-3">
@@ -15,6 +15,7 @@ const LoginInput = ({onLoginChange}) => {
                     type="text"
                     className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                     placeholder="Введите логин"
+                    value={login}
                     onChange={(e) => onLoginChange(e.target.value)}
                 />
             </div>

@@ -1,12 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import FillingTable from "../../components/tables/FillingTable";
 import Navbar from "../../components/layout/Navbar";
 import StackedLayout from "../../components/layout/StackedLayout";
 import ListboxDropdown from "../../components/dropdowns/ListboxDropdown";
 import {Link} from "react-router-dom";
 import Footer from "../../components/layout/Footer";
+import {getCurrentProfessor, getGroupsByProfessorId} from "../../services/professorService";
 
 const ProfHomeworkPage = () => {
+    const [dropdownGroups, setDropdownGroups] = useState([]);
+
     const navigation = [
         {
             name: <Link to="/professor/homeworks">Домашние задания</Link>,
@@ -18,13 +21,19 @@ const ProfHomeworkPage = () => {
         <Link to="/professor/homeworks">Домашние задания</Link>,
     ];
 
-    const dropdownGroups = [
-        {name: '4310'},
-        {name: '4311'},
-        {name: '4312'},
-        {name: '4317'},
-        {name: '4318'},
-    ];
+    useEffect(() => {
+        const fetchGroups = async () => {
+            try {
+                const currentProfessor = await getCurrentProfessor();
+                const groups = await getGroupsByProfessorId(currentProfessor.id);
+                setDropdownGroups(groups);
+            } catch (error) {
+                console.error("Не удалось получить группы:", error);
+            }
+        };
+
+        fetchGroups();
+    }, []);
 
     const dropdownDisciplines = [
         {name: 'Дисциплина 1'},
@@ -80,7 +89,10 @@ const ProfHomeworkPage = () => {
                 title="Домашние задания"
                 buttons={
                     <>
-                        <ListboxDropdown options={dropdownGroups} defaultValue={dropdownGroups[0]}/>
+                        <ListboxDropdown options={dropdownGroups}
+                                         defaultValue={dropdownGroups[0]}
+                                         placeholder="Выберите группу"
+                        />
                         <ListboxDropdown options={dropdownDisciplines} defaultValue={dropdownDisciplines[0]}/>
                     </>
                 }

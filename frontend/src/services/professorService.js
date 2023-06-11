@@ -23,6 +23,17 @@ export const getProfessorById = async (id) => {
     }
 };
 
+export const getCurrentProfessor = async () => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get("/professors/me", {headers});
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const getGroupsByProfessorId = async (professorId) => {
     try {
         const headers = createAuthHeaders();

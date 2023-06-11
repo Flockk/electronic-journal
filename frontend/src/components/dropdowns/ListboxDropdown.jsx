@@ -2,13 +2,13 @@ import {Fragment, useState} from 'react'
 import {Listbox, Transition} from '@headlessui/react'
 import {CheckIcon, ChevronUpDownIcon} from '@heroicons/react/20/solid'
 
-function ListboxDropdown({options, defaultValue}) {
-    const [selected, setSelected] = useState(defaultValue || options[0])
-    const [searchQuery, setSearchQuery] = useState('')
+function ListboxDropdown({options, defaultValue, placeholder}) {
+    const [selected, setSelected] = useState(defaultValue || options[0]);
+    const [searchQuery, setSearchQuery] = useState('');
     const [isHovered, setIsHovered] = useState(false);
     const filteredOptions = options.filter(option =>
-        option.name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+        option && option.title && option.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <div className="top-16 w-48">
@@ -21,7 +21,7 @@ function ListboxDropdown({options, defaultValue}) {
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                     >
-                        <span className="block truncate">{selected.name}</span>
+                        <span className="block truncate">{selected ? selected.title : placeholder}</span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true"/>
                         </span>
@@ -59,7 +59,7 @@ function ListboxDropdown({options, defaultValue}) {
                                             <span
                                                 className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}
                                             >
-                                                {option.name}
+                                                {option.title}
                                             </span>
                                             {selected ? (
                                                 <span

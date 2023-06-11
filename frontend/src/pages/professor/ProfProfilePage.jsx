@@ -6,7 +6,6 @@ import Card from "../../components/cards/Card";
 import ProfilePhoto from "../../components/profile/ProfilePhoto";
 import FullNameInput from "../../components/inputs/FullNameInput";
 import LoginInput from "../../components/inputs/LoginInput";
-import PasswordInput from "../../components/inputs/PasswordInput";
 import ActionButton from "../../components/buttons/ActionButton";
 import {getCurrentUser} from "../../services/userService";
 
@@ -15,6 +14,7 @@ const ProfProfilePage = () => {
     const [lastname, setLastName] = useState("");
     const [firstname, setFirstName] = useState("");
     const [patronymic, setPatronymic] = useState("");
+    const [login, setLogin] = useState("");
 
     useEffect(() => {
         const fetchCurrentUser = async () => {
@@ -24,6 +24,7 @@ const ProfProfilePage = () => {
                 setLastName(user.lastname);
                 setFirstName(user.firstname);
                 setPatronymic(user.patronymic);
+                setLogin(user.login);
             } catch (error) {
                 console.log(error);
             }
@@ -65,8 +66,7 @@ const ProfProfilePage = () => {
                                 onFirstNameChange={setFirstName}
                                 onPatronymicChange={setPatronymic}
                             />
-                            <LoginInput/>
-                            <PasswordInput/>
+                            <LoginInput login={login} onLoginChange={setLogin}/>
                         </div>
 
                         <div className="mt-5 flex justify-end gap-x-2">
