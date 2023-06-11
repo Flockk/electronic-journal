@@ -28,6 +28,22 @@ public class LessonService {
     return lessonRepository.save(lesson);
   }
 
+  public Optional<Lesson> updateLesson(Long id, Lesson updatedLesson) {
+    Optional<Lesson> lesson = getLessonById(id);
+    if (lesson.isPresent()) {
+      Lesson existingLesson = lesson.get();
+      existingLesson.setDiscipline(updatedLesson.getDiscipline());
+      existingLesson.setProfessor(updatedLesson.getProfessor());
+      existingLesson.setLessonType(updatedLesson.getLessonType());
+      existingLesson.setDate(updatedLesson.getDate());
+      existingLesson.setTopic(updatedLesson.getTopic());
+
+      return Optional.of(lessonRepository.save(existingLesson));
+    } else {
+      return Optional.empty();
+    }
+  }
+
   public void deleteLesson(Long id) {
     lessonRepository.deleteById(id);
   }

@@ -54,16 +54,11 @@ public class HomeworkController {
 
   @PutMapping("/{id}")
   @PreAuthorize("hasAuthority('professor:update')")
-  public ResponseEntity<Homework> updateHomework(
-      @PathVariable("id") Long id,
-      @RequestBody Homework homework
-  ) {
-    Homework updatedHomework = homeworkService.updateHomework(id, homework);
-    if (updatedHomework != null) {
-      return new ResponseEntity<>(updatedHomework, HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+  public ResponseEntity<Homework> updateHomework(@PathVariable("id") Long id,
+      @RequestBody Homework updatedHomework) {
+    Optional<Homework> homework = homeworkService.updateHomework(id, updatedHomework);
+    return homework.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
   @DeleteMapping("/{id}")

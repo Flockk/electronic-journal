@@ -40,21 +40,20 @@ public class HomeworkService {
     return homeworkRepository.save(homework);
   }
 
-  public Homework updateHomework(Long id, Homework updatedHomework) {
-    Optional<Homework> existingHomework = getHomeworkById(id);
-    if (existingHomework.isPresent()) {
-      Homework existing = existingHomework.get();
-      existing.setLesson(updatedHomework.getLesson());
-      existing.setProfessor(updatedHomework.getProfessor());
-      existing.setDescription(updatedHomework.getDescription());
+  public Optional<Homework> updateHomework(Long id, Homework updatedHomework) {
+    Optional<Homework> homework = getHomeworkById(id);
+    if (homework.isPresent()) {
+      Homework existingHomework = homework.get();
+      existingHomework.setLesson(updatedHomework.getLesson());
+      existingHomework.setProfessor(updatedHomework.getProfessor());
+      existingHomework.setDescription(updatedHomework.getDescription());
 
-      return saveHomework(existing);
+      return Optional.of(homeworkRepository.save(existingHomework));
     } else {
-      return null;
+      return Optional.empty();
     }
   }
-
-
+  
   public void deleteHomework(Long id) {
     homeworkRepository.deleteById(id);
   }
