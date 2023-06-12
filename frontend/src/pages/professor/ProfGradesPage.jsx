@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getGradesByGroupDisciplineAndProfessor} from "../../services/gradeService";
+import {getGradesByGroupDisciplineAndProfessor, updateGrade} from "../../services/gradeService";
 import {getStudentsByGroupId} from "../../services/studentService";
 import Navbar from "../../components/layout/Navbar";
 import StackedLayout from "../../components/layout/StackedLayout";
@@ -18,6 +18,9 @@ const StudentGrades = () => {
     const [selectedDiscipline, setSelectedDiscipline] = useState(null);
     const [dropdownGroups, setDropdownGroups] = useState([]);
     const [dropdownDisciplines, setDropdownDisciplines] = useState([]);
+
+    const [editingCell, setEditingCell] = useState(null);
+    const [editedValue, setEditedValue] = useState('');
 
     const navigation = [
         {
@@ -44,7 +47,7 @@ const StudentGrades = () => {
                 }));
                 setDropdownGroups(formattedGroups);
             } catch (error) {
-                console.error('Failed to fetch groups:', error);
+                console.error('Не удалось загрузить группы:', error);
             }
         };
 
@@ -69,7 +72,7 @@ const StudentGrades = () => {
                 }));
                 setDropdownDisciplines(formattedDisciplines);
             } catch (error) {
-                console.error('Failed to fetch disciplines:', error);
+                console.error('Не удалось загрузить дисциплины:', error);
             }
         };
 
@@ -87,7 +90,6 @@ const StudentGrades = () => {
             try {
                 const studentsData = await getStudentsByGroupId(
                     selectedGroup ? selectedGroup.id : null,
-
                 );
                 setStudents(studentsData);
             } catch (error) {
@@ -144,6 +146,50 @@ const StudentGrades = () => {
         return columns;
     };
 
+    const handleCellClick = (rowIndex, columnKey) => {
+        const student = students[rowIndex];
+        const grade = grades.find(grade => grade.student.id === student.id && formatDate(grade.lesson.date) === columnKey);
+        const value = grade ? grade.value : '';
+
+        setEditingCell({rowIndex, columnKey});
+        setEditedValue(value);
+    };
+
+    const handleSaveGrade = async () => {
+        try {
+            const { rowIndex, columnKey } = editingCell;
+            const student = students[rowIndex];
+            const grade = grades.find(
+                (grade) =>
+                    grade.student.id === student.id &&
+                    formatDate(grade.lesson.date) === columnKey
+            );
+
+            if (grade) {
+                const updatedGrade = { ...grade, value: parseFloat(editedValue) };
+                console.log("Обновлённая оценка:", updatedGrade);
+                await updateGrade(grade.id, updatedGrade);
+                setGrades((prevGrades) => {
+                    const updatedGrades = [...prevGrades];
+                    const gradeIndex = updatedGrades.findIndex((g) => g.id === grade.id);
+                    updatedGrades[gradeIndex] = updatedGrade;
+                    return updatedGrades;
+                });
+            }
+
+            setEditingCell(null);
+            setEditedValue('');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
+    const handleCancelEdit = () => {
+        setEditingCell(null);
+        setEditedValue('');
+    };
+
     return (
         <div className="flex flex-col min-h-screen mt-16">
             <Navbar navigation={navigation} profileLink="/professor/profile"/>
@@ -173,34 +219,61 @@ const StudentGrades = () => {
                                     {renderTableColumns().map((column, index) => (
                                         <th
                                             key={index}
-                                            className="py-3 px-6 text-center whitespace-normal"
+                                            className="px-6 py-3 text-center"
+                                            scope="col"
                                         >
                                             {column}
                                         </th>
                                     ))}
                                 </tr>
                                 </thead>
-                                <tbody className="text-gray-600 divide-y">
-                                {renderTableData().map((item, idx) => (
-                                    <tr key={idx} className="divide-x">
-                                        {Object.entries(item).map(([key, value], index) => (
-                                            <td
-                                                key={index}
-                                                className="px-6 py-4 whitespace-normal text-center"
-                                            >
-                                                <div className="flex items-center justify-center">
-                                                    {key === 'name' ? (
-                                                        <div className="text-left truncate">
-                                                            {value}
+                                <tbody className="bg-white divide-y">
+                                {renderTableData().map((row, rowIndex) => (
+                                    <tr key={rowIndex} className="hover:bg-gray-50">
+                                        {Object.entries(row).map(([key, value], index) => {
+                                            const isEditable =
+                                                key !== 'ФИО' &&
+                                                (!editingCell ||
+                                                    (editingCell.rowIndex !== rowIndex &&
+                                                        editingCell.columnKey !== key));
+
+                                            return (
+                                                <td
+                                                    key={index}
+                                                    className={`px-6 py-4 whitespace-nowrap ${
+                                                        isEditable ? 'cursor-pointer' : ''
+                                                    }`}
+                                                    onClick={() => isEditable && handleCellClick(rowIndex, key)}
+                                                >
+                                                    {editingCell &&
+                                                    editingCell.rowIndex === rowIndex &&
+                                                    editingCell.columnKey === key ? (
+                                                        <div className="flex items-center">
+                                                            <input
+                                                                type="number"
+                                                                className="w-12 h-8 rounded-sm px-2 py-1 border focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                                                                value={editedValue}
+                                                                onChange={(e) => setEditedValue(e.target.value)}
+                                                            />
+                                                            <button
+                                                                className="ml-2 px-2 py-1 bg-indigo-500 text-white rounded-sm"
+                                                                onClick={handleSaveGrade}
+                                                            >
+                                                                Сохранить
+                                                            </button>
+                                                            <button
+                                                                className="ml-2 px-2 py-1 bg-gray-300 text-gray-700 rounded-sm"
+                                                                onClick={handleCancelEdit}
+                                                            >
+                                                                Отмена
+                                                            </button>
                                                         </div>
                                                     ) : (
-                                                        <div className="w-min mx-auto whitespace-nowrap">
-                                                            {value}
-                                                        </div>
+                                                        value
                                                     )}
-                                                </div>
-                                            </td>
-                                        ))}
+                                                </td>
+                                            );
+                                        })}
                                     </tr>
                                 ))}
                                 </tbody>
@@ -212,8 +285,8 @@ const StudentGrades = () => {
                                 <div className="flex">
                                     <svg viewBox="0 0 40 40" className="w-6 h-6 fill-current">
                                         <path
-                                            d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"
-                                        ></path>
+                                            d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z">
+                                        </path>
                                     </svg>
 
                                     <p className="mx-3">Оценок нет</p>

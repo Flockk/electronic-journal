@@ -46,6 +46,17 @@ export const createGrade = async (gradeData) => {
     }
 };
 
+export const updateGrade = async (id, updatedGrade) => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.put(`/grades/${id}`, updatedGrade, {headers});
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const deleteGrade = async (id) => {
     try {
         const headers = createAuthHeaders();

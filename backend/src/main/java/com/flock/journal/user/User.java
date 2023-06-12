@@ -1,5 +1,6 @@
 package com.flock.journal.user;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.FetchType;
 import java.util.Collection;
 import java.util.List;
@@ -68,7 +69,7 @@ public class User implements UserDetails {
   @OneToOne(mappedBy = "user")
   private transient Student student;
 
-  @Override
+  @JsonDeserialize(using = GrantedAuthorityDeserializer.class)
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return role.getAuthorities();
   }
