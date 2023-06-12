@@ -12,10 +12,15 @@ const StudSchedulePage = () => {
             current: false,
         },
         {name: "Расписание", href: "#", current: true},
+        {
+            name: <Link to="/student/homeworks">Домашние задания</Link>,
+            current: false,
+        },
     ];
 
     const footerElements = [
         <Link to="/student/divisions">Учебные подразделения</Link>,
+        <Link to="/student/homeworks">Домашние задания</Link>,
         "Расписание",
     ];
 

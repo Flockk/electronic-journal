@@ -26,7 +26,7 @@ export const getHomeworkById = async (id) => {
 export const getHomeworksByGroupDisciplineProfessor = async (groupId, disciplineId, professorId) => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get(`/homeworks/${groupId}/${disciplineId}/${professorId}`, {headers});
+        const response = await api.get(`/homeworks/groups/${groupId}/${disciplineId}/${professorId}`, {headers});
 
         return response.data;
     } catch (error) {

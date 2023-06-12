@@ -9,7 +9,6 @@ const FillingTable = ({tableItems, setTableItemsProp, columns}) => {
     const toggleEditMode = (rowIndex, field) => {
         const userRole = localStorage.getItem("role");
 
-        // Проверка, является ли пользователь "STUDENT"
         if (userRole === "STUDENT") {
             return;
         }
@@ -83,18 +82,19 @@ const FillingTable = ({tableItems, setTableItemsProp, columns}) => {
                                         activeEditIndex === `${idxRow}-${column.field}` ? (
                                             <div className="relative">
                                                 <div
-                                                    className="relative overflow-hidden rounded-md border border-gray-300 shadow-sm focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
-              <textarea
-                  value={item[column.field]}
-                  onChange={(e) => {
-                      const newValue = e.target.value;
-                      const updatedTableItems = [...tableItems];
-                      updatedTableItems[idxRow][column.field] = newValue;
-                      setTableItemsProp(updatedTableItems);
-                  }}
-                  placeholder={column.placeholder}
-                  className="block w-full border-0 focus:border-primary-500 focus:ring-0"
-              />
+                                                    className="relative overflow-hidden rounded-md border border-gray-300 shadow-sm focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50"
+                                                >
+                                                    <textarea
+                                                        value={item[column.field]}
+                                                        onChange={(e) => {
+                                                            const newValue = e.target.value;
+                                                            const updatedTableItems = [...tableItems];
+                                                            updatedTableItems[idxRow][column.field] = newValue;
+                                                            setTableItemsProp(updatedTableItems);
+                                                        }}
+                                                        placeholder={column.placeholder}
+                                                        className="block w-full border-0 focus:border-primary-500 focus:ring-0"
+                                                    />
                                                     <div className="flex w-full items-center justify-end bg-white p-2">
                                                         <div className="flex space-x-1">
                                                             <button
