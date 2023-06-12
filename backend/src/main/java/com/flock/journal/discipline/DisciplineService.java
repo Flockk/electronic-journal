@@ -37,6 +37,10 @@ public class DisciplineService {
     return disciplineRepository.findById(id);
   }
 
+  public List<Discipline> getDisciplinesForStudent(Long studentId) {
+    return disciplineRepository.findDisciplinesByStudentId(studentId);
+  }
+
   public Discipline saveDiscipline(Discipline discipline) {
     return disciplineRepository.save(discipline);
   }

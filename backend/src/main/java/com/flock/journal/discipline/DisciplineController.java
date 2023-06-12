@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/disciplines")
-@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
+@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
 public class DisciplineController {
 
   private final DisciplineService disciplineService;
@@ -32,6 +32,17 @@ public class DisciplineController {
   public ResponseEntity<List<Discipline>> getDisciplinesByProfessor(
       @PathVariable("professorId") Long professorId) {
     List<Discipline> disciplines = disciplineService.getDisciplinesByProfessorId(professorId);
+    if (disciplines.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return new ResponseEntity<>(disciplines, HttpStatus.OK);
+  }
+
+  @GetMapping("/students/{studentId}")
+  @PreAuthorize("hasAuthority('student:read')")
+  public ResponseEntity<List<Discipline>> getStudentDisciplines(
+      @PathVariable("studentId") Long studentId) {
+    List<Discipline> disciplines = disciplineService.getDisciplinesForStudent(studentId);
     if (disciplines.isEmpty()) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
