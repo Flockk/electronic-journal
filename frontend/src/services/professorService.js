@@ -28,7 +28,18 @@ export const getCurrentProfessor = async () => {
         const headers = createAuthHeaders();
         const response = await api.get("/professors/me", {headers});
 
-        return response.data;
+        const {position, phoneNumber, user} = response.data;
+        const {lastname, firstname, patronymic, login} = user;
+
+        return {
+            lastname,
+            firstname,
+            patronymic,
+            login,
+            position,
+            phoneNumber,
+            ...response.data,
+        };
     } catch (error) {
         throw new Error(error.response.data.error);
     }
@@ -48,7 +59,7 @@ export const getGroupsByProfessorId = async (professorId) => {
 export const getHomeworksByProfessorId = async () => {
     try {
         const headers = createAuthHeaders();
-        const response = await api.get("/professors/me/homeworks", { headers });
+        const response = await api.get("/professors/me/homeworks", {headers});
 
         return response.data;
     } catch (error) {
@@ -56,10 +67,16 @@ export const getHomeworksByProfessorId = async () => {
     }
 };
 
-export const createProfessor = async (professorData) => {
+export const createProfessor = async (user) => {
     try {
+        const professorData = {
+            user_id: user.user_id,
+            position: null,
+            phone_number: null
+        };
+
         const headers = createAuthHeaders();
-        const response = await api.post('/professors', professorData, {headers});
+        const response = await api.post('/professors', professorData, { headers });
 
         return response.data;
     } catch (error) {

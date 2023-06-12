@@ -28,7 +28,21 @@ export const getCurrentStudent = async () => {
         const headers = createAuthHeaders();
         const response = await api.get(`/students/me`, {headers});
 
-        return response.data;
+        const {group, course, major, level, phoneNumber, user} = response.data;
+        const {lastname, firstname, patronymic, login} = user;
+
+        return {
+            lastname,
+            firstname,
+            patronymic,
+            login,
+            group,
+            course,
+            major,
+            level,
+            phoneNumber,
+            ...response.data,
+        };
     } catch (error) {
         throw new Error(error.response.data.error);
     }

@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getCurrentUser} from "../../services/userService";
 import Navbar from "../layout/Navbar";
 import Card from "../cards/Card";
@@ -7,6 +7,9 @@ import FullNameInput from "../inputs/FullNameInput";
 import LoginInput from "../inputs/LoginInput";
 import Footer from "../layout/Footer";
 import ActionButton from "../buttons/ActionButton";
+import {getCurrentProfessor} from "../../services/professorService";
+import {getCurrentStudent} from "../../services/studentService";
+import PhoneInput from "../inputs/PhoneInput";
 
 const UserProfilePage = ({navigation, footerElements}) => {
     const [currentUser, setCurrentUser] = useState(null);
@@ -14,23 +17,44 @@ const UserProfilePage = ({navigation, footerElements}) => {
     const [firstname, setFirstName] = useState("");
     const [patronymic, setPatronymic] = useState("");
     const [login, setLogin] = useState("");
+    const [phone, setPhone] = useState("");
+    const [role, setRole] = useState("");
+
+    useEffect(() => {
+        const userRole = localStorage.getItem("role");
+        setRole(userRole);
+    }, []);
 
     useEffect(() => {
         const fetchCurrentUser = async () => {
             try {
-                const user = await getCurrentUser();
+                let user;
+
+                if (role === "ADMIN") {
+                    user = await getCurrentUser();
+                } else if (role === "PROFESSOR") {
+                    const professor = await getCurrentProfessor();
+                    user = {...professor};
+                } else if (role === "STUDENT") {
+                    const student = await getCurrentStudent();
+                    user = {...student};
+                }
+
                 setCurrentUser(user);
                 setLastName(user.lastname);
                 setFirstName(user.firstname);
                 setPatronymic(user.patronymic);
                 setLogin(user.login);
+                setPhone(user.phoneNumber);
             } catch (error) {
                 console.log(error);
             }
         };
 
-        fetchCurrentUser();
-    }, []);
+        if (role) {
+            fetchCurrentUser();
+        }
+    }, [role]);
 
     return (
         <div className="flex flex-col min-h-screen mt-16">
@@ -55,6 +79,9 @@ const UserProfilePage = ({navigation, footerElements}) => {
                                 onPatronymicChange={setPatronymic}
                             />
                             <LoginInput login={login} onLoginChange={setLogin}/>
+                            {role === "PROFESSOR" || role === "STUDENT" ? (
+                                <PhoneInput phone={phone} onPhoneChange={setPhone}/>
+                            ) : null}
                         </div>
 
                         <div className="mt-5 flex justify-end gap-x-2">
