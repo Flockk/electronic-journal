@@ -91,15 +91,31 @@ const ProfHomeworkPage = () => {
                     currentProfessor.id
                 );
                 const formattedHomeworks = homeworks.map(homework => ({
+                    id: homework.id,
+                    lsn_id: homework.lesson.id,
+                    prof_id: homework.professor.id,
                     date: formatDate(homework.lesson.date),
-                    type: homework.lesson.lessonType,
+                    type: getTypeLabel(homework.lesson.lessonType),
                     theme: homework.lesson.topic,
                     homework: homework.description,
                 }));
 
                 setTableItems(formattedHomeworks);
             } catch (error) {
-                console.error('Failed to fetch homeworks:', error);
+                console.error('Не удалось загрузить домашние задания:', error);
+            }
+        };
+
+        const getTypeLabel = (type) => {
+            switch (type) {
+                case "LECTURE":
+                    return "Лекция";
+                case "PRACTICAL":
+                    return "Практическое занятие";
+                case "LAB":
+                    return "Лабораторная работа";
+                default:
+                    return type;
             }
         };
 

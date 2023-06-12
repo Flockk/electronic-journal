@@ -45,6 +45,17 @@ export const createHomework = async (homework) => {
     }
 };
 
+export const updateHomework = async (id, updatedHomework) => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.put(`/homeworks/${id}`, updatedHomework, {headers});
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const deleteHomework = async (id) => {
     try {
         const headers = createAuthHeaders();
