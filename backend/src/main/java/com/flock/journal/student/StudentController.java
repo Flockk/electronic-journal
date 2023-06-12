@@ -1,5 +1,6 @@
 package com.flock.journal.student;
 
+import com.flock.journal.group.Group;
 import com.flock.journal.user.UserService;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,13 @@ public class StudentController {
   public ResponseEntity<Student> getCurrentStudent() throws NotFoundException {
     Student student = userService.getCurrentStudent();
     return ResponseEntity.ok(student);
+  }
+
+  @GetMapping("/me/group")
+  @PreAuthorize("hasAuthority('student:read')")
+  public ResponseEntity<Group> getCurrentStudentGroup() throws NotFoundException {
+    Group group = userService.getCurrentStudentGroup();
+    return ResponseEntity.ok(group);
   }
 
   @PostMapping

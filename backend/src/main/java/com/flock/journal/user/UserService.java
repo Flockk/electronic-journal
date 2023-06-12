@@ -1,5 +1,6 @@
 package com.flock.journal.user;
 
+import com.flock.journal.group.Group;
 import com.flock.journal.professor.Professor;
 import com.flock.journal.professor.ProfessorRepository;
 import com.flock.journal.student.Student;
@@ -60,6 +61,11 @@ public class UserService {
     User currentUser = getCurrentUser();
     return studentRepository.findByUserId(currentUser.getId())
         .orElseThrow(NotFoundException::new);
+  }
+
+  public Group getCurrentStudentGroup() throws NotFoundException {
+    Student currentStudent = getCurrentStudent();
+    return currentStudent.getGroup();
   }
 
   public List<User> getAllUsersSortedAscending() {
