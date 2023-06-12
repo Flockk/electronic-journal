@@ -21,14 +21,16 @@ const ProfHomeworkPage = () => {
     const [tableItems, setTableItems] = useState([]);
 
     const navigation = [
+        {name: 'Домашние задания', href: '#', current: true},
         {
-            name: <Link to="/professor/homeworks">Домашние задания</Link>,
+            name: <Link to="/professor/grades">Оценки</Link>,
             current: false,
         },
     ];
 
     const footerElements = [
-        <Link to="/professor/homeworks">Домашние задания</Link>,
+        <Link to="#">Домашние задания</Link>,
+        <Link to="/professor/grades">Оценки</Link>,
     ];
 
     useEffect(() => {

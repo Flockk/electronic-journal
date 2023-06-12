@@ -13,6 +13,7 @@ import AdminManagementUsers from "./pages/admin/AdminManagementUsers";
 import AdminAccountCreationPage from "./pages/admin/AdminAccountCreationPage";
 import AdminManagementGroups from "./pages/admin/AdminManagementGroups";
 import StudHomeworkPage from "./pages/student/StudHomeworkPage";
+import ProfGradesPage from "./pages/professor/ProfGradesPage";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path="professor" element={<RequireAuth allowedRole={"PROFESSOR"}/>}>
                     <Route path="profile" element={<ProfProfilePage/>}/>
                     <Route path="homeworks" element={<ProfHomeworkPage/>}/>
+                    <Route path="grades" element={<ProfGradesPage/>}/>
                 </Route>
 
                 <Route path="student" element={<RequireAuth allowedRole={"STUDENT"}/>}>

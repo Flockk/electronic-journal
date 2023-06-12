@@ -45,6 +45,17 @@ export const getCurrentStudentGroup = async () => {
     }
 };
 
+export const getStudentsByGroupId = async (groupId) => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get(`/students/group/${groupId}`, {headers});
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const createStudent = async (studentData) => {
     try {
         const headers = createAuthHeaders();

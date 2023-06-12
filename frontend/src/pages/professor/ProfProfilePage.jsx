@@ -9,6 +9,10 @@ const ProfProfilePage = () => {
             name: <Link to="/professor/homeworks">Домашние задания</Link>,
             current: false,
         },
+        {
+            name: <Link to="/professor/grades">Оценки</Link>,
+            current: false,
+        },
     ];
 
     const footerElements = [
