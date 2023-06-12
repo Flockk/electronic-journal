@@ -12,6 +12,7 @@ import ProfProfilePage from "./pages/professor/ProfProfilePage";
 import AdminManagementUsers from "./pages/admin/AdminManagementUsers";
 import AdminAccountCreationPage from "./pages/admin/AdminAccountCreationPage";
 import AdminManagementGroups from "./pages/admin/AdminManagementGroups";
+import StudHomeworkPage from "./pages/student/StudHomeworkPage";
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
                 <Route path="student" element={<RequireAuth allowedRole={"STUDENT"}/>}>
                     <Route path="profile" element={<StudProfilePage/>}/>
                     <Route path="divisions" element={<StudDivisionPage/>}/>
+                    <Route path="homeworks" element={<StudHomeworkPage/>}/>
                     <Route path="schedule" element={<StudSchedulePage/>}/>
                 </Route>
 

@@ -1,66 +1,45 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
-import FillingTable from '../../components/tables/FillingTable';
-import Navbar from '../../components/layout/Navbar';
-import StackedLayout from '../../components/layout/StackedLayout';
-import ListboxDropdown from '../../components/dropdowns/ListboxDropdown';
-import Footer from '../../components/layout/Footer';
+import React, {useEffect, useState} from "react";
+import {getCurrentStudent, getCurrentStudentGroup} from "../../services/studentService";
 import {
-    getCurrentProfessor,
-    getGroupsByProfessorId
-} from "../../services/professorService";
-import {getDisciplinesByProfessor} from "../../services/disciplineService";
-import {getHomeworksByGroupDisciplineProfessor} from "../../services/homeworkService";
+    getHomeworksByDisciplineStudentGroup,
+} from "../../services/homeworkService";
+import {Link} from "react-router-dom";
+import Navbar from "../../components/layout/Navbar";
+import StackedLayout from "../../components/layout/StackedLayout";
+import Footer from "../../components/layout/Footer";
+import {getStudentDisciplines} from "../../services/disciplineService";
+import ListboxDropdown from "../../components/dropdowns/ListboxDropdown";
 import formatDate from "../../utils/alternativeDateUtils";
+import FillingTable from "../../components/tables/FillingTable";
 
-const ProfHomeworkPage = () => {
-    const [selectedGroup, setSelectedGroup] = useState(null);
+const StudHomeworkPage = () => {
     const [selectedDiscipline, setSelectedDiscipline] = useState(null);
-    const [dropdownGroups, setDropdownGroups] = useState([]);
     const [dropdownDisciplines, setDropdownDisciplines] = useState([]);
     const [tableItems, setTableItems] = useState([]);
 
     const navigation = [
         {
-            name: <Link to="/professor/homeworks">Домашние задания</Link>,
+            name: <Link to="/student/divisions">Учебные подразделения</Link>,
             current: false,
         },
+        {
+            name: <Link to="/student/schedule">Расписание</Link>,
+            current: false,
+        },
+        {name: "Домашние задания", href: "#", current: true},
     ];
 
     const footerElements = [
-        <Link to="/professor/homeworks">Домашние задания</Link>,
+        <Link to="/student/divisions">Учебные подразделения</Link>,
+        <Link to="/student/schedule">Расписание</Link>,
+        "Домашние задания",
     ];
-
-    useEffect(() => {
-        const fetchGroups = async () => {
-            try {
-                const currentProfessor = await getCurrentProfessor();
-                const groups = await getGroupsByProfessorId(currentProfessor.id);
-                const formattedGroups = groups.map(group => ({
-                    id: group.id,
-                    title: group.name,
-                    ...group,
-                }));
-                setDropdownGroups(formattedGroups);
-            } catch (error) {
-                console.error('Failed to fetch groups:', error);
-            }
-        };
-
-        fetchGroups();
-    }, []);
-
-    useEffect(() => {
-        if (dropdownGroups.length > 0 && selectedGroup === null) {
-            setSelectedGroup(dropdownGroups[0]);
-        }
-    }, [dropdownGroups, selectedGroup]);
 
     useEffect(() => {
         const fetchDisciplines = async () => {
             try {
-                const currentProfessor = await getCurrentProfessor();
-                const disciplines = await getDisciplinesByProfessor(currentProfessor.id);
+                const currentStudent = await getCurrentStudent();
+                const disciplines = await getStudentDisciplines(currentStudent.id);
                 const formattedDisciplines = disciplines.map(discipline => ({
                     id: discipline.id,
                     title: discipline.name,
@@ -84,11 +63,12 @@ const ProfHomeworkPage = () => {
     useEffect(() => {
         const fetchHomeworks = async () => {
             try {
-                const currentProfessor = await getCurrentProfessor();
-                const homeworks = await getHomeworksByGroupDisciplineProfessor(
-                    selectedGroup ? selectedGroup.id : null,
+                const currentGroup = await getCurrentStudentGroup();
+                const currentStudent = await getCurrentStudent();
+                const homeworks = await getHomeworksByDisciplineStudentGroup(
                     selectedDiscipline ? selectedDiscipline.id : null,
-                    currentProfessor.id
+                    currentGroup.id,
+                    currentStudent.id
                 );
                 const formattedHomeworks = homeworks.map(homework => ({
                     id: homework.id,
@@ -120,7 +100,7 @@ const ProfHomeworkPage = () => {
         };
 
         fetchHomeworks();
-    }, [selectedGroup, selectedDiscipline]);
+    }, [selectedDiscipline]);
 
     const columns = [
         {label: "Дата", field: "date"},
@@ -131,16 +111,11 @@ const ProfHomeworkPage = () => {
 
     return (
         <div className="flex flex-col min-h-screen mt-16">
-            <Navbar navigation={navigation} profileLink="/professor/profile"/>
+            <Navbar navigation={navigation} profileLink="/student/profile"/>
             <StackedLayout
                 title="Домашние задания"
                 buttons={
                     <>
-                        <ListboxDropdown
-                            options={dropdownGroups}
-                            value={selectedGroup}
-                            onChange={(value) => setSelectedGroup(value)}
-                        />
                         <ListboxDropdown
                             options={dropdownDisciplines}
                             value={selectedDiscipline}
@@ -160,4 +135,4 @@ const ProfHomeworkPage = () => {
     );
 };
 
-export default ProfHomeworkPage;
+export default StudHomeworkPage;

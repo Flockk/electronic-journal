@@ -7,6 +7,13 @@ const FillingTable = ({tableItems, setTableItemsProp, columns}) => {
     const [hoveredCell, setHoveredCell] = useState(null);
 
     const toggleEditMode = (rowIndex, field) => {
+        const userRole = localStorage.getItem("role");
+
+        // Проверка, является ли пользователь "STUDENT"
+        if (userRole === "STUDENT") {
+            return;
+        }
+
         if (activeEditIndex === `${rowIndex}-${field}`) {
             setActiveEditIndex(null);
         } else {
@@ -109,13 +116,14 @@ const FillingTable = ({tableItems, setTableItemsProp, columns}) => {
                                         ) : (
                                             <div
                                                 onClick={() => toggleEditMode(idxRow, column.field)}
-                                                className="cursor-pointer flex justify-center items-center h-full"
+                                                className={`cursor-pointer flex justify-center items-center h-full}`}
                                             >
-            <span>
-              {hoveredCell === `${idxRow}-${column.field}`
-                  ? item[column.field] || "Заполнить"
-                  : item[column.field]}
-            </span>
+                                                <span>
+                                                    {hoveredCell === `${idxRow}-${column.field}`
+                                                        ? item[column.field] || "Заполнить"
+                                                        : item[column.field]}
+
+                                                </span>
                                             </div>
                                         )
                                     ) : (

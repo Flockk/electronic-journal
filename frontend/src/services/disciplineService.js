@@ -13,10 +13,22 @@ export const getAllDisciplines = async () => {
     }
 };
 
-export const getDisciplinesByProfessorId = async (professorId) => {
+export const getDisciplinesByProfessor = async (professorId) => {
     try {
         const headers = createAuthHeaders();
         const response = await api.get(`/disciplines/professors/${professorId}`, {headers});
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw new Error(error.response.data.error);
+    }
+};
+
+export const getStudentDisciplines = async (studentId) => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get(`/disciplines/students/${studentId}`, {headers});
 
         return response.data;
     } catch (error) {
