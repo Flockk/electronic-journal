@@ -37,6 +37,24 @@ public class GradeService {
     );
   }
 
+  public Optional<Grade> updateGrade(Long id, Grade updatedGrade) {
+    Optional<Grade> grade = getGradeById(id);
+    if (grade.isPresent()) {
+      Grade existingGrade = grade.get();
+      existingGrade.setLesson(updatedGrade.getLesson());
+      existingGrade.setHomework(updatedGrade.getHomework());
+      existingGrade.setStudent(updatedGrade.getStudent());
+      existingGrade.setProfessor(updatedGrade.getProfessor());
+      existingGrade.setGradeType(updatedGrade.getGradeType());
+      existingGrade.setDate(updatedGrade.getDate());
+      existingGrade.setValue(updatedGrade.getValue());
+
+      return Optional.of(gradeRepository.save(existingGrade));
+    } else {
+      return Optional.empty();
+    }
+  }
+
   public Grade saveGrade(Grade grade) {
     return gradeRepository.save(grade);
   }

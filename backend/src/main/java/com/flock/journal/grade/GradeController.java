@@ -49,6 +49,15 @@ public class GradeController {
     return new ResponseEntity<>(grades, HttpStatus.OK);
   }
 
+  @PutMapping("/{id}")
+  @PreAuthorize("hasAuthority('professor:update')")
+  public ResponseEntity<Grade> updateGrade(@PathVariable("id") Long id,
+      @RequestBody Grade updatedGrade) {
+    Optional<Grade> grade = gradeService.updateGrade(id, updatedGrade);
+    return grade.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
   @PostMapping
   public ResponseEntity<Grade> createGrade(@RequestBody Grade grade) {
     Grade savedGrade = gradeService.saveGrade(grade);
