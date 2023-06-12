@@ -1,5 +1,6 @@
 package com.flock.journal.student;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,4 +10,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
   @Query("SELECT s FROM Student s WHERE s.user.id = :userId")
   Optional<Student> findByUserId(@Param("userId") Long userId);
+
+  @Query("SELECT s FROM Student s WHERE s.group.id = :groupId")
+  List<Student> findByGroupId(@Param("groupId") Long groupId);
 }

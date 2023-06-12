@@ -23,6 +23,10 @@ public class StudentService {
     return studentRepository.findById(id);
   }
 
+  public List<Student> getStudentsByGroupId(Long groupId) {
+    return studentRepository.findByGroupId(groupId);
+  }
+
   public Student saveStudent(Student student) {
     return studentRepository.save(student);
   }

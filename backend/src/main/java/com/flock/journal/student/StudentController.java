@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/students")
-@PreAuthorize("hasAnyRole('ADMIN', 'STUDENT')")
+@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
 public class StudentController {
 
   private final UserService userService;
@@ -51,6 +51,13 @@ public class StudentController {
   public ResponseEntity<Group> getCurrentStudentGroup() throws NotFoundException {
     Group group = userService.getCurrentStudentGroup();
     return ResponseEntity.ok(group);
+  }
+
+  @GetMapping("/group/{groupId}")
+  @PreAuthorize("hasAuthority('professor:read')")
+  public ResponseEntity<List<Student>> getStudentsByGroupId(@PathVariable("groupId") Long groupId) {
+    List<Student> students = studentService.getStudentsByGroupId(groupId);
+    return new ResponseEntity<>(students, HttpStatus.OK);
   }
 
   @PostMapping
