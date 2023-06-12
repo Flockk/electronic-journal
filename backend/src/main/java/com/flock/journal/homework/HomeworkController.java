@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1/homeworks")
-@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR')")
+@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
 public class HomeworkController {
 
   private final HomeworkService homeworkService;
@@ -35,7 +35,7 @@ public class HomeworkController {
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
-  @GetMapping("/{groupId}/{disciplineId}/{professorId}")
+  @GetMapping("/groups/{groupId}/{disciplineId}/{professorId}")
   @PreAuthorize("hasAuthority('professor:read')")
   public ResponseEntity<List<Homework>> getHomeworksByGroupDisciplineProfessor(
       @PathVariable("groupId") Long groupId,
@@ -43,6 +43,17 @@ public class HomeworkController {
       @PathVariable("professorId") Long professorId) {
     List<Homework> homeworks = homeworkService.getHomeworksByGroupDisciplineProfessor(
         groupId, disciplineId, professorId);
+    return new ResponseEntity<>(homeworks, HttpStatus.OK);
+  }
+
+  @GetMapping("/{disciplineId}/{groupId}/{studentId}")
+  @PreAuthorize("hasAuthority('student:read')")
+  public ResponseEntity<List<Homework>> getHomeworksByDisciplineStudentGroup(
+      @PathVariable("disciplineId") Long disciplineId,
+      @PathVariable("groupId") Long groupId,
+      @PathVariable("studentId") Long studentId) {
+    List<Homework> homeworks = homeworkService.getHomeworkByDisciplineAndGroupAndStudent(
+        disciplineId, groupId, studentId);
     return new ResponseEntity<>(homeworks, HttpStatus.OK);
   }
 

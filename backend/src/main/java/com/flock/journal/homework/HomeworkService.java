@@ -32,6 +32,18 @@ public class HomeworkService {
     );
   }
 
+  public List<Homework> getHomeworkByDisciplineAndGroupAndStudent(
+      Long disciplineId,
+      Long groupId,
+      Long studentId
+  ) {
+    return homeworkRepository.findByDisciplineAndGroupAndStudent(
+        disciplineId,
+        groupId,
+        studentId
+    );
+  }
+
   public Optional<Homework> getHomeworkById(Long id) {
     return homeworkRepository.findById(id);
   }
