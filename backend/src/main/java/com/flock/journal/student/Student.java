@@ -1,5 +1,6 @@
 package com.flock.journal.student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flock.journal.semestergrades.SemesterGrade;
 import java.time.LocalDate;
 import java.util.List;
@@ -67,18 +68,22 @@ public class Student {
   @Column(name = "phone_number")
   private String phoneNumber;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "student")
   private List<Attendance> attendances;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "student")
   private List<Grade> grades;
 
+  @JsonIgnore
   @ManyToMany
   @JoinTable(name = "homeworks_students",
       joinColumns = @JoinColumn(name = "stud_id"),
       inverseJoinColumns = @JoinColumn(name = "hw_id"))
   private List<Homework> homeworks;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "student")
   private List<SemesterGrade> semesterGrades;
 }

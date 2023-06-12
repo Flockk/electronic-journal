@@ -25,6 +25,18 @@ public class GradeService {
     return gradeRepository.findById(id);
   }
 
+  public List<Grade> getGradesByGroupDisciplineAndProfessor(
+      Long groupId,
+      Long disciplineId,
+      Long professorId
+  ) {
+    return gradeRepository.findGradesByGroupDisciplineAndProfessor(
+        groupId,
+        disciplineId,
+        professorId
+    );
+  }
+
   public Grade saveGrade(Grade grade) {
     return gradeRepository.save(grade);
   }

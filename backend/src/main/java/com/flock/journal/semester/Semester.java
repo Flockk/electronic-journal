@@ -1,5 +1,6 @@
 package com.flock.journal.semester;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.flock.journal.semestergrades.SemesterGrade;
 import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
@@ -36,6 +37,7 @@ public class Semester {
   @Column(name = "end_date")
   private LocalDate endDate;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "semester")
   private List<SemesterGrade> semesterGrades;
 }

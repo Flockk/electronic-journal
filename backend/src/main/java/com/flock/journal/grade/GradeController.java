@@ -6,10 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/grades")
+@PreAuthorize("hasAnyRole('ADMIN', 'PROFESSOR', 'STUDENT')")
 public class GradeController {
 
   private final GradeService gradeService;
@@ -30,6 +32,21 @@ public class GradeController {
     Optional<Grade> grade = gradeService.getGradeById(id);
     return grade.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping("/{groupId}/{disciplineId}/{professorId}")
+  @PreAuthorize("hasAuthority('professor:read')")
+  public ResponseEntity<List<Grade>> getGradesByGroupDisciplineAndProfessor(
+      @PathVariable Long groupId,
+      @PathVariable Long disciplineId,
+      @PathVariable Long professorId
+  ) {
+    List<Grade> grades = gradeService.getGradesByGroupDisciplineAndProfessor(
+        groupId,
+        disciplineId,
+        professorId
+    );
+    return new ResponseEntity<>(grades, HttpStatus.OK);
   }
 
   @PostMapping

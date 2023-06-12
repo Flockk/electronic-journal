@@ -1,5 +1,6 @@
 package com.flock.journal.homework;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 import jakarta.persistence.ManyToMany;
@@ -48,12 +49,15 @@ public class Homework {
   @Column(name = "description", columnDefinition = "TEXT")
   private String description;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "homework")
   private List<Grade> grades;
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "homeworks")
   private List<Group> groups;
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "homeworks")
   private List<Student> students;
 }
