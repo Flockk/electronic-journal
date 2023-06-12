@@ -16,6 +16,10 @@ const LoginPage = () => {
         password: '',
     });
 
+    const [loginError, setLoginError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [loginFailedError, setLoginFailedError] = useState('');
+
     const handleChange = (e) => {
         setLoginData({
             ...loginData,
@@ -25,10 +29,30 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        let isValid = true;
+        if (loginData.login.trim() === '') {
+            setLoginError('Введите логин');
+            isValid = false;
+        } else {
+            setLoginError('');
+        }
+
+        if (loginData.password.trim() === '') {
+            setPasswordError('Введите пароль');
+            isValid = false;
+        } else {
+            setPasswordError('');
+        }
+
+        if (!isValid) {
+            return;
+        }
+
         try {
             const response = await login(loginData);
             setAuth({response});
-            console.log('Logged in successfully', response);
+            console.log('Вы успешно вошли в систему', response);
 
             if (response.role === "ADMIN") {
                 navigate("/admin/profile", {replace: true});
@@ -40,7 +64,12 @@ const LoginPage = () => {
                 navigate(from, {replace: true});
             }
         } catch (error) {
-            console.error('Login failed', error);
+            setLoginFailedError('Неверный логин или пароль');
+            console.error('Ошибка входа', error);
+
+            setTimeout(() => {
+                setLoginFailedError('');
+            }, 3000);
         }
     };
 
@@ -67,12 +96,13 @@ const LoginPage = () => {
                             <input
                                 type="text"
                                 required
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-blue-600 shadow-sm rounded-lg"
+                                className={`w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-blue-600 shadow-sm rounded-lg ${loginError ? 'border-red-500' : ''}`}
                                 placeholder="Введите логин"
                                 value={loginData.login}
                                 onChange={handleChange}
                                 name="login"
                             />
+                            {loginError && <p className="text-red-500">{loginError}</p>}
                         </div>
                         <div>
                             <label className="font-medium">
@@ -81,12 +111,13 @@ const LoginPage = () => {
                             <input
                                 type="password"
                                 required
-                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-blue-600 shadow-sm rounded-lg"
+                                className={`w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-blue-600 shadow-sm rounded-lg ${passwordError ? 'border-red-500' : ''}`}
                                 placeholder="Введите пароль"
                                 value={loginData.password}
                                 onChange={handleChange}
                                 name="password"
                             />
+                            {passwordError && <p className="text-red-500">{passwordError}</p>}
                         </div>
                         <button
                             className="w-full px-4 py-2 text-white font-medium bg-blue-500 hover:bg-blue-400 active:bg-blue-600 rounded-lg duration-150"
@@ -94,6 +125,7 @@ const LoginPage = () => {
                         >
                             Войти
                         </button>
+                        {loginFailedError && <p className="text-red-500">{loginFailedError}</p>}
                     </form>
                 </div>
             </div>
