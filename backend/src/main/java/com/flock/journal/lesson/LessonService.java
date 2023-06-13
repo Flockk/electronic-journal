@@ -1,5 +1,6 @@
 package com.flock.journal.lesson;
 
+import com.flock.journal.homework.Homework;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,10 +33,18 @@ public class LessonService {
     Optional<Lesson> lesson = getLessonById(id);
     if (lesson.isPresent()) {
       Lesson existingLesson = lesson.get();
-      existingLesson.setDiscipline(updatedLesson.getDiscipline());
-      existingLesson.setProfessor(updatedLesson.getProfessor());
-      existingLesson.setLessonType(updatedLesson.getLessonType());
-      existingLesson.setDate(updatedLesson.getDate());
+      if (existingLesson.getDiscipline() != null) {
+        existingLesson.setDiscipline(existingLesson.getDiscipline());
+      }
+      if (existingLesson.getProfessor() != null) {
+        existingLesson.setProfessor(existingLesson.getProfessor());
+      }
+      if (existingLesson.getLessonType() != null) {
+        existingLesson.setLessonType(existingLesson.getLessonType());
+      }
+      if (existingLesson.getDate() != null) {
+        existingLesson.setDate(existingLesson.getDate());
+      }
       existingLesson.setTopic(updatedLesson.getTopic());
 
       return Optional.of(lessonRepository.save(existingLesson));

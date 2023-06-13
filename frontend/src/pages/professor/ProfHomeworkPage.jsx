@@ -94,8 +94,12 @@ const ProfHomeworkPage = () => {
                 );
                 const formattedHomeworks = homeworks.map(homework => ({
                     id: homework.id,
-                    lsn_id: homework.lesson.id,
-                    prof_id: homework.professor.id,
+                    lesson: {
+                        id: homework.lesson.id
+                    },
+                    professor: {
+                        id: homework.professor.id
+                    },
                     date: formatDate(homework.lesson.date),
                     type: getTypeLabel(homework.lesson.lessonType),
                     theme: homework.lesson.topic,
