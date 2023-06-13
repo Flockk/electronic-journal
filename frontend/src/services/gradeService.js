@@ -35,6 +35,17 @@ export const getGradesByGroupDisciplineAndProfessor = async (groupId, discipline
     }
 };
 
+export const getGradesByStudentAndDiscipline = async (disciplineId, studentId) => {
+    try {
+        const headers = createAuthHeaders();
+        const response = await api.get(`/grades/${disciplineId}/${studentId}`, {headers});
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response.data.error);
+    }
+};
+
 export const createGrade = async (gradeData) => {
     try {
         const headers = createAuthHeaders();

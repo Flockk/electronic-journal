@@ -7,21 +7,21 @@ import SimpleTable from "../../components/tables/SimpleTable";
 
 const StudSchedulePage = () => {
     const navigation = [
-        {
-            name: <Link to="/student/divisions">Учебные подразделения</Link>,
-            current: false,
-        },
         {name: "Расписание", href: "#", current: true},
         {
             name: <Link to="/student/homeworks">Домашние задания</Link>,
             current: false,
         },
+        {
+            name: <Link to="/student/grades">Оценки</Link>,
+            current: false,
+        },
     ];
 
     const footerElements = [
-        <Link to="/student/divisions">Учебные подразделения</Link>,
         <Link to="/student/homeworks">Домашние задания</Link>,
         "Расписание",
+        <Link to="/student/grades">Оценки</Link>,
     ];
 
     const columns = [

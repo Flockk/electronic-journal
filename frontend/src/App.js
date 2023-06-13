@@ -14,6 +14,7 @@ import AdminAccountCreationPage from "./pages/admin/AdminAccountCreationPage";
 import AdminManagementGroups from "./pages/admin/AdminManagementGroups";
 import StudHomeworkPage from "./pages/student/StudHomeworkPage";
 import ProfGradesPage from "./pages/professor/ProfGradesPage";
+import StudGradesPage from "./pages/student/StudGradesPage";
 
 function App() {
     return (
@@ -41,6 +42,7 @@ function App() {
                     <Route path="divisions" element={<StudDivisionPage/>}/>
                     <Route path="homeworks" element={<StudHomeworkPage/>}/>
                     <Route path="schedule" element={<StudSchedulePage/>}/>
+                    <Route path="grades" element={<StudGradesPage/>}/>
                 </Route>
 
                 <Route path="*" element={<MissingPage/>}/>

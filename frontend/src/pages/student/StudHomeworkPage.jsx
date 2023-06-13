@@ -19,20 +19,20 @@ const StudHomeworkPage = () => {
 
     const navigation = [
         {
-            name: <Link to="/student/divisions">Учебные подразделения</Link>,
-            current: false,
-        },
-        {
             name: <Link to="/student/schedule">Расписание</Link>,
             current: false,
         },
         {name: "Домашние задания", href: "#", current: true},
+        {
+            name: <Link to="/student/grades">Оценки</Link>,
+            current: false,
+        },
     ];
 
     const footerElements = [
-        <Link to="/student/divisions">Учебные подразделения</Link>,
         <Link to="/student/schedule">Расписание</Link>,
         "Домашние задания",
+        <Link to="/student/grades">Оценки</Link>,
     ];
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const StudHomeworkPage = () => {
                 }));
                 setDropdownDisciplines(formattedDisciplines);
             } catch (error) {
-                console.error('Failed to fetch disciplines:', error);
+                console.error('Не удалось загрузить дисциплины:', error);
             }
         };
 
