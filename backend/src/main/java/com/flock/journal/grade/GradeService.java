@@ -37,6 +37,16 @@ public class GradeService {
     );
   }
 
+  public List<Grade> getGradesByStudentAndDiscipline(
+      Long disciplineId,
+      Long studentId
+  ) {
+    return gradeRepository.findGradesByStudentAndDiscipline(
+        disciplineId,
+        studentId
+    );
+  }
+
   public Optional<Grade> updateGrade(Long id, Grade updatedGrade) {
     Optional<Grade> grade = getGradeById(id);
     if (grade.isPresent()) {

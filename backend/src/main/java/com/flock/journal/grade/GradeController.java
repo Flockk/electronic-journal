@@ -49,6 +49,16 @@ public class GradeController {
     return new ResponseEntity<>(grades, HttpStatus.OK);
   }
 
+  @GetMapping("/{disciplineId}/{studentId}")
+  @PreAuthorize("hasAuthority('student:read')")
+  public ResponseEntity<List<Grade>> getGradesByStudentAndDiscipline(
+      @PathVariable Long disciplineId,
+      @PathVariable Long studentId
+  ) {
+    List<Grade> grades = gradeService.getGradesByStudentAndDiscipline(disciplineId, studentId);
+    return new ResponseEntity<>(grades, HttpStatus.OK);
+  }
+
   @PutMapping("/{id}")
   @PreAuthorize("hasAuthority('professor:update')")
   public ResponseEntity<Grade> updateGrade(@PathVariable("id") Long id,

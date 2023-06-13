@@ -21,4 +21,15 @@ public interface GradeRepository extends JpaRepository<Grade, Long> {
       @Param("disciplineId") Long disciplineId,
       @Param("professorId") Long professorId
   );
+
+  @Query("SELECT g FROM Grade g " +
+      "JOIN g.lesson l " +
+      "JOIN l.discipline d " +
+      "JOIN g.student s " +
+      "WHERE d.id = :disciplineId " +
+      "AND s.id = :studentId ")
+  List<Grade> findGradesByStudentAndDiscipline(
+      @Param("disciplineId") Long disciplineId,
+      @Param("studentId") Long studentId
+  );
 }
