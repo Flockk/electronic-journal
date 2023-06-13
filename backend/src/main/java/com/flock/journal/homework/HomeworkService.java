@@ -56,8 +56,12 @@ public class HomeworkService {
     Optional<Homework> homework = getHomeworkById(id);
     if (homework.isPresent()) {
       Homework existingHomework = homework.get();
-      existingHomework.setLesson(updatedHomework.getLesson());
-      existingHomework.setProfessor(updatedHomework.getProfessor());
+      if (updatedHomework.getLesson() != null) {
+        existingHomework.setLesson(updatedHomework.getLesson());
+      }
+      if (updatedHomework.getProfessor() != null) {
+        existingHomework.setProfessor(updatedHomework.getProfessor());
+      }
       existingHomework.setDescription(updatedHomework.getDescription());
 
       return Optional.of(homeworkRepository.save(existingHomework));

@@ -25,21 +25,19 @@ const FillingTable = ({tableItems, setTableItemsProp, columns}) => {
             if (field === "theme") {
                 const lessonId = tableItems[rowIndex].lesson.id;
                 const updatedLesson = {...tableItems[rowIndex].lesson, topic: value};
+                console.log('Lesson ID:', lessonId);
+                console.log('Updated Lesson:', updatedLesson);
                 await updateLesson(lessonId, updatedLesson);
             } else if (field === "homework") {
                 const homeworkId = tableItems[rowIndex]?.id;
-                const lsn_id = tableItems[rowIndex]?.lesson?.id;
-                const prof_id = tableItems[rowIndex]?.professor?.id;
 
                 const updatedHomework = {
-                    ...tableItems[rowIndex],
-                    lsn_id: lsn_id,
-                    prof_id: prof_id,
                     description: value,
+                    ...tableItems[rowIndex],
                 };
 
-                console.log("tableItems:", tableItems);
-                console.log("homeworkId:", homeworkId);
+                console.log('Homework ID:', homeworkId);
+                console.log('Updated Homework:', updatedHomework);
 
                 await updateHomework(homeworkId, updatedHomework);
             }

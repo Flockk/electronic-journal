@@ -102,6 +102,8 @@ const ProfHomeworkPage = () => {
                     homework: homework.description,
                 }));
 
+                console.log('Formatted Homeworks:', formattedHomeworks);
+
                 setTableItems(formattedHomeworks);
             } catch (error) {
                 console.error('Не удалось загрузить домашние задания:', error);
