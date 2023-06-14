@@ -42,13 +42,24 @@ const AdminAccountCreationPage = () => {
 
     const handleRegister = async () => {
         try {
+            if (userData.login === "") {
+                console.log("Требуется логин");
+                return;
+            }
+
+            if (userData.password === "") {
+                console.log("Необходим пароль");
+                return;
+            }
+
             console.log(userData);
             await register(userData);
             setShowSuccessAlert(true);
         } catch (error) {
-            // Обработка ошибок при регистрации
+            // Обработка ошибок регистрации
         }
     };
+
 
     const handleAlertClose = () => {
         setShowSuccessAlert(false);

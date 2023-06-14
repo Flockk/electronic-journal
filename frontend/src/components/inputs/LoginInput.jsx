@@ -17,6 +17,7 @@ const LoginInput = ({login, onLoginChange}) => {
                     placeholder="Введите логин"
                     value={login}
                     onChange={(e) => onLoginChange(e.target.value)}
+                    required
                 />
             </div>
         </>

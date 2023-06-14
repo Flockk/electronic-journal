@@ -15,6 +15,7 @@ import AdminManagementGroups from "./pages/admin/AdminManagementGroups";
 import StudHomeworkPage from "./pages/student/StudHomeworkPage";
 import ProfGradesPage from "./pages/professor/ProfGradesPage";
 import StudGradesPage from "./pages/student/StudGradesPage";
+import AdminGroupCreationPage from "./pages/admin/AdminGroupCreationPage";
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                     <Route path="users/create" element={<AdminAccountCreationPage/>}/>
 
                     <Route path="groups" element={<AdminManagementGroups/>}/>
+                    <Route path="groups/create" element={<AdminGroupCreationPage/>}/>
                 </Route>
 
                 <Route path="professor" element={<RequireAuth allowedRole={"PROFESSOR"}/>}>
