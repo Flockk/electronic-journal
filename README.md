@@ -5,7 +5,7 @@ This application for managing student grades and assignments.
 
 To build the project, you need to follow these steps:
 
-1. Clone the repository using Git: `git clone https://github.com/Flockk/electronic-journal.git`
+1. Clone the repository using Git: `git clone https://github.com/llummin/electronic-journal.git`
 2. Navigate to the project directory: `cd <project_name>`
 3. Install dependencies: `mvn install`
 4. Build the application: `mvn package`
